@@ -16,9 +16,13 @@
         "copy-webpack-plugin": "^11.0.0",
         "cross-env": "^7.0.3",
         "css-loader": "^6.8.1",
+        "cssnano": "^6.0.1",
         "hint": "^7.1.10",
         "html-webpack-plugin": "^5.5.3",
         "mini-css-extract-plugin": "^2.7.6",
+        "postcss-import": "^15.1.0",
+        "postcss-loader": "^7.3.3",
+        "postcss-preset-env": "^9.1.4",
         "raw-loader": "^4.0.2",
         "style-loader": "^3.3.3",
         "webpack": "^5.88.2",
@@ -27,6 +31,7 @@
     },
     "dependencies": {
         "ol": "^8.1.0",
-        "ol-layerswitcher": "^4.1.1"
+        "ol-layerswitcher": "^4.1.1",
+        "proj4": "^2.9.0"
     }
 }

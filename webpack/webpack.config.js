@@ -29,7 +29,7 @@ console.log('Mode: %s%s\u001b[0m', isProduction ? '\u001b[1;34m' : '\u001b[33m',
 
 const productionOutput = {
     path: paths.appBuild,
-    filename: 'static/js/app.js',
+    filename: 'static/js/[name].js',
 };
 
 const sourceMapOption = {
@@ -93,8 +93,10 @@ const productionCSSLoader = [
     {
         loader: 'postcss-loader',
         options: {
-            ident: 'postcss',
-            plugins: () => [require('postcss-import')(), require('postcss-preset-env')(), require('cssnano')()],
+            postcssOptions: {
+                ident: 'postcss',
+                plugins: () => [require('postcss-import')(), require('postcss-preset-env')(), require('cssnano')()],
+            }
         },
     },
 ];
