@@ -26,6 +26,7 @@
         "webpack-dev-server": "^4.15.1"
     },
     "dependencies": {
-        "ol": "^8.1.0"
+        "ol": "^8.1.0",
+        "ol-layerswitcher": "^4.1.1"
     }
 }

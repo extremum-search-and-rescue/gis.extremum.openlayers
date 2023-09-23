@@ -4,29 +4,35 @@ import './index.css'
 import './../node_modules/ol/ol.css'
 console.log("running index.js")
 
-
-import BingMaps from 'ol/source/BingMaps.js';
 import Map from 'ol/Map.js';
-import TileLayer from 'ol/layer/Tile.js';
 import View from 'ol/View.js';
+import LayerGroup from 'ol/layer/Group';
+import LayerSwitcher from 'ol-layerswitcher';
+import { BaseLayerOptions, GroupLayerOptions } from 'ol-layerswitcher';
+import 'ol-layerswitcher/dist/ol-layerswitcher.css';
 
-const layers = [];
-layers.push(
-    new TileLayer({
-        visible: true,
-        preload: Infinity,
-        source: new BingMaps({
-        key: config.BingKey,
-        imagerySet: "Aerial",
-        placeholderTiles: false,
-        }),
-    })
-);
-const map = new Map({
-  layers: layers,
+console.log("added layers")
+
+const baseMaps = new LayerGroup({
+    title: 'Base maps',
+    layers: [App.BasicOsm, App.OpenTopoMap, App.OpenTopoMapCZ, App.BingSat, ]
+  });
+
+const indexMap = new Map({
+  layers: [baseMaps],
   target: 'map',
   view: new View({
-    center: [-6655.5402445057125, 6709968.258934638],
-    zoom: 13,
+    center: config.center,
+    zoom: config.zoom,
   }),
 });
+
+indexMap.addControl(new LayerSwitcher({
+    reverse: true,
+    groupSelectStyle: 'group'
+    // collapsed: false,
+    // mouseover: true
+  })
+);
+
+console.log("created map")
