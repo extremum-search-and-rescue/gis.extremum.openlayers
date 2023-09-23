@@ -1,9 +1,8 @@
 import secrets from "./secrets";
-
-if(!ENV)
+if(!window.ENV)
 {
     console.info("ENV variable should be defined in real application before this script")
-    ENV = {
+    window.ENV = {
 
     };
 }

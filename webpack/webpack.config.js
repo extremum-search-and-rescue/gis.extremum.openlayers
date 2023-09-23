@@ -149,16 +149,20 @@ module.exports = {
     entry: {
         app: paths.appIndexJs,
     },
+    devServer: {
+       
+        static: __dirname + "/assets/",
+     },
     optimization: {
         // splitChunks: {
         //     chunks: 'all',
         // },
         // runtimeChunk: 'single',
-        minimizer: [
+        minimizer: isProduction ? [
             new TerserPlugin({
                 parallel: true
             }),
-        ],
+        ] : [],
     },
 
     resolve: {
