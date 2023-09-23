@@ -1,0 +1,8 @@
+{
+  "hints": {
+    "meta-viewport": "off"
+},
+  "extends": [
+    "development"
+  ]
+}
