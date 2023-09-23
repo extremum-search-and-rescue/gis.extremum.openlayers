@@ -15,7 +15,7 @@ console.log("added layers")
 
 const baseMaps = new LayerGroup({
     title: 'Base maps',
-    layers: [App.BasicOsm, App.OpenTopoMap, App.OpenTopoMapCZ, App.BingSat, ]
+    layers: [App.BasicOsm, App.OpenTopoMap, App.OpenTopoMapCZ, App.BingSat, App.YandexSatellite, App.YandexMaps, App.Topomapper, App.GosGisCenter, App.EsriSatellite, App.PkkRosreestr, App.GoogleSatellite ]
   });
 
 const indexMap = new Map({
