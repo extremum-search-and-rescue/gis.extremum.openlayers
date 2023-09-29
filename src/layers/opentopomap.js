@@ -18,6 +18,7 @@ export const OpenTopoMap = new TileLayer({
 export const OpenTopoMapCZ = new TileLayer({
     type: 'base',
     title: 'Opentopomap.cz',
+    preload: 1,
     source: new XYZ({
         maxZoom: 18,
         urls: [

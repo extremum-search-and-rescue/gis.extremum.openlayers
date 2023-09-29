@@ -20,5 +20,7 @@ import { MegafonCoverage, MtsRusCoverage, MtsByCoverage, A1ByCoverage, LifeByCov
 export { MegafonCoverage, MtsRusCoverage, MtsByCoverage, A1ByCoverage, LifeByCoverage, Tele2Coverage, BeelineCoverage } 
 import { Strava } from './layers/strava'
 export { Strava }
+import { GosLesHoz } from './layers/lesinforg'
+export { GosLesHoz }
 
 console.log("running App.js");

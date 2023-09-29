@@ -23,7 +23,7 @@ const overlayMaps = new LayerGroup({
   visible: true,
   title: 'Overlay maps',
   layers: [
-    App.MegafonCoverage, App.MtsRusCoverage, App.MtsByCoverage, App.A1ByCoverage, App.LifeByCoverage, App.Tele2Coverage, App.BeelineCoverage, App.YandexTracks, App.Strava, App.YandexHybrid
+    App.MegafonCoverage, App.MtsRusCoverage, App.MtsByCoverage, App.A1ByCoverage, App.LifeByCoverage, App.Tele2Coverage, App.BeelineCoverage, App.YandexTracks, App.Strava, App.YandexHybrid, App.GosLesHoz
    ]
 });
 
