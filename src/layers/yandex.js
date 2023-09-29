@@ -3,6 +3,7 @@ import XYZ from "ol/source/XYZ";
 import { fromLonLat, get as getProjection } from "ol/proj";
 import { register } from "ol/proj/proj4";
 import proj4 from "proj4";
+import LayerGroup from "ol/layer/Group";
 
 proj4.defs(
   "EPSG:3395",
@@ -18,7 +19,6 @@ export const YandexSatellite = new TileLayer({
     type: 'base',
     baseLayer: true,
     title: 'YandexSatellite',
-    preload: Infinity,
     source: new XYZ({
         urls: [
             'https://sat01.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}',
@@ -40,3 +40,43 @@ export const YandexSatellite = new TileLayer({
         projection: proj3395    
     }),
   });
+
+  export const YandexHybrid = new TileLayer({
+    title: 'Yandex Hybrid',
+    preload: Infinity,
+    source: new XYZ({
+        transition: 0,
+        url: 'https://core-renderer-tiles.maps.yandex.net/tiles?l=skl&x={x}&y={y}&z={z}&scale=1&lang=ru_RU',
+        projection: proj3395    
+    }),
+  });
+
+
+
+  const YandexTracksHigh = new TileLayer({
+    minZoom: 17,
+    source: new XYZ({
+        minZoom: 17,
+        transition: 0,
+        url: 'https://core-gpstiles.maps.yandex.net/tiles?style=red_combined&x={x}&y={y}&z={z}',
+        projection: proj3395    
+    }),
+  });
+
+  const YandexTracksLow = new TileLayer({
+    minZoom: 10,
+    source: new XYZ({
+        minZoom: 10,
+        maxZoom: 15,
+        transition: 0,
+        url: 'https://core-gpstiles.maps.yandex.net/tiles?style=point&x={x}&y={y}&z={z}',
+        projection: proj3395    
+    }),
+  });
+
+export const YandexTracks = new LayerGroup({
+    visible: false,
+    title: 'Yandex Hybrid',
+    layers: [YandexTracksHigh,YandexTracksLow]
+  }
+);

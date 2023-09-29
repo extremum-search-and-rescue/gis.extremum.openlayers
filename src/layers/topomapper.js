@@ -4,9 +4,10 @@ import XYZ from "ol/source/XYZ";
 export const Topomapper = new TileLayer({
     type: 'base',
     baseLayer: true,
+    preload: Infinity,
     title: 'Topomapper',
-    maxZoom: 13,
     source: new XYZ({
+        maxZoom: 13,
         urls: [
             'https://layers.extremum.org/v2/other/topomapperproxy/{z}/{x}/{y}.jpg',
         ]

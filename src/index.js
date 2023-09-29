@@ -15,11 +15,20 @@ console.log("added layers")
 
 const baseMaps = new LayerGroup({
     title: 'Base maps',
-    layers: [App.BasicOsm, App.OpenTopoMap, App.OpenTopoMapCZ, App.BingSat, App.YandexSatellite, App.YandexMaps, App.Topomapper, App.GosGisCenter, App.EsriSatellite, App.PkkRosreestr, App.GoogleSatellite ]
+    layers: [
+      App.BasicOsm, App.OpenTopoMap, App.OpenTopoMapCZ, App.BingSat, App.Topomapper, App.GosGisCenter, App.EsriSatellite, App.PkkRosreestr, App.GoogleSatellite, App.YandexSatellite, App.YandexMaps
+     ]
   });
+const overlayMaps = new LayerGroup({
+  visible: true,
+  title: 'Overlay maps',
+  layers: [
+    App.MegafonCoverage, App.MtsRusCoverage, App.MtsByCoverage, App.A1ByCoverage, App.LifeByCoverage, App.Tele2Coverage, App.BeelineCoverage, App.YandexTracks, App.Strava, App.YandexHybrid
+   ]
+});
 
 const indexMap = new Map({
-  layers: [baseMaps],
+  layers: [baseMaps, overlayMaps],
   target: 'map',
   view: new View({
     center: config.center,
@@ -29,7 +38,7 @@ const indexMap = new Map({
 
 indexMap.addControl(new LayerSwitcher({
     reverse: true,
-    groupSelectStyle: 'group'
+    groupSelectStyle: 'none'
     // collapsed: false,
     // mouseover: true
   })

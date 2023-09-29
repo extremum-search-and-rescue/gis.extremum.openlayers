@@ -5,6 +5,7 @@ export const BasicOsm = new TileLayer({
     title: 'Openstreetmap',
     type: 'base',
     baseLayer: true,
+    preload: Infinity,
     source: new OSM(),
   });
 

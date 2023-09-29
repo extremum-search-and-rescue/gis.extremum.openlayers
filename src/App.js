@@ -2,14 +2,10 @@ import {BingSat} from './layers/bingsat'
 export {BingSat}
 import {BasicOsm} from './layers/basicosm'
 export {BasicOsm}
-import {OpenTopoMap} from './layers/opentopomap'
-export {OpenTopoMap}
-import {OpenTopoMapCZ} from './layers/opentopomap'
-export {OpenTopoMapCZ}
-import {YandexSatellite} from './layers/yandex'
-export {YandexSatellite}
-import {YandexMaps} from './layers/yandex'
-export {YandexMaps}
+import {OpenTopoMap, OpenTopoMapCZ} from './layers/opentopomap'
+export {OpenTopoMap, OpenTopoMapCZ}
+import {YandexSatellite, YandexMaps, YandexTracks, YandexHybrid} from './layers/yandex'
+export {YandexSatellite, YandexMaps, YandexTracks, YandexHybrid}
 import {Topomapper} from './layers/topomapper'
 export {Topomapper}
 import {GosGisCenter} from './layers/ggc'
@@ -20,6 +16,9 @@ import { PkkRosreestr } from './layers/rosreestr'
 export {PkkRosreestr}
 import { GoogleSatellite } from './layers/google'
 export { GoogleSatellite}
-
+import { MegafonCoverage, MtsRusCoverage, MtsByCoverage, A1ByCoverage, LifeByCoverage, Tele2Coverage, BeelineCoverage } from './layers/operators'
+export { MegafonCoverage, MtsRusCoverage, MtsByCoverage, A1ByCoverage, LifeByCoverage, Tele2Coverage, BeelineCoverage } 
+import { Strava } from './layers/strava'
+export { Strava }
 
 console.log("running App.js");
