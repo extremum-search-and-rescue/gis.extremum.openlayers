@@ -11,7 +11,7 @@ const ShapesKV = new TileLayer({
         minZoom: 8,
         maxZoom: 18,
         params: {'TILED': true},
-        url: 'https://layers.extremum.org/v2/other/roslesinforgproxy'
+        url: 'https://a08.layers.extremum.org/v2/other/roslesinforgproxy'
     }),
   });
 
@@ -22,7 +22,7 @@ const NnLayers = new TileLayer({
         minZoom: 9,
         maxZoom: 14,
         urls: [
-            'https://layers.extremum.org/v2/other/nnforrest/{z}/{x}/{y}.png'
+            'https://a08.layers.extremum.org/v2/other/nnforrest/{z}/{x}/{y}.png'
         ]
     })
 });

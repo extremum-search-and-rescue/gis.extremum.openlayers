@@ -9,7 +9,9 @@ export const Topomapper = new TileLayer({
     source: new XYZ({
         maxZoom: 13,
         urls: [
-            'https://layers.extremum.org/v2/other/topomapperproxy/{z}/{x}/{y}.jpg',
+            'https://a01.layers.extremum.org/v2/other/topomapperproxy/{z}/{x}/{y}.jpg',
+            'https://a02.layers.extremum.org/v2/other/topomapperproxy/{z}/{x}/{y}.jpg',
+            'https://a03.layers.extremum.org/v2/other/topomapperproxy/{z}/{x}/{y}.jpg',
         ]
     }),
   });

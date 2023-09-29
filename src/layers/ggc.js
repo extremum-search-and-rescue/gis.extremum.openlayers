@@ -11,8 +11,7 @@ export const GosGisCenter = new TileLayer({
         urls: [
             'https://a01.layers.extremum.org/proxy/ggc/{z}/{x}/{y}.png',
             'https://a02.layers.extremum.org/proxy/ggc/{z}/{x}/{y}.png',
-            'https://a03.layers.extremum.org/proxy/ggc/{z}/{x}/{y}.png',
-            'https://a04.layers.extremum.org/proxy/ggc/{z}/{x}/{y}.png'
+            'https://a03.layers.extremum.org/proxy/ggc/{z}/{x}/{y}.png'
         ]
     }),
   });
