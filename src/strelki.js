@@ -24,7 +24,7 @@ const overlayMaps = new LayerGroup({
   visible: true,
   title: 'Overlay maps',
   layers: [
-    Layers.MegafonCoverage, Layers.MtsRusCoverage, Layers.MtsByCoverage, Layers.A1ByCoverage, Layers.LifeByCoverage, Layers.Tele2Coverage, Layers.BeelineCoverage, Layers.YandexTracks, Layers.Strava, Layers.YandexHybrid, Layers.GosLesHoz
+    Layers.YandexHybrid
    ]
 });
 
@@ -45,4 +45,4 @@ indexMap.addControl(new LayerSwitcher({
   })
 );
 
-console.log("created map")
+console.log("created strelki page")

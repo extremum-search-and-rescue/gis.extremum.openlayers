@@ -150,6 +150,7 @@ module.exports = {
     devtool: false,
     entry: {
         app: paths.appIndexJs,
+        strelki: paths.appStrelkiJs,
     },
     devServer: {
        
