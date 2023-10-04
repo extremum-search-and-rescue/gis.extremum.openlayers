@@ -22,3 +22,5 @@ import { Strava } from './strava'
 export { Strava }
 import { GosLesHoz } from './lesinforg'
 export { GosLesHoz }
+import { Strelki } from './strelki'
+export { Strelki }

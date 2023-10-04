@@ -1,4 +1,3 @@
-import * as App from './app';
 import * as Layers from './layers/index';
 import config from './config'
 import './index.css'
@@ -24,7 +23,7 @@ const overlayMaps = new LayerGroup({
   visible: true,
   title: 'Overlay maps',
   layers: [
-    Layers.YandexHybrid
+    Layers.Strelki
    ]
 });
 

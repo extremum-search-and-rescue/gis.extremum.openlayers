@@ -153,7 +153,9 @@ module.exports = {
         strelki: paths.appStrelkiJs,
     },
     devServer: {
-        port: 8025,
+        port: 8080,
+        https: false,
+        http2: true,
         static: __dirname + "/assets/",
      },
     optimization: {

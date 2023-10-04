@@ -9,8 +9,9 @@ function resolveApp(relativePath) {
 module.exports = {
     appBuild: resolveApp('build'),
     appIndexJs: resolveApp('src/index.js'),
-    appStrelkiJs: resolveApp('src/strelki.js'),
     appIndexHtml: resolveApp('src/index.html'),
+    appStrelkiJs: resolveApp('src/strelki.js'),
+    appStrelkiHtml: resolveApp('src/strelki.html'), //for debugging pursposes
     appAssets: resolveApp('assets'),
     appSrc: resolveApp('src'),
 };
