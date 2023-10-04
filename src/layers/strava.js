@@ -11,11 +11,7 @@ const StravaLow = new TileLayer({
         tileSize: 512,
         minZoom: 3,
         maxZoom: 11,
-        urls: [
-            'https://heatmap-external-a.strava.com/tiles/all/purple/{z}/{x}/{y}.png?v=19',
-            'https://heatmap-external-b.strava.com/tiles/all/purple/{z}/{x}/{y}.png?v=19',
-            'https://heatmap-external-c.strava.com/tiles/all/purple/{z}/{x}/{y}.png?v=19',
-        ]
+        url: 'https://heatmap-external-{a-c}.strava.com/tiles/all/purple/{z}/{x}/{y}.png?v=19'
     }),
   });
 
@@ -25,11 +21,7 @@ const StravaHigh = new TileLayer({
         transition: 0,
         minZoom: 11,
         maxZoom: 16,
-        urls: [
-            'https://proxy.nakarte.me/https/heatmap-external-a.strava.com/tiles-auth/all/purple/{z}/{x}/{y}.png?px=256',
-            'https://proxy.nakarte.me/https/heatmap-external-b.strava.com/tiles-auth/all/purple/{z}/{x}/{y}.png?px=256',
-            'https://proxy.nakarte.me/https/heatmap-external-a.strava.com/tiles-auth/all/purple/{z}/{x}/{y}.png?px=256',
-        ]
+        url: 'https://proxy.nakarte.me/https/heatmap-external-{a-c}.strava.com/tiles-auth/all/purple/{z}/{x}/{y}.png?px=256'
     }),
   }
 )

@@ -8,9 +8,7 @@ export const MegafonCoverage = new TileLayer({
         minZoom: 1,
         maxZoom: 12,
         transition: 0,
-        urls: [
-            'https://a08.layers.extremum.org/proxy/megafon/{z}/{x}/{y}.png',
-        ]
+        url: 'https://a08.layers.extremum.org/proxy/megafon/{z}/{x}/{y}.png'
     }),
   });
 
@@ -21,9 +19,7 @@ export const MtsRusCoverage = new TileLayer({
         minZoom: 7,
         maxZoom: 12,
         transition: 0,
-        urls: [
-            'https://a08.layers.extremum.org/proxy/mtsrus/{z}/{x}/{y}.png',
-        ]
+        url: 'https://a08.layers.extremum.org/proxy/mtsrus/{z}/{x}/{y}.png'
     }),
 });
 
@@ -33,9 +29,7 @@ export const MtsRusCoverage = new TileLayer({
     source: new XYZ({
         minZoom: 5,
         maxZoom: 14,
-        urls: [
-            'https://a08.layers.extremum.org/proxy/mtsby/{z}/{x}/{y}.png',
-        ]
+        url: 'https://a08.layers.extremum.org/proxy/mtsby/{z}/{x}/{y}.png'
     }),
   });
 
@@ -45,9 +39,7 @@ export const A1ByCoverage = new TileLayer({
     source: new XYZ({
         minZoom: 5,
         maxZoom: 14,
-        urls: [
-            'https://a08.layers.extremum.org/proxy/a1by/{z}/{x}/{y}.png',
-        ]
+        url: 'https://a08.layers.extremum.org/proxy/a1by/{z}/{x}/{y}.png'
     }),
 });
 
@@ -57,9 +49,7 @@ export const LifeByCoverage = new TileLayer({
     source: new XYZ({
         minZoom: 6,
         maxZoom: 14,
-        urls: [
-            'https://a08.layers.extremum.org/proxy/lifeby/{z}/{x}/{y}.png',
-        ]
+        url: 'https://a08.layers.extremum.org/proxy/lifeby/{z}/{x}/{y}.png'
     }),
 });
 
@@ -69,9 +59,7 @@ export const Tele2Coverage = new TileLayer({
     source: new XYZ({
         minZoom: 3,
         maxZoom: 12,
-        urls: [
-            'https://a08.layers.extremum.org/proxy/tele2/{z}/{x}/{y}.png',
-        ]
+        url: 'https://a08.layers.extremum.org/proxy/tele2/{z}/{x}/{y}.png'
     }),
 });
 
@@ -81,8 +69,6 @@ export const BeelineCoverage = new TileLayer({
     source: new XYZ({
         minZoom: 3,
         maxZoom: 12,
-        urls: [
-            'https://a08.layers.extremum.org/proxy/beeline/{z}/{x}/{y}.png',
-        ]
+        url: 'https://a08.layers.extremum.org/proxy/beeline/{z}/{x}/{y}.png'
     }),
 });

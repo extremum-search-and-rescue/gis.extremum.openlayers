@@ -8,11 +8,6 @@ export const GoogleSatellite = new TileLayer({
     title: 'Google Satellite',
     source: new XYZ({
         maxZoom: 18,
-        urls: [
-            'https://mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
-            'https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
-            'https://mt2.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
-            'https://mt3.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',
-        ]
+        url: 'https://mt{0-3}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}'
     }),
   });

@@ -8,10 +8,6 @@ export const GosGisCenter = new TileLayer({
     title: 'GosGisCenter',
     source: new XYZ({
         maxZoom: 15,
-        urls: [
-            'https://a01.layers.extremum.org/proxy/ggc/{z}/{x}/{y}.png',
-            'https://a02.layers.extremum.org/proxy/ggc/{z}/{x}/{y}.png',
-            'https://a03.layers.extremum.org/proxy/ggc/{z}/{x}/{y}.png'
-        ]
+        url: 'https://a0{1-3}.layers.extremum.org/proxy/ggc/{z}/{x}/{y}.png'
     }),
   });

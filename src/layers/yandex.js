@@ -20,12 +20,7 @@ export const YandexSatellite = new TileLayer({
     baseLayer: true,
     title: 'YandexSatellite',
     source: new XYZ({
-        urls: [
-            'https://sat01.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}',
-            'https://sat02.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}',
-            'https://sat03.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}',
-            'https://sat04.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}'
-        ],
+        url: 'https://sat0{1-4}.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}',
         projection: proj3395    
     }),
   });

@@ -21,9 +21,7 @@ const NnLayers = new TileLayer({
     source: new XYZ({
         minZoom: 9,
         maxZoom: 14,
-        urls: [
-            'https://a08.layers.extremum.org/v2/other/nnforrest/{z}/{x}/{y}.png'
-        ]
+        url: 'https://a08.layers.extremum.org/v2/other/nnforrest/{z}/{x}/{y}.png'
     })
 });
 
