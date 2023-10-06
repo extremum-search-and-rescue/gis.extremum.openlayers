@@ -159,10 +159,6 @@ module.exports = {
         static: __dirname + "/assets/",
      },
     optimization: {
-        // splitChunks: {
-        //     chunks: 'all',
-        // },
-        // runtimeChunk: 'single',
         minimizer: isProduction ? [
             new TerserPlugin({
                 parallel: true

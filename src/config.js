@@ -15,7 +15,7 @@ if(!window.ENV)
  * }}
  */
 const config = {
-    center: fromLonLat([30, 60]),//[-6655.5402445057125, 6709968.258934638],
+    center: fromLonLat([30, 60]),
     zoom: 11,
     ...ENV,
     ...secrets
