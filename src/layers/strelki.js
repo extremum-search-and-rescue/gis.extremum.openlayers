@@ -9,11 +9,16 @@ import {
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 
+  /**
+   * @param {GeoJSON.Point} feature 
+   * @param {number} resolution 
+   * @returns {Text}
+   */
 const createTextStyle = function (feature, resolution) {
     return new Text({
       font: "Arial 12px",
       align: "left",
-      text: feature.get('name'),
+      text: feature.get('number'),
       fill: new Fill({color: "red"}),
       stroke: new Stroke({color: "white", width: 1}),
       offsetX: 8,
@@ -25,9 +30,12 @@ const createTextStyle = function (feature, resolution) {
     });
   };
 
-
+  /**
+   * @param {GeoJSON.Point} feature 
+   * @param {number} resolution 
+   * @returns {Style}
+   */
 function pointStyleFunction(feature, resolution) {
-    debugger;
     return new Style({
       image: new CircleStyle({
         radius: 10,
@@ -35,6 +43,7 @@ function pointStyleFunction(feature, resolution) {
         stroke: new Stroke({color: 'red', width: 1}),
       }),
       text: createTextStyle(feature, resolution),
+      //title: feature.get("text")
     });
   }
 
@@ -42,8 +51,7 @@ function pointStyleFunction(feature, resolution) {
     title: "Стрелки",
     visible: false,
     source: new VectorSource({
-      url: 'https://192.168.1.10:8001/v3/strelki/all.geojson',
-      //url: 'https://layers.extremum.org/v3/strelki/all.geojson',
+      url: 'https://layers.extremum.org/v3/strelki/all.geojson',
       format: new GeoJSON(),
     }),
     style: pointStyleFunction,
