@@ -26,6 +26,7 @@ const StravaHigh = new TileLayer({
   }
 )
 export const Strava = new LayerGroup({
+    visible: false,
     title: "Strava",
     layers: [StravaHigh, StravaLow]
 })

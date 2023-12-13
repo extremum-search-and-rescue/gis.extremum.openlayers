@@ -38,8 +38,10 @@ const indexMap = new Map({
 });
 
 indexMap.addControl(new LayerSwitcher({
+    startActive: true,
     reverse: true,
-    groupSelectStyle: 'none'
+  //  groupSelectStyle: 'none',
+    combine: true,
     // collapsed: false,
     // mouseover: true
   })
