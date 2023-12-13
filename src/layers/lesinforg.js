@@ -2,6 +2,7 @@ import LayerGroup from "ol/layer/Group";
 import TileLayer from "ol/layer/Tile";
 import XYZ from "ol/source/XYZ";
 import TileWMS from 'ol/source/TileWMS.js';
+import Config from "../config";
 
 const ShapesKV = new TileLayer({
     preload: Infinity,
@@ -11,7 +12,7 @@ const ShapesKV = new TileLayer({
         minZoom: 8,
         maxZoom: 18,
         params: {'TILED': true},
-        url: 'https://a08.layers.extremum.org/v2/other/roslesinforgproxy'
+        url: `${Config.backend.scheme}://a08.${Config.backend.host}/v2/other/roslesinforgproxy`
     }),
   });
 
@@ -21,7 +22,7 @@ const NnLayers = new TileLayer({
     source: new XYZ({
         minZoom: 9,
         maxZoom: 14,
-        url: 'https://a08.layers.extremum.org/v2/other/nnforrest/{z}/{x}/{y}.png'
+        url: `${Config.backend.scheme}://a08.${Config.backend.host}/v2/other/nnforrest/{z}/{x}/{y}.png`
     })
 });
 

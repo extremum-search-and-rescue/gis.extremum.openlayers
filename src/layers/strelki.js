@@ -8,6 +8,7 @@ import {
   } from 'ol/style.js';
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
+import Config from '../config';
 
   /**
    * @param {GeoJSON.Point} feature 
@@ -51,7 +52,7 @@ function pointStyleFunction(feature, resolution) {
     title: "Стрелки",
     visible: false,
     source: new VectorSource({
-      url: 'https://layers.extremum.org/v3/strelki/all.geojson',
+      url: `${Config.backend.scheme}://${Config.backend.host}/v3/strelki/all.geojson`,
       format: new GeoJSON(),
     }),
     style: pointStyleFunction,

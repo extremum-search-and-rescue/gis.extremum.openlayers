@@ -1,6 +1,6 @@
 import BingMaps from 'ol/source/BingMaps.js';
 import TileLayer from 'ol/layer/Tile.js';
-import config from './../config'
+import Config from './../config'
 
 export const BingSat = new TileLayer({
     baseLayer: true,
@@ -8,7 +8,7 @@ export const BingSat = new TileLayer({
     title: 'Bing Aerial',
     preload: Infinity,
     source: new BingMaps({
-    key: config.BingKey,
+    key: Config.BingKey,
     imagerySet: "Aerial",
     placeholderTiles: false,
     }),

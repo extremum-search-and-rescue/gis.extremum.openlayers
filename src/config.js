@@ -1,4 +1,4 @@
-import secrets from "./secrets";
+import Secrets from "./secrets";
 import { fromLonLat } from "ol/proj";
 
 if(!window.ENV)
@@ -8,16 +8,31 @@ if(!window.ENV)
 
     };
 }
+
 /**
  * @type {{
+* scheme: string,
+* host: string,
+* }}
+*/
+const Backend = {
+    scheme: 'https',
+    host: 'layers.extremum.org'
+    
+}
+
+/**
+ * @type {{
+ * backend: Backend,
  * center: import("ol/coordinate").Coordinate,
  * zoom: number
  * }}
  */
-const config = {
+const Config = {
+    backend: Backend,
     center: fromLonLat([30, 60]),
     zoom: 11,
     ...ENV,
-    ...secrets
+    ...Secrets
 }
-export default config;
+export default Config;
