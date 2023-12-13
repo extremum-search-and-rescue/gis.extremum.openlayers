@@ -25,13 +25,24 @@ export const YandexSatellite = new TileLayer({
     }),
   });
 
-  export const YandexMaps = new TileLayer({
+ export const YandexMaps = new TileLayer({
     type: 'base',
     baseLayer: true,
     preload: Infinity,
     title: 'Yandex Maps',
     source: new XYZ({
         url: 'https://core-renderer-tiles.maps.yandex.net/tiles?l=map&x={x}&y={y}&z={z}',
+        projection: proj3395    
+    }),
+  });
+
+  export const YandexMapsDark = new TileLayer({
+    type: 'base',
+    baseLayer: true,
+    preload: Infinity,
+    title: 'Yandex Maps',
+    source: new XYZ({
+        url: 'https://core-renderer-tiles.maps.yandex.net/tiles?l=map&theme=dark&x={x}&y={y}&z={z}',
         projection: proj3395    
     }),
   });

@@ -17,7 +17,7 @@ console.log("added layers")
 const baseMaps = new LayerGroup({
     title: 'Base maps',
     layers: [
-      Layers.BasicOsm, Layers.OpenTopoMap, Layers.OpenTopoMapCZ, Layers.BingSat, Layers.Topomapper, Layers.GosGisCenter, Layers.EsriSatellite, Layers.PkkRosreestr, Layers.GoogleSatellite, Layers.YandexSatellite, Layers.YandexMaps
+      Layers.BasicOsm, Layers.OpenTopoMap, Layers.OpenTopoMapCZ, Layers.BingSat, Layers.Topomapper, Layers.GosGisCenter, Layers.EsriSatellite, Layers.PkkRosreestr, Layers.GoogleSatellite, Layers.YandexSatellite, Layers.YandexMaps, Layers.YandexMapsDark
      ]
   });
 const overlayMaps = new LayerGroup({

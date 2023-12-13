@@ -4,8 +4,8 @@ import { BasicOsm } from './basicosm'
 export { BasicOsm }
 import { OpenTopoMap, OpenTopoMapCZ } from './opentopomap'
 export { OpenTopoMap, OpenTopoMapCZ }
-import { YandexSatellite, YandexMaps, YandexTracks, YandexHybrid } from './yandex'
-export { YandexSatellite, YandexMaps, YandexTracks, YandexHybrid }
+import { YandexSatellite, YandexMaps, YandexMapsDark, YandexTracks, YandexHybrid } from './yandex'
+export { YandexSatellite, YandexMaps, YandexMapsDark, YandexTracks, YandexHybrid }
 import { Topomapper } from './topomapper'
 export { Topomapper }
 import { GosGisCenter } from './ggc'
