@@ -1,0 +1,162 @@
+:root {
+/*
+base pallete
+https://accessiblepalette.com/?lightness=96,89,83,72,60,50,44,34,26,18&f44557=1,0&d95316=1,0&ff9a1d=1,0&ffd327=1,0&7f9028=1,0&108412=1,0&0b8d72=1,0&677892=1,0&006ABE=1,-1&9768e9=1,0&b94dc7=1,0&808080=1,0
+
+for --xxx-950
+https://accessiblepalette.com/?lightness=96,89,83,72,60,50,44,34,26,8&f44557=1,0&d95316=1,0&ff9a1d=1,0&ffd327=1,0&7f9028=1,0&108412=1,0&0b8d72=1,0&677892=1,0&006ABE=1,-1&9768e9=1,0&b94dc7=1,0&808080=1,0
+
+accent colors --xxx-600
+*/
+
+
+
+--red-50: #fff0ef;
+--red-100: #ffd6d4;
+--red-200: #ffbfbd;
+--red-300: #ff9191;
+--red-400: #f85a64;
+--red-500: #d63f4d;
+--red-600: #ba3944;
+--red-700: #8d2f35;
+--red-800: #6b272a;
+--red-900: #4b1e1f;
+--red-950: #251212;
+
+/* In fact red orange. Named for simplicity */
+--orange-50: #fff1eb;
+--orange-100: #d95316;
+--orange-200: #fdc1a9;
+--orange-300: #f49a74;
+--orange-400: #e56e3b;
+--orange-500: #cc4f16;
+--orange-600: #b24616;
+--orange-700: #873815;
+--orange-800: #672c13;
+--orange-900: #482110;
+--orange-950: #251308;
+
+--brown-50: #fff2f3;
+--brown-100: #ffd9b0;
+--brown-200: #ffc482;
+--brown-300: #fd991d;
+--brown-400: #cf7e1d;
+--brown-500: #a9681c;
+--brown-600: #945b1b;
+--brown-700: #714618;
+--brown-800: #563715;
+--brown-900: #3d2712;
+--brown-950: #20160a;
+
+--yellow-50: #fff3ce;
+--yellow-100: #ffdd69;
+--yellow-200: #f5cb27;
+--yellow-300: #d1ad26;
+--yellow-400: #ab8e23;
+--yellow-500: #8d7521;
+--yellow-600: #7b661f;
+--yellow-700: #5f4e1b;
+--yellow-800: #493c17;
+--yellow-900: #342813;
+--yellow-950: #1c170b;
+
+--olive-50: #f4f4eb;
+--olive-100: #e0e2c7;
+--olive-200: #c2daa9;
+--olive-300: #aeb674;
+--olive-400: #89983a;
+--olive-500: #6f7e25;
+--olive-600: #626222;
+--olive-700: #4c541d;
+--olive-800: #3b4119;
+--olive-900: #2b2e14;
+--olive-950: #18180c;
+
+--grass-50: #eff6ec;
+--grass-100: #d2e5cc;
+--grass-200: #bad7b1;
+--grass-300: #8dbd81;
+--grass-400: #5aa14d;
+--grass-500: #25891f;
+--grass-600: #147913;
+--grass-700: #185d14;
+--grass-800: #184713;
+--grass-900: #153111;
+--grass-950: #0f1a09;
+
+--green-50: #edf5f2;
+--green-100: #cee5dd;
+--green-200: #b4d6cb;
+--green-300: #83bcaa;
+--green-400: #499f88;
+--green-500: #0f876d;
+--green-600: #14765f;
+--green-700: #185a5a;
+--green-800: #174539;
+--green-900: #153129;
+--green-950: #0e1a16;
+
+--blue-50: #f1f3fa;
+--blue-100: #d9dff3;
+--blue-200: #c3cfec;
+--blue-300: #9cb1df;
+--blue-400: #6091d1;
+--blue-500: #3b78c5;
+--blue-600: #006abe;
+--blue-700: #13518e;
+--blue-800: #183e6b;
+--blue-900: #182c4a;
+--blue-950: #111824;
+
+--bluegray-50: #f2f4f6;
+--bluegray-100: #dce9e6;
+--bluegray-200: #cacfd9;
+--bluegray-300: #a8b1c1;
+--bluegray-400: #8491a7;
+--bluegray-500: #677892;
+--bluegray-600: #5a697f;
+--bluegray-700: #465161;
+--bluegray-800: #363e4a;
+--bluegray-900: #282c34;
+--bluegray-950: #16181B;
+
+--purple-50: #f7f1fd;
+--purple-100: #e9dafb;
+--purple-200: #dcc6f8;
+--purple-300: #c3a1f3;
+--purple-400: #a67aec;
+--purple-500: #8a5fd4;
+--purple-600: #79548b;
+--purple-700: #5d418b;
+--purple-800: #483369;
+--purple-900: #332548;
+--purple-950: #1b1523;
+
+--violete-50: #faf1fb;
+--violete-100: #f2d8f3;
+--violete-200: #eac2ec;
+--violete-300: #da9bdf;
+--violete-400: #c76fd1;
+--violete-500: #b34bc0;
+--violete-600: #9c43a7;
+--viotete-700: #76367e;
+--violete-800: #5a2b60;
+--violete-900: #3f2142;
+--violete-950: #201321;
+
+--gray-50: #f3f3f3;
+--gray-100: #e0e0e0;
+--gray-200: #cfcfcf;
+--gray-300: #b0b0b0;
+--gray-400: #919191;
+--gray-500: #777777;
+--gray-600: #686868;
+--gray-700: #505050;
+--gray-800: #3e3e3e;
+--gray-900: #2c2c2c;
+--gray-950: #181818;
+
+/* */
+--gis-primary: var(--blue-600)
+
+}

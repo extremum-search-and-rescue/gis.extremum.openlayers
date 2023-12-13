@@ -10,17 +10,19 @@ import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import Config from '../config';
 
+const bodyStyles = window.getComputedStyle(document.body);
   /**
    * @param {GeoJSON.Point} feature 
    * @param {number} resolution 
    * @returns {Text}
    */
 const createTextStyle = function (feature, resolution) {
+  const fill = bodyStyles.getPropertyValue('--red-700');
     return new Text({
       font: "Arial 12px",
       align: "left",
       text: feature.get('number'),
-      fill: new Fill({color: "red"}),
+      fill: new Fill({color: fill}),
       stroke: new Stroke({color: "white", width: 1}),
       offsetX: 8,
       offsetY: 0,
@@ -37,11 +39,12 @@ const createTextStyle = function (feature, resolution) {
    * @returns {Style}
    */
 function pointStyleFunction(feature, resolution) {
+  const stroke = bodyStyles.getPropertyValue('--red-500');
     return new Style({
       image: new CircleStyle({
         radius: 10,
         fill: new Fill({color: 'rgba(255, 0, 0, 0.1)'}),
-        stroke: new Stroke({color: 'red', width: 1}),
+        stroke: new Stroke({color: stroke, width: 1}),
       }),
       text: createTextStyle(feature, resolution),
       //title: feature.get("text")
