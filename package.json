@@ -36,6 +36,7 @@
         "ol": "^8.1.0",
         "ol-layerswitcher": "^4.1.1",
         "proj4": "^2.9.0",
-        "solid-js": "^1.8.7"
+        "solid-js": "^1.8.7",
+        "solidjs-div-100vh": "^1.0.1"
     }
 }

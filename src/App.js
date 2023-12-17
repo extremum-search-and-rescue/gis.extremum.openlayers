@@ -1,8 +1,8 @@
 console.log("running app.js");
 
 import { render } from 'solid-js/web';
-import { MapContainer} from './controls/mapcontainer'
+import { FullScreenMapContainer } from './controls/mapcontainer'
 
-render(() => <MapContainer/>, document.body);
+render(() => <FullScreenMapContainer/>, document.body);
 
 console.log("created map container")

@@ -1,4 +1,6 @@
-export const MapContainer = props => {
+import Div100vh from "solidjs-div-100vh";
+
+export const FullScreenMapContainer = props => {
   const id = "map";
-  return <div id={id}></div>;
+  return <Div100vh id={id}></Div100vh>;
 }
