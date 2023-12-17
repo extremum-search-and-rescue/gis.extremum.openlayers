@@ -47,14 +47,9 @@ const babelConfig = {
                 exclude: ['proposal-dynamic-import'],
             },
         ],
+        ['solid']
     ],
-    overrides: [
-        {
-            test: './src/vendored/github.com/augustl/js-unzip/js-unzip.js',
-            sourceType: 'script',
-        },
-    ],
-
+    overrides: [],
     plugins: [
         '@babel/plugin-syntax-dynamic-import',
         '@babel/plugin-proposal-class-properties',
@@ -150,7 +145,7 @@ module.exports = {
     devtool: false,
     entry: {
         app: paths.appIndexJs,
-        strelki: paths.appStrelkiJs,
+      //  strelki: paths.appStrelkiJs,
     },
     devServer: {
         port: 8080,
