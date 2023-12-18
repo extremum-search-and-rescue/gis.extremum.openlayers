@@ -9,6 +9,7 @@ import Map from 'ol/Map.js';
 import View from 'ol/View.js';
 import LayerGroup from 'ol/layer/Group';
 import LayerSwitcher from 'ol-layerswitcher';
+import LayerControl from './controls/layerswitcher/layercontrol'
 import { BaseLayerOptions, GroupLayerOptions } from 'ol-layerswitcher';
 import 'ol-layerswitcher/dist/ol-layerswitcher.css';
 
@@ -42,9 +43,14 @@ indexMap.addControl(new LayerSwitcher({
     reverse: true,
   //  groupSelectStyle: 'none',
     combine: true,
-    // collapsed: false,
+     collapsed: false,
     // mouseover: true
   })
 );
+
+indexMap.addControl(new LayerControl({
+  basemaps: [Layers.BasicOsm, Layers.OpenTopoMap, Layers.OpenTopoMapCZ, Layers.BingSat, Layers.Topomapper, Layers.GosGisCenter, Layers.EsriSatellite, Layers.PkkRosreestr, Layers.GoogleSatellite, Layers.YandexSatellite, Layers.YandexMaps, Layers.YandexMapsDark],
+  overlays: [Layers.MegafonCoverage, Layers.MtsRusCoverage, Layers.MtsByCoverage, Layers.A1ByCoverage, Layers.LifeByCoverage, Layers.Tele2Coverage, Layers.BeelineCoverage, Layers.YandexTracks, Layers.Strava, Layers.YandexHybrid, Layers.GosLesHoz, Layers.Strelki],
+} ));
 
 console.log("created map")

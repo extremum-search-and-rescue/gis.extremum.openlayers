@@ -156,7 +156,22 @@ accent colors --xxx-600
 --gray-900: #2c2c2c;
 --gray-950: #181818;
 
+font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+;
 /* */
---gis-primary: var(--blue-600)
+--gis-primary: var(--blue-600);
 
+@media (prefers-color-scheme: dark) {
+        --gis-panel-background: var(--gray-950);
+        --gis-text-base: white;
+        --gis-text-light: var(--gray-300);
+        --gis-text-subtle: var(--gray-700);
+    };
+
+@media (prefers-color-scheme: light) {
+        --gis-panel-background: white;
+        --gis-text-base: var(--gray-950);
+        --gis-text-light: var(--gray-700);
+        --gis-text-subtle: var(--gray-400);
+    }
 }
