@@ -6,27 +6,11 @@ console.log("running index.js")
 
 import Map from 'ol/Map.js';
 import View from 'ol/View.js';
-import LayerGroup from 'ol/layer/Group';
-import LayerSwitcher from 'ol-layerswitcher';
-import { BaseLayerOptions, GroupLayerOptions } from 'ol-layerswitcher';
 import 'ol-layerswitcher/dist/ol-layerswitcher.css';
 
-const baseMaps = new LayerGroup({
-    title: 'Base maps',
-    layers: [
-      Layers.BasicOsm, Layers.OpenTopoMap, Layers.OpenTopoMapCZ, Layers.BingSat, Layers.Topomapper, Layers.GosGisCenter, Layers.EsriSatellite, Layers.PkkRosreestr, Layers.GoogleSatellite, Layers.YandexSatellite, Layers.YandexMaps
-     ]
-  });
-const overlayMaps = new LayerGroup({
-  visible: true,
-  title: 'Overlay maps',
-  layers: [
-    Layers.Strelki
-   ]
-});
 
 const indexMap = new Map({
-  layers: [baseMaps, overlayMaps],
+  layers: [Layers.YandexSatellite, Layers.Strelki],
   target: 'map',
   view: new View({
     center: Config.center,
@@ -34,12 +18,5 @@ const indexMap = new Map({
   }),
 });
 
-indexMap.addControl(new LayerSwitcher({
-    reverse: true,
-    groupSelectStyle: 'none'
-    // collapsed: false,
-    // mouseover: true
-  })
-);
 
 console.log("created strelki page")
