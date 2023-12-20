@@ -10,6 +10,7 @@ import View from 'ol/View.js';
 import { LayersList } from './controls/layerswitcher/layersmodel';
 import LayerControl from './controls/layerswitcher/layercontrol'
 import { createStore } from 'solid-js/store';
+import { Collection } from 'ol';
 
 console.log("initializing layers")
 const baseMaps = [
@@ -31,6 +32,7 @@ const layersToAdd = baseMaps
 layersToAdd.forEach(l => l.setVisible(l.visible));
 
 const indexMap = new Map({
+  controls: new Collection(),
   layers: layersToAdd,
   target: 'map',
   view: new View({
