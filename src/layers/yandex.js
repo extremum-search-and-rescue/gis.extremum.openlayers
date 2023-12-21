@@ -63,20 +63,15 @@ export const YandexSatellite = {
     ]
 }
 
-  export const YandexHybrid = {
-    id: 'gHyb',
-    title: 'Yandex Hybrid',
-    layers: [
-        new TileLayer({
-            preload: 4,
-            source: new XYZ({
-                transition: 0,
-                url: 'https://core-renderer-tiles.maps.yandex.net/tiles?l=skl&x={x}&y={y}&z={z}&scale=1&lang=ru_RU',
-                projection: proj3395    
-            }),
-        })
-    ]
-}
+export const YandexHybridLayer = 
+    new TileLayer({
+        preload: 4,
+        source: new XYZ({
+            transition: 0,
+            url: 'https://core-renderer-tiles.maps.yandex.net/tiles?l=skl&x={x}&y={y}&z={z}&scale=1&lang=ru_RU',
+            projection: proj3395    
+        }),
+    })
 
 export const YandexTracks = {
     id: 'yN',

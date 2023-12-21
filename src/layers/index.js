@@ -4,8 +4,8 @@ import { BasicOsm } from './basicosm'
 export { BasicOsm }
 import { OpenTopoMap, OpenTopoMapCZ } from './opentopomap'
 export { OpenTopoMap, OpenTopoMapCZ }
-import { YandexSatellite, YandexMaps, YandexMapsDark, YandexTracks, YandexHybrid } from './yandex'
-export { YandexSatellite, YandexMaps, YandexMapsDark, YandexTracks, YandexHybrid }
+import { YandexSatellite, YandexMaps, YandexMapsDark, YandexTracks } from './yandex'
+export { YandexSatellite, YandexMaps, YandexMapsDark, YandexTracks }
 import { Topomapper } from './topomapper'
 export { Topomapper }
 import { GosGisCenter } from './ggc'
@@ -24,3 +24,9 @@ import { GosLesHoz } from './lesinforg'
 export { GosLesHoz }
 import { Strelki } from './strelki'
 export { Strelki }
+import { Stations } from './stations'
+export { Stations}
+import { Hybrid } from './hybrid'
+export { Hybrid }
+import { Wikimapia } from './wikimapia'
+export { Wikimapia }
