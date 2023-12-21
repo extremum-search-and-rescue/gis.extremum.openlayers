@@ -11,6 +11,7 @@ export const BingSat = {
         new TileLayer({
             preload: Infinity,
             source: new BingMaps({
+                tilePixelRatio: window.devicePixelRatio,
                 key: Config.BingKey,
                 imagerySet: "Aerial",
                 placeholderTiles: false,

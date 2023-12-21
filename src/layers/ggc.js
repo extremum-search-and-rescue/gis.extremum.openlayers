@@ -8,7 +8,7 @@ export const GosGisCenter = {
     baseLayer: true,
     layers: [
         new TileLayer({
-        preload: Infinity,
+        preload: 4,
         source: new XYZ({
             maxZoom: 15,
             url: 'https://a0{1-3}.layers.extremum.org/proxy/ggc/{z}/{x}/{y}.png'

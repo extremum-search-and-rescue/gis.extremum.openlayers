@@ -8,7 +8,7 @@ export const Topomapper = {
     baseLayer: true,
     layers: [
         new TileLayer({
-            preload: Infinity,
+            preload: 4,
             source: new XYZ({
                 maxZoom: 13,
                 url: 'https://a0{1-3}.layers.extremum.org/v2/other/topomapperproxy/{z}/{x}/{y}.jpg'

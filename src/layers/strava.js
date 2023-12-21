@@ -8,6 +8,7 @@ export const Strava = {
     layers: [
         new TileLayer({
         minZoom: 11,
+        preload: 4,
         source: new XYZ({
             transition: 0,
             minZoom: 11,
@@ -17,7 +18,7 @@ export const Strava = {
       }
     ), 
     new TileLayer({
-        preload: Infinity,
+        preload: 4,
         minZoom: 3,
         maxZoom: 11,
         source: new XYZ({

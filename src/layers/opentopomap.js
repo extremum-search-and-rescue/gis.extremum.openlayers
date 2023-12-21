@@ -8,7 +8,7 @@ export const OpenTopoMap = {
     title: 'Opentopomap.org',
     layers: [
         new TileLayer({
-        preload: Infinity,
+        preload: 4,
         source: new XYZ({
             maxZoom: 16,
             url: 'https://{a-c}.tile.opentopomap.org/{z}/{x}/{y}.png'
@@ -23,7 +23,7 @@ export const OpenTopoMapCZ = {
     title: 'Opentopomap.cz',
     layers: [
         new TileLayer({
-        preload: 1,
+        preload: 4,
         source: new XYZ({
             maxZoom: 18,
             url: 'https://tile-{a-c}.opentopomap.cz/{z}/{x}/{y}.png'

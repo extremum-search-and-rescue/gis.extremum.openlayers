@@ -8,6 +8,7 @@ export const MegafonCoverage = {
     visible: false,
     layers: [
         new TileLayer({
+            preload: Infinity,
             source: new XYZ({
                 minZoom: 1,
                 maxZoom: 12,
@@ -24,6 +25,7 @@ export const MtsRusCoverage = {
     visible: false,
     layers: [
     new TileLayer({
+        preload: Infinity,
         source: new XYZ({
             minZoom: 7,
             maxZoom: 12,
@@ -40,6 +42,7 @@ export const MtsByCoverage = {
     title: 'МТС Беларусь',
     layers: [ 
         new TileLayer({
+            preload: Infinity,
             source: new XYZ({
                 minZoom: 5,
                 maxZoom: 14,
@@ -55,11 +58,12 @@ export const A1ByCoverage = {
     visible: false,
     layers: [
         new TileLayer({
-        source: new XYZ({
-            minZoom: 5,
-            maxZoom: 14,
-            url: `${Config.backend.scheme}://a08.${Config.backend.host}/proxy/a1by/{z}/{x}/{y}.png`
-        }),
+            preload: Infinity,
+            source: new XYZ({
+                minZoom: 5,
+                maxZoom: 14,
+                url: `${Config.backend.scheme}://a08.${Config.backend.host}/proxy/a1by/{z}/{x}/{y}.png`
+            }),
     })]
 }
 
@@ -69,6 +73,7 @@ export const LifeByCoverage = {
     visible: false,
     layers: [
         new TileLayer({
+            preload: Infinity,
             source: new XYZ({
                 minZoom: 6,
                 maxZoom: 14,
@@ -84,6 +89,7 @@ export const Tele2Coverage = {
     visible: false,
     layers: [
         new TileLayer({
+            preload: Infinity,
             source: new XYZ({
             minZoom: 3,
             maxZoom: 12,
@@ -98,10 +104,11 @@ export const BeelineCoverage = {
     visible: false,
     layers: [
         new TileLayer({
-        source: new XYZ({
-            minZoom: 3,
-            maxZoom: 12,
-            url: `${Config.backend.scheme}://a08.${Config.backend.host}/proxy/beeline/{z}/{x}/{y}.png`
-        }),
-    })]
+            preload: Infinity,
+            source: new XYZ({
+                minZoom: 3,
+                maxZoom: 12,
+                url: `${Config.backend.scheme}://a08.${Config.backend.host}/proxy/beeline/{z}/{x}/{y}.png`
+            }),
+        })]
 }

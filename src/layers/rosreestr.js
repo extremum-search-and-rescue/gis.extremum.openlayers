@@ -8,7 +8,7 @@ export const PkkRosreestr = {
     title: 'Росреестр',
     layers: [
         new TileLayer({
-            preload: Infinity,
+            preload: 4,
             source: new XYZ({
                 url: 'https://ngw.fppd.cgkipd.ru/tile/56/{z}/{x}/{y}.png'
             }),

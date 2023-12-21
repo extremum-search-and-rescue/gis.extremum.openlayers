@@ -9,6 +9,7 @@ export const GosLesHoz = {
     title: 'Лесное хозяйство',
     layers: [
         new TileLayer({
+            preload: 4,
             minZoom: 9,
             maxZoom: 14,
             source: new XYZ({
@@ -18,7 +19,7 @@ export const GosLesHoz = {
             })
         }), 
         new TileLayer({
-            preload: Infinity,
+            preload: 4,
             minZoom: 8,
             source: new TileWMS({
                 transition: 0,

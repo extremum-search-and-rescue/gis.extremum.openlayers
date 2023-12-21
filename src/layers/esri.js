@@ -12,6 +12,7 @@ export const EsriSatellite = {
         new TileLayer({
         preload: Infinity,
         source: new XYZ({
+            tilePixelRatio: window.devicePixelRatio,
             maxZoom: 18,
             urls: [
                 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}?blankTile=false',

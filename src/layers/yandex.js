@@ -21,7 +21,9 @@ export const YandexSatellite = {
     title: 'YandexSatellite',
     layers: [
         new TileLayer({
+            preload: Infinity,
             source: new XYZ({
+                tilePixelRatio: window.devicePixelRatio,
                 url: 'https://sat0{1-4}.maps.yandex.net/tiles?l=sat&x={x}&y={y}&z={z}',
                 projection: proj3395    
             }),
@@ -36,7 +38,7 @@ export const YandexSatellite = {
     title: 'Yandex Maps Day',
     layers: [
         new TileLayer({
-        preload: Infinity,
+        preload: 4,
         source: new XYZ({
             url: 'https://core-renderer-tiles.maps.yandex.net/tiles?l=map&x={x}&y={y}&z={z}',
             projection: proj3395    
@@ -52,7 +54,7 @@ export const YandexSatellite = {
     title: 'Yandex Maps Night',
     layers: [
         new TileLayer({
-            preload: Infinity,
+            preload: 4,
             source: new XYZ({
                 url: 'https://core-renderer-tiles.maps.yandex.net/tiles?l=map&theme=dark&x={x}&y={y}&z={z}',
                 projection: proj3395    
@@ -66,7 +68,7 @@ export const YandexSatellite = {
     title: 'Yandex Hybrid',
     layers: [
         new TileLayer({
-            preload: Infinity,
+            preload: 4,
             source: new XYZ({
                 transition: 0,
                 url: 'https://core-renderer-tiles.maps.yandex.net/tiles?l=skl&x={x}&y={y}&z={z}&scale=1&lang=ru_RU',
@@ -83,6 +85,7 @@ export const YandexTracks = {
     layers: [
         new TileLayer({
         minZoom: 17,
+        preload: 4,
         source: new XYZ({
             minZoom: 17,
             transition: 0,
@@ -92,6 +95,7 @@ export const YandexTracks = {
       }),
       new TileLayer({
         minZoom: 10,
+        preload: 4,
         source: new XYZ({
             minZoom: 10,
             maxZoom: 15,

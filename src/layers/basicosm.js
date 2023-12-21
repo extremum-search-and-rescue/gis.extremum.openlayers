@@ -9,7 +9,7 @@ export const BasicOsm = {
   visible: true,
   layers: [
       new TileLayer({
-        preload: Infinity,
+        preload: 4,
         source: new OSM(),
       })
   ]
