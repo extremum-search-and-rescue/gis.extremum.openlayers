@@ -1,7 +1,5 @@
 import { WaysLayer } from './ways'
-export { WaysLayer }
 import { YandexHybridLayer } from './yandex'
-export { YandexHybridLayer }
 
 export const Hybrid = {
     id: 'gHyb',
