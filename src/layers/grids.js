@@ -1,8 +1,8 @@
 import GeoJSON from 'ol/format/GeoJSON.js';
 import {Stroke as StrokeStyle, Fill, Stroke, Style, Text} from 'ol/style.js';
 import Config from '../config';
-import VectorTileSource from 'ol/source/VectorTile';
-import VectorTileLayer from 'ol/layer/VectorTile';
+import VectorSource from 'ol/source/Vector';
+import VectorLayer from 'ol/layer/Vector';
 
 const bodyStyles = window.getComputedStyle(document.body);
 
@@ -20,16 +20,16 @@ function polylineStyleFunction(feature, resolution) {
     });
 }
 
-export const Wikimapia = {
-    id: 'Wm',
-    title: 'Wikimapia',
+export const LaGrids = {
+    id: 'lg',
+    title: 'Grids',
     visible: false,
     layers: [
-        new VectorTileLayer({
-            source: new VectorTileSource({
+        new VectorLayer({
+            source: new VectorSource({
                 minZoom: 13,
                 maxZoom: 15,
-                url: `${Config.backend.scheme}://${Config.backend.host}/v3/wikimapia/polygons/{z}/{x}/{y}.geojson?tileSize=256`,
+                url: `${Config.backend.scheme}://${Config.backend.host}/v3/lagrid/all.geojson`,
                 format: new GeoJSON(),
             }),
             style: polylineStyleFunction,

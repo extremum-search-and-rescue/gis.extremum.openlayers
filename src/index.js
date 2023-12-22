@@ -41,7 +41,9 @@ const overlayMaps = [
     Layers.GosLesHoz,
     Layers.Strelki,
     Layers.Stations,
-    Layers.Wikimapia
+    Layers.Wikimapia,
+    Layers.LaGrids,
+    Layers.ResqueTracks
 ];
 
 console.log('initialized layers');

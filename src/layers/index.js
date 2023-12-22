@@ -22,3 +22,5 @@ export {Strelki} from './strelki';
 export {Stations} from './stations';
 export {Hybrid} from './hybrid';
 export {Wikimapia} from './wikimapia';
+export {LaGrids} from './grids.js'
+export {ResqueTracks} from './resquetracks.js'
