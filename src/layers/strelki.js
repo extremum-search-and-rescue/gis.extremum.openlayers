@@ -12,7 +12,6 @@ const bodyStyles = window.getComputedStyle(document.body);
  */
 const createTextStyle = function (feature, resolution) {
     const fill = bodyStyles.getPropertyValue('--red-700');
-    console.info(resolution)
     return new Text({
         font: 'Arial 12px',
         align: 'left',
