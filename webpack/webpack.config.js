@@ -143,6 +143,7 @@ const loaders = [
 module.exports = {
     mode: isProduction ? 'production' : 'development',
     devtool: false,
+    target: 'browserslist',
     entry: {
         app: paths.appIndexJs,
       //  strelki: paths.appStrelkiJs,
@@ -162,6 +163,12 @@ module.exports = {
     },
 
     resolve: {
+        fallback: {
+            fs: false,
+            url: false,
+            http: false,
+            https: false
+        },
         alias: {
             '~': paths.appSrc,
         },
