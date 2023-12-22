@@ -21,7 +21,7 @@ function polylineStyleFunction(feature, resolution) {
     });
 }
 
-export const ResqueTracks = {
+export const RescueTracks = {
     id: 'aT',
     title: 'Search tracks',
     visible: false,

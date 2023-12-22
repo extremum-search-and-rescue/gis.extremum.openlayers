@@ -17,6 +17,7 @@ const baseMaps = [
     Layers.BasicOsm,
     Layers.OpenTopoMap,
     Layers.OpenTopoMapCZ,
+    Layers.OpenSnowMap,
     Layers.BingSat,
     Layers.Topomapper,
     Layers.GosGisCenter,
@@ -43,7 +44,12 @@ const overlayMaps = [
     Layers.Stations,
     Layers.Wikimapia,
     Layers.LaGrids,
-    Layers.ResqueTracks
+    Layers.ResqueTracks,
+    Layers.Photos,
+    Layers.MarineTraffic,
+    Layers.OpenseamapMarks,
+    Layers.OnlineTrackers,
+    Layers.Hillshading
 ];
 
 console.log('initialized layers');

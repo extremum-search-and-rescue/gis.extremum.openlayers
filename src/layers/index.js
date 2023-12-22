@@ -1,5 +1,7 @@
 export {BingSat} from './bingsat';
 export {BasicOsm} from './basicosm';
+export {OpenSnowMap} from './snowmap';
+export {OpenseamapMarks} from './opensea';
 export {OpenTopoMap, OpenTopoMapCZ} from './opentopomap';
 export {YandexSatellite, YandexMaps, YandexMapsDark, YandexTracks} from './yandex';
 export {Topomapper} from './topomapper';
@@ -23,4 +25,8 @@ export {Stations} from './stations';
 export {Hybrid} from './hybrid';
 export {Wikimapia} from './wikimapia';
 export {LaGrids} from './grids.js'
-export {ResqueTracks} from './resquetracks.js'
+export {RescueTracks as ResqueTracks} from './rescuetracks.js'
+export {Photos} from './photos.js'
+export {MarineTraffic} from './ships.js'
+export {OnlineTrackers} from './online-tracking.js'
+export {Hillshading} from './hillshade.js'
