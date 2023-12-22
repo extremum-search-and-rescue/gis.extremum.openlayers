@@ -41,7 +41,6 @@ function pointStyleFunction(feature, resolution) {
             stroke: new Stroke({color: stroke, width: 1}),
         }),
         text: createTextStyle(feature, resolution),
-        //title: feature.get("text")
     });
 }
 
