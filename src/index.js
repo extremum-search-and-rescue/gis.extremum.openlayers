@@ -49,7 +49,8 @@ const overlayMaps = [
     Layers.MarineTraffic,
     Layers.OpenseamapMarks,
     Layers.OnlineTrackers,
-    Layers.Hillshading
+    Layers.Hillshading,
+    Layers.GeolocationPublic
 ];
 
 console.log('initialized layers');
