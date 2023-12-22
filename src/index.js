@@ -50,7 +50,8 @@ const overlayMaps = [
     Layers.OpenseamapMarks,
     Layers.OnlineTrackers,
     Layers.Hillshading,
-    Layers.GeolocationPublic
+    Layers.GeolocationPublic,
+    Layers.LiveTransport
 ];
 
 console.log('initialized layers');
