@@ -12,6 +12,7 @@ const bodyStyles = window.getComputedStyle(document.body);
  */
 const createTextStyle = function (feature, resolution) {
     const fill = bodyStyles.getPropertyValue('--red-700');
+    console.info(resolution)
     return new Text({
         font: 'Arial 12px',
         align: 'left',
@@ -40,7 +41,7 @@ function pointStyleFunction(feature, resolution) {
             fill: new Fill({color: 'rgba(255, 0, 0, 0.1)'}),
             stroke: new Stroke({color: stroke, width: 1}),
         }),
-        text: createTextStyle(feature, resolution),
+        text: resolution<15 ? createTextStyle(feature, resolution) : undefined,
     });
 }
 
