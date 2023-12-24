@@ -1,8 +1,11 @@
 import Control from 'ol/control/Control';
 import {LayersList} from './layersmodel';
-import {For, createComponent} from 'solid-js';
+import {For, Show, createComponent} from 'solid-js';
 import './layercontrol.css';
-import {render} from 'solid-js/web'
+import './../checkbox.css'
+import { Checkbox} from '@ark-ui/solid'
+import { createSignal } from 'solid-js'
+import { Checkmark } from '../checkmark';
 
 const BasemapItem = (params) => {
     return (
@@ -19,7 +22,7 @@ const BaseMapSelector = (params) => {
         <div class="set">
             <For each={params.model.get('basemaps')}>
                 { (item) => 
-                    <BasemapItem id={item.id} item={item} onchange={(ev)=> params.model.changeBasemap(item.id)} />
+                    <BasemapItem id={item.id} item={item} model={params.model} onchange={()=> params.model.changeBasemap(item.id)} />
                 }
             </For>
         </div>
@@ -27,11 +30,15 @@ const BaseMapSelector = (params) => {
 };
 
 const OverlayItem = (params) => {
+    const [checked, setChecked] = createSignal(params.item.visible)
+    console.info(params);
     return (
-        <label>
-            <input type="checkbox" checked={params.item.visible} onchange={params.onchange}/>
-            {params.item.title}
-        </label>
+        <Checkbox.Root checked={params.item.visible} onCheckedChange={(ev)=> params.model.toggleOverlay(params.item.id, ev.checked) }>
+            <Checkbox.Control>
+                <Show when={params.item.visible}><Checkmark/></Show>
+            </Checkbox.Control>
+            <Checkbox.Label>{params.item.title}</Checkbox.Label>
+      </Checkbox.Root>
     );
 };
 
@@ -42,7 +49,7 @@ const OverlaySelector = (params) => {
         <div class="set">
             <For each={params.model.get('overlays')}>
                 { (item) => 
-                    <OverlayItem id={item.id} item={item} onchange={(ev)=> params.model.toggleOverlay(item.id, ev.srcElement.checked )}/>
+                    <OverlayItem id={item.id} model={params.model} item={item}/>
                 }
             </For>
         </div>

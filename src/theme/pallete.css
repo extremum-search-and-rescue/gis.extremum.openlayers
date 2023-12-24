@@ -158,18 +158,21 @@ accent colors --xxx-600
 ;
 /* */
 --gis-primary: var(--blue-600);
+--gis-accent: var(--blue-500);
 
 @media (prefers-color-scheme: dark) {
         --gis-panel-background: var(--gray-950);
-        --gis-text-base: white;
-        --gis-text-light: var(--gray-300);
-        --gis-text-subtle: var(--gray-700);
+        --gis-text-base: rgba(255,255,255,0.9);
+        --gis-text-light: rgba(255,255,255,0.7);
+        --gis-text-subtle: rgba(255,255,255,0.55);
+        --gis-outline: rgba(255,255,255,0.2);
     };
 
 @media (prefers-color-scheme: light) {
         --gis-panel-background: white;
-        --gis-text-base: var(--gray-950);
-        --gis-text-light: var(--gray-700);
-        --gis-text-subtle: var(--gray-400);
+        --gis-text-base: rgba(0,0,0,0.9);
+        --gis-text-light: rgba(0,0,0,0.7);
+        --gis-text-subtle: rgba(0,0,0,0.5);
+        --gis-outline: rgba(0,0,0,0.2);
     }
 }
