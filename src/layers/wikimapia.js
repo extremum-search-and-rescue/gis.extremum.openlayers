@@ -26,7 +26,9 @@ export const Wikimapia = {
     visible: false,
     layers: [
         new VectorTileLayer({
+            minZoom: 13,
             source: new VectorTileSource({
+                tileSize: 256,
                 minZoom: 13,
                 maxZoom: 15,
                 url: `${Config.backend.scheme}://${Config.backend.host}/v3/wikimapia/polygons/{z}/{x}/{y}.geojson?tileSize=256`,
