@@ -7,8 +7,7 @@
   }
   
   [data-scope='checkbox'][data-part='control'] {
-    border: 1px solid;
-    background-color: var(--gis-panel-background);
+    border: 1px solid var(--gis-text-light);
     border-radius: 2.5px;
     display: flex;
     align-items: center;
@@ -17,7 +16,38 @@
     height: 12px;
   }
   
-[data-scope='checkbox'][data-part='control'][data-state='checked'] {
-    background: var(--blue-600);
-    color: var(--gis-text-light)
+@media (prefers-color-scheme: light){
+    [data-scope='checkbox'][data-part='control'] {
+        background-color: var(--gray-50);
+    }
+    [data-scope='checkbox'][data-part='control'][data-hover] {
+        background-color: var(--blue-50);
+        border: 1px solid var(--blue-800);
+    }
+    [data-scope='checkbox'][data-part='control'][data-state='checked'] {
+        background: var(--blue-500);
+        border: 1px solid var(--blue-700)
+    }
+    [data-scope='checkbox'][data-part='control'][data-state='checked'][data-hover] {
+        background: var(--blue-400);
+        border: 1px solid var(--blue-800)
+    }
+}
+@media (prefers-color-scheme: dark){
+    [data-scope='checkbox'][data-part='control'] {
+        background-color: var(--gray-900);
+
+    }
+    [data-scope='checkbox'][data-part='control'][data-hover] {
+        background-color: var(--blue-950);
+        border: 1px solid var(--blue-50);
+    }
+    [data-scope='checkbox'][data-part='control'][data-state='checked'] {
+        background: var(--blue-500);
+        border: 1px solid var(--blue-400)
+    }
+    [data-scope='checkbox'][data-part='control'][data-state='checked'][data-hover] {
+        background: var(--blue-600);
+        border: 1px solid var(--blue-400)
+    }
 }

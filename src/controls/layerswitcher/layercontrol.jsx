@@ -1,37 +1,33 @@
 import Control from 'ol/control/Control';
 import {LayersList} from './layersmodel';
-import {For, Show, createComponent} from 'solid-js';
+import {For, Index, Show, createComponent} from 'solid-js';
 import './layercontrol.css';
 import './../checkbox.css'
+import './../radiogroup.css'
 import { Checkbox} from '@ark-ui/solid'
-import { createSignal } from 'solid-js'
 import { Checkmark } from '../checkmark';
-
-const BasemapItem = (params) => {
-    return (
-        <label>
-            <input type="radio" data-id={params.id} checked={params.item.visible} onchange={params.onchange} name="basemaps"/>
-            {params.item.title}
-        </label>
-    );
-};
+import { RadioGroup } from '@ark-ui/solid';
 
 const BaseMapSelector = (params) => {
     console.info('adding BaseMapSelector', params);
     return (
         <div class="set">
-            <For each={params.model.get('basemaps')}>
-                { (item) => 
-                    <BasemapItem id={item.id} item={item} model={params.model} onchange={()=> params.model.changeBasemap(item.id)} />
+        <RadioGroup.Root value={params.model.get('basemaps').filter(b => b.visible)[0].id} 
+            onValueChange={(i) => params.model.changeBasemap(i.value)}>
+            <Index each={params.model.get('basemaps')}>
+                {(item) =>
+                    <RadioGroup.Item value={item().id} checked={item().visible}>
+                        <RadioGroup.ItemControl/>
+                        <RadioGroup.ItemText>{item().title}</RadioGroup.ItemText>
+                    </RadioGroup.Item>
                 }
-            </For>
+            </Index>
+        </RadioGroup.Root>
         </div>
     );
 };
 
 const OverlayItem = (params) => {
-    const [checked, setChecked] = createSignal(params.item.visible)
-    console.info(params);
     return (
         <Checkbox.Root checked={params.item.visible} onCheckedChange={(ev)=> params.model.toggleOverlay(params.item.id, ev.checked) }>
             <Checkbox.Control>
