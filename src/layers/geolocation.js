@@ -1,5 +1,5 @@
-import GeoJSON from 'ol/format/GeoJSON.js';
-import {Circle as CircleStyle, Fill, Stroke, Style, Text} from 'ol/style.js';
+import ArrayGeoJSON from '../format/ArrayGeoJSON'
+import {Circle as CircleStyle, Icon, Fill, Stroke, Style, Text} from 'ol/style.js';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import Config from '../config';
@@ -12,7 +12,8 @@ const bodyStyles = window.getComputedStyle(document.body);
  */
 const createTextStyle = function (feature, resolution) {
     const fill = bodyStyles.getPropertyValue('--red-700');
-    const formattedText = `${feature.get('deviceName')} ± ${acc}`;
+    const acc = feature.get('acc');
+    const formattedText = `${feature.get('deviceName')}${acc ? `± ${acc}` : ''}`;
     return new Text({
         font: 'Arial 12px',
         align: 'left',
@@ -34,14 +35,12 @@ const createTextStyle = function (feature, resolution) {
  * @returns {Style}
  */
 function pointStyleFunction(feature, resolution) {
-    const stroke = bodyStyles.getPropertyValue('--red-500');
+    const isLast = feature.get('isLast');
     return new Style({
-        image: new CircleStyle({
-            radius: 10,
-            fill: new Fill({color: 'rgba(255, 0, 0, 0.1)'}),
-            stroke: new Stroke({color: stroke, width: 1}),
+        image: new Icon({
+            src: `${Config.frontend.images}/${isLast ? 'last' : 'other' }.svg` 
         }),
-        text: createTextStyle(feature, resolution),
+        text: resolution < 12 ? createTextStyle(feature, resolution) : undefined,
     });
 }
 
@@ -53,14 +52,14 @@ export const GeolocationPublic = {
         new VectorLayer({
             source: new VectorSource({
                 url: `${Config.backend.scheme}://${Config.backend.host}/v3/geolocation/geo.extremum.org.geojson`,
-                format: new GeoJSON(),
+                format: new ArrayGeoJSON(),
             }),
             style: pointStyleFunction,
         }),
         new VectorLayer({
             source: new VectorSource({
                 url: `${Config.backend.scheme}://${Config.backend.host}/v3/geolocation/gps.extremum.org.geojson`,
-                format: new GeoJSON(),
+                format: new ArrayGeoJSON(),
             }),
             style: pointStyleFunction,
         }),
@@ -75,7 +74,7 @@ export const GeolocationExtremum = {
         new VectorLayer({
             source: new VectorSource({
                 url: `${Config.backend.scheme}://${Config.backend.host}/v3/geolocation/extremum.geojson`,
-                format: new GeoJSON(),
+                format: new ArrayGeoJSON(),
             }),
             style: pointStyleFunction,
         })
@@ -90,14 +89,14 @@ export const GeolocationLizaAlert = {
         new VectorLayer({
             source: new VectorSource({
                 url: `${Config.backend.scheme}://${Config.backend.host}/v3/geolocation/lizaalert.geojson`,
-                format: new GeoJSON(),
+                format: new ArrayGeoJSON(),
             }),
             style: pointStyleFunction,
         }),
         new VectorLayer({
             source: new VectorSource({
                 url: `${Config.backend.scheme}://${Config.backend.host}/v3/geolocation/lizaalert.geojson`,
-                format: new GeoJSON(),
+                format: new ArrayGeoJSON(),
             }),
             style: pointStyleFunction,
         }),
@@ -112,7 +111,7 @@ export const GeolocationYarspas = {
         new VectorLayer({
             source: new VectorSource({
                 url: `${Config.backend.scheme}://${Config.backend.host}/v3/geolocation/yarspas.geojson`,
-                format: new GeoJSON(),
+                format: new ArrayGeoJSON(),
             }),
             style: pointStyleFunction,
         })

@@ -3,6 +3,7 @@ import {Circle as CircleStyle, Fill, Icon, Stroke, Style, Text} from 'ol/style.j
 import VectorTileSource from 'ol/source/VectorTile';
 import VectorTileLayer from 'ol/layer/VectorTile';
 import Config from '../config';
+import { toRadians } from 'ol/math';
 
 const bodyStyles = window.getComputedStyle(document.body);
 /**
@@ -18,11 +19,11 @@ const createTextStyle = function (feature, resolution) {
         text: feature.get('name'),
         fill: new Fill({color: fill}),
         stroke: new Stroke({color: 'white', width: 1}),
-        offsetX: 12,
+        offsetX: 16,
         offsetY: 0,
         placement: 'Point',
         maxAngle: '45',
-        overflow: true,
+        overflow: false,
         rotation: 0,
     });
 };
@@ -37,12 +38,14 @@ function pointStyleFunction(feature, resolution) {
     return type === undefined ? getContrail(feature) : getPoint(feature, resolution, type);
 }
 function getPoint(feature, resolution, type) {
+    const degrees = feature.get('angle')
+    const rotation = degrees ? toRadians(degrees) : undefined;
     return new Style({
         image: new Icon({
             src: `https://gis.extremum.org/images/${type}.png`,
-            rotation: type === 'plane' ? feature.get('angle') : undefined,
+            rotation: type === 'plane' ? rotation : undefined,
         }),
-        text: createTextStyle(feature, resolution),
+        text: resolution < 12 ? createTextStyle(feature, resolution) : undefined,
     });
 }
 function getContrail(feature) {

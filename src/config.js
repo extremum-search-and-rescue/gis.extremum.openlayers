@@ -18,18 +18,28 @@ if(!window.ENV)
 const Backend = {
     scheme: 'https',
     host: 'layers.extremum.org'
-    
+}
+
+/**
+ * @type {{
+* images: string,
+* }}
+*/
+const Frontend = {
+    images: 'https://gis.extremum.org/images'
 }
 
 /**
  * @type {{
  * backend: Backend,
+ * frontend: Frontend
  * center: import("ol/coordinate").Coordinate,
  * zoom: number
  * }}
  */
 const Config = {
     backend: Backend,
+    frontend: Frontend,
     center: fromLonLat([30, 60]),
     zoom: 11,
     ...ENV,

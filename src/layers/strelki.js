@@ -1,8 +1,9 @@
 import GeoJSON from 'ol/format/GeoJSON.js';
-import {Circle as CircleStyle, Fill, Stroke, Style, Text} from 'ol/style.js';
+import {Icon, Fill, Stroke, Style, Text} from 'ol/style.js';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import Config from '../config';
+import { toRadians } from 'ol/math'
 
 const bodyStyles = window.getComputedStyle(document.body);
 /**
@@ -18,7 +19,7 @@ const createTextStyle = function (feature, resolution) {
         text: feature.get('number'),
         fill: new Fill({color: fill}),
         stroke: new Stroke({color: 'white', width: 1}),
-        offsetX: 8,
+        offsetX: 16,
         offsetY: 0,
         placement: 'Point',
         maxAngle: '45',
@@ -33,12 +34,17 @@ const createTextStyle = function (feature, resolution) {
  * @returns {Style}
  */
 function pointStyleFunction(feature, resolution) {
-    const stroke = bodyStyles.getPropertyValue('--red-500');
+    const url = `${Config.frontend.images}/strelka.svg`;
+    const degrees = feature.get('degrees')
+    const rotation = degrees ? toRadians(degrees) : undefined;
+    if(feature.get('number')=='88') {
+        console.info(feature); 
+        console.info(rotation)
+    }
     return new Style({
-        image: new CircleStyle({
-            radius: 10,
-            fill: new Fill({color: 'rgba(255, 0, 0, 0.1)'}),
-            stroke: new Stroke({color: stroke, width: 1}),
+        image: new Icon({
+            src: url,
+            rotation: rotation
         }),
         text: resolution<15 ? createTextStyle(feature, resolution) : undefined,
     });
