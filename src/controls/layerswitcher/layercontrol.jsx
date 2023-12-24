@@ -1,7 +1,8 @@
 import Control from 'ol/control/Control';
-import {LayersList, LayersModel} from './layersmodel';
+import {LayersList} from './layersmodel';
 import {For, createComponent} from 'solid-js';
 import './layercontrol.css';
+import {render} from 'solid-js/web'
 
 const BasemapItem = (params) => {
     return (
@@ -73,7 +74,7 @@ class LayerControl extends Control {
         const element = createComponent(LayerControlComponent, params);
 
         super({
-            element: element,
+            element: element(),
             target: undefined,
         });
         this.layersModel = layersModel;

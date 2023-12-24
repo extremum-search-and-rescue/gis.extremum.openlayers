@@ -1,4 +1,3 @@
-import * as App from './app';
 import * as Layers from './layers/index';
 import config from './config';
 import './index.css';
@@ -11,6 +10,8 @@ import {LayersList} from './controls/layerswitcher/layersmodel';
 import LayerControl from './controls/layerswitcher/layercontrol';
 import {createStore} from 'solid-js/store';
 import {Collection} from 'ol';
+import { render } from 'solid-js/web';
+import { FullScreenMapContainer } from './controls/mapcontainer'
 
 console.log('initializing layers');
 const baseMaps = [
@@ -64,10 +65,13 @@ const layersToAdd = baseMaps
     .concat(overlayMaps.flatMap((o) => o.layers.map((l) => Object.assign(l, {id: o.id, visible: o.visible || false}))));
 layersToAdd.forEach((l) => l.setVisible(l.visible));
 
+
+render(() => <FullScreenMapContainer id={"indexMap"}/>, document.body);
+
 const indexMap = new Map({
     controls: new Collection(),
     layers: layersToAdd,
-    target: 'map',
+    target: 'indexMap',
     view: new View({
         center: config.center,
         zoom: config.zoom,
@@ -76,6 +80,6 @@ const indexMap = new Map({
 
 var layersModel = new LayersList(indexMap, basemaps, setBasemaps, overlays, setOverlays);
 
-indexMap.addControl(new LayerControl(layersModel, layersModel));
+indexMap.addControl(new LayerControl(layersModel));
 
 console.log('created map');
