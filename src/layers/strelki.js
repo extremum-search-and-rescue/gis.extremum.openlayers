@@ -12,18 +12,21 @@ const bodyStyles = window.getComputedStyle(document.body);
  * @returns {Text}
  */
 const createTextStyle = function (feature, resolution) {
-    const fill = bodyStyles.getPropertyValue('--red-700');
+    const fill = bodyStyles.getPropertyValue('--gray-950');
+    const text = resolution > 3 
+        ? feature.get('number')
+        : `${feature.get('number')} ${feature.get('text')}`
     return new Text({
         font: 'Arial 12px',
-        align: 'left',
-        text: feature.get('number'),
+        justify: 'left',
+        textAlign: 'left',
+        text: text,
         fill: new Fill({color: fill}),
         stroke: new Stroke({color: 'white', width: 1}),
-        offsetX: 16,
+        offsetX: 8,
         offsetY: 0,
-        placement: 'Point',
+        placement: 'point',
         maxAngle: '45',
-        overflow: true,
         rotation: 0,
     });
 };
@@ -37,10 +40,6 @@ function pointStyleFunction(feature, resolution) {
     const url = `${Config.frontend.images}/strelka.svg`;
     const degrees = feature.get('degrees')
     const rotation = degrees ? toRadians(degrees) : undefined;
-    if(feature.get('number')=='88') {
-        console.info(feature); 
-        console.info(rotation)
-    }
     return new Style({
         image: new Icon({
             src: url,
