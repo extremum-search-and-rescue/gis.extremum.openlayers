@@ -407,7 +407,7 @@ FodyWeavers.xsd
 .DS_Store
 
 #dist folders
-build
+dist/
 
 # file for storing local secrets. Use src/secrets.js.template to create
 src/secrets.js
