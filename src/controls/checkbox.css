@@ -12,9 +12,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 12px;
-    height: 12px;
+    width: 13px;
+    height: 13px;
   }
+  
   
 @media (prefers-color-scheme: light){
     [data-scope='checkbox'][data-part='control'] {
@@ -23,6 +24,9 @@
     [data-scope='checkbox'][data-part='control'][data-hover] {
         background-color: var(--blue-50);
         border: 1px solid var(--blue-800);
+    }
+    [data-scope='checkbox'][data-part='control'][data-focus] {
+        outline: 1px solid var(--blue-300);
     }
     [data-scope='checkbox'][data-part='control'][data-state='checked'] {
         background: var(--blue-500);
@@ -42,6 +46,9 @@
         background-color: var(--blue-950);
         border: 1px solid var(--blue-50);
     }
+    [data-scope='checkbox'][data-part='control'][data-focus] {
+        outline: 1px solid var(--blue-300);
+    }
     [data-scope='checkbox'][data-part='control'][data-state='checked'] {
         background: var(--blue-500);
         border: 1px solid var(--blue-400)
@@ -51,3 +58,19 @@
         border: 1px solid var(--blue-400)
     }
 }
+
+[data-scope='checkbox'][data-part='control'][data-state='checked']::after {
+    display: initial;
+  }
+
+  [data-scope='checkbox'][data-part='control']::after {
+    content: '';
+    display: none;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    position: relative;
+    top: -1px;
+  }

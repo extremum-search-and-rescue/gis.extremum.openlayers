@@ -5,7 +5,6 @@ import './layercontrol.css';
 import './../checkbox.css'
 import './../radiogroup.css'
 import { Checkbox} from '@ark-ui/solid'
-import { Checkmark } from '../checkmark';
 import { RadioGroup } from '@ark-ui/solid';
 
 const BaseMapSelector = (params) => {
@@ -30,9 +29,7 @@ const BaseMapSelector = (params) => {
 const OverlayItem = (params) => {
     return (
         <Checkbox.Root checked={params.item.visible} onCheckedChange={(ev)=> params.model.toggleOverlay(params.item.id, ev.checked) }>
-            <Checkbox.Control>
-                <Show when={params.item.visible}><Checkmark/></Show>
-            </Checkbox.Control>
+            <Checkbox.Control/>
             <Checkbox.Label>{params.item.title}</Checkbox.Label>
       </Checkbox.Root>
     );

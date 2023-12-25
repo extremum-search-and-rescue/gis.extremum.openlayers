@@ -23,8 +23,8 @@
   }
   
   [data-scope='radio-group'][data-part='item-control'] {
-    height: 13px;
-    width: 13px;
+    height: 14px;
+    width: 14px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -37,29 +37,37 @@
         background-color: var(--gray-50);
 
     }
+    [data-scope='radio-group'][data-part='item-control'][data-state='checked'] {
+        background-color: var(--blue-500);
+        border-color:  var(--blue-700);
+    }
+    [data-scope='radio-group'][data-part='item-control'][data-focus] {
+        outline: 1px solid var(--blue-300);
+      }  
     [data-scope='radio-group'][data-part='item-control'][data-hover] {
-        background-color: var(--blue-50);
-        border: 1px solid var(--blue-800);
+        border: 1px solid var(--blue-800)
       }
+    [data-scope='radio-group'][data-part='item-control'][data-state='checked'][data-hover] {
+        background: var(--blue-400);
+        border: 1px solid var(--blue-800)
+    }
 }
 @media (prefers-color-scheme: dark){
     [data-scope='radio-group'][data-part='item-control'] {
         background-color: var(--gray-900);
     }
-    [data-scope='radio-group'][data-part='item-control'][data-hover] {
+    [data-scope='radio-group'][data-part='item-control'][data-focus] {
+        outline: 1px solid var(--blue-300);
+      }  
+      [data-scope='radio-group'][data-part='item-control'][data-hover] {
         background-color: var(--blue-950);
         border: 1px solid var(--blue-50);
       }
+    [data-scope='radio-group'][data-part='item-control'][data-state='checked'] {
+        background-color: var(--blue-500);
+        border-color:  var(--blue-400);
+    }
 }
-  
-  [data-scope='radio-group'][data-part='item-control'][data-focus] {
-    outline: 2px solid royalblue;
-  }
-  
-  [data-scope='radio-group'][data-part='item-control'][data-state='checked'] {
-    background-color: #2196f3;
-    border-color: #2196f3;
-  }
   
   [data-scope='radio-group'][data-part='item-control'][data-state='checked']::after {
     display: initial;
@@ -69,14 +77,14 @@
     content: '';
     display: none;
     width: 4px;
-    height: 9px;
+    height: 7px;
     border: solid white;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
     position: relative;
     top: -1px;
   }
-  
+  /*
   [data-scope='radio-group'][data-part='indicator'] {
     height: 4px;
     background-color: red;
@@ -87,3 +95,4 @@
       rgba(0, 0, 0, 0.1) 0px 0.0625rem 0.125rem;
     background-color: rgb(255, 255, 255);
   }
+  */
