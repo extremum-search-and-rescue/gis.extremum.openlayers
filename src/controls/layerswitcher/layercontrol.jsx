@@ -1,19 +1,20 @@
 import Control from 'ol/control/Control';
-import {LayersList} from './layersmodel';
 import {For, Index, Show, createComponent} from 'solid-js';
 import './layercontrol.css';
 import './../../ark-styles/checkbox.css'
 import './../../ark-styles/radiogroup.css'
 import { Checkbox} from '@ark-ui/solid'
 import { RadioGroup } from '@ark-ui/solid';
+import { useService } from 'solid-services';
+import { LayerService } from '../../services/layerservice';
 
 const BaseMapSelector = (params) => {
     console.info('adding BaseMapSelector', params);
     return (
         <div class="set">
-        <RadioGroup.Root value={params.model.get('basemaps').filter(b => b.visible)[0].id} 
-            onValueChange={(i) => params.model.changeBasemap(i.value)}>
-            <Index each={params.model.get('basemaps')}>
+        <RadioGroup.Root value={params.model().currentBasemapId} 
+            onValueChange={(i) => params.model().changeBasemap(i.value)}>
+            <Index each={params.model().basemaps}>
                 {(item) =>
                     <RadioGroup.Item value={item().id} checked={item().visible}>
                         <RadioGroup.ItemControl/>
@@ -28,7 +29,7 @@ const BaseMapSelector = (params) => {
 
 const OverlayItem = (params) => {
     return (
-        <Checkbox.Root checked={params.item.visible} onCheckedChange={(ev)=> params.model.toggleOverlay(params.item.id, ev.checked) }>
+        <Checkbox.Root checked={params.item.visible} onCheckedChange={(ev)=> params.model().toggleOverlay(params.item.id, ev.checked) }>
             <Checkbox.Control/>
             <Checkbox.Label>{params.item.title}</Checkbox.Label>
       </Checkbox.Root>
@@ -40,7 +41,7 @@ const OverlaySelector = (params) => {
 
     return (
         <div class="set">
-            <For each={params.model.get('overlays')}>
+            <For each={params.model().overlays}>
                 { (item) => 
                     <OverlayItem id={item.id} model={params.model} item={item}/>
                 }
@@ -60,15 +61,13 @@ const LayerControlComponent = (params) => {
 };
 
 class LayerControl extends Control {
-    /**
-     * @param {LayersList} [layersModel]
-     */
+    constructor() {
+        const layerService = useService(LayerService);
 
-    constructor(layersModel) {
         console.info('LayerControl constructor');
         const params = {
             classes: 'ol-unselectable gis-layercontrol',
-            model: layersModel,
+            model: layerService,
         };
         console.info('adding LayerControl', params);
         const element = createComponent(LayerControlComponent, params);
@@ -77,7 +76,6 @@ class LayerControl extends Control {
             element: element(),
             target: undefined,
         });
-        this.layersModel = layersModel;
     }
     setMap(map){
         super.setMap(map);

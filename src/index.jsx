@@ -5,6 +5,7 @@ import * as Layers from './layers/index';
 import {FullScreenMapContainer} from './components/fullscreenmap'
 import View from 'ol/View.js';
 import config from './config';
+import { ServiceRegistry } from 'solid-services';
 
 console.log('running index.js');
 
@@ -55,12 +56,12 @@ const view = new View({
     zoom: config.zoom,
 })
 
-render(() => <FullScreenMapContainer 
+render(() => <ServiceRegistry> <FullScreenMapContainer 
     id={"indexMap"} 
     basemaps={baseMaps} 
     overlays={overlayMaps}
     view={view}
-    />,
+    /></ServiceRegistry>,
     document.body
     );
 
