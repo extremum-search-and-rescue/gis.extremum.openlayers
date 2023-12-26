@@ -155,18 +155,10 @@ accent colors --xxx-600
 --gray-800: #3e3e3e;
 --gray-900: #2c2c2c;
 --gray-950: #181818;
-;
+
 /* */
 --gis-primary: var(--blue-600);
 --gis-accent: var(--blue-500);
-
-@media (prefers-color-scheme: dark) {
-        --gis-panel-background: var(--gray-950);
-        --gis-text-base: rgba(255,255,255,0.9);
-        --gis-text-light: rgba(255,255,255,0.7);
-        --gis-text-subtle: rgba(255,255,255,0.55);
-        --gis-outline: rgba(255,255,255,0.2);
-    };
 
 @media (prefers-color-scheme: light) {
         --gis-panel-background: white;
@@ -174,5 +166,39 @@ accent colors --xxx-600
         --gis-text-light: rgba(0,0,0,0.7);
         --gis-text-subtle: rgba(0,0,0,0.5);
         --gis-outline: rgba(0,0,0,0.2);
-    }
+        
+        --gis-focus-outline: var(--blue-300);
+
+        --gis-input-background: var(--gray-50);
+        --gis-input-background-hover: var(--blue-50);
+        --gis-input-background-checked: var(--blue-500);
+        --gis-input-background-checked-hover: var(--blue-400);
+
+        --gis-input-border: var(--gis-text-light);
+        --gis-input-border-hover: var(--blue-800);
+        --gis-input-border-checked: var(--blue-600);
+        --gis-input-border-checked-hover: var(--blue-600);
 }
+
+@media (prefers-color-scheme: dark) {
+    --gis-panel-background: var(--gray-950);
+    --gis-text-base: rgba(255,255,255,0.9);
+    --gis-text-light: rgba(255,255,255,0.7);
+    --gis-text-subtle: rgba(255,255,255,0.55);
+    --gis-outline: rgba(255,255,255,0.2);
+
+    --gis-focus-outline: var(--blue-300);
+
+    --gis-input-background: var(--gray-900);
+    --gis-input-background-hover: var(--blue-900);
+    --gis-input-background-checked: var(--blue-500);
+    --gis-input-background-checked-hover: var(--blue-600);
+
+    --gis-input-border: var(--gis-text-light);
+    --gis-input-border-hover: var(--blue-50);
+    --gis-input-border-checked: var(--blue-400);
+    --gis-input-border-checked-hover: var(--blue-400);
+}
+
+
+} /* :root */

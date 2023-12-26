@@ -3,12 +3,12 @@
     flex-direction: row;
     align-items:center;
     cursor: pointer;
-    gap: 4px;
+    gap: 3px;
   }
   
   [data-scope='checkbox'][data-part='control'] {
     border: 1px solid var(--gis-text-light);
-    border-radius: 2.5px;
+    border-radius: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -16,47 +16,27 @@
     height: 13px;
   }
   
-  
-@media (prefers-color-scheme: light){
-    [data-scope='checkbox'][data-part='control'] {
-        background-color: var(--gray-50);
-    }
-    [data-scope='checkbox'][data-part='control'][data-hover] {
-        background-color: var(--blue-50);
-        border: 1px solid var(--blue-800);
-    }
-    [data-scope='checkbox'][data-part='control'][data-focus] {
-        outline: 1px solid var(--blue-300);
-    }
-    [data-scope='checkbox'][data-part='control'][data-state='checked'] {
-        background: var(--blue-500);
-        border: 1px solid var(--blue-700)
-    }
-    [data-scope='checkbox'][data-part='control'][data-state='checked'][data-hover] {
-        background: var(--blue-400);
-        border: 1px solid var(--blue-800)
-    }
+[data-scope='checkbox'][data-part='control'] {
+    background-color: var(--gis-input-background);
 }
-@media (prefers-color-scheme: dark){
-    [data-scope='checkbox'][data-part='control'] {
-        background-color: var(--gray-900);
 
-    }
-    [data-scope='checkbox'][data-part='control'][data-hover] {
-        background-color: var(--blue-950);
-        border: 1px solid var(--blue-50);
-    }
-    [data-scope='checkbox'][data-part='control'][data-focus] {
-        outline: 1px solid var(--blue-300);
-    }
-    [data-scope='checkbox'][data-part='control'][data-state='checked'] {
-        background: var(--blue-500);
-        border: 1px solid var(--blue-400)
-    }
-    [data-scope='checkbox'][data-part='control'][data-state='checked'][data-hover] {
-        background: var(--blue-600);
-        border: 1px solid var(--blue-400)
-    }
+[data-scope='checkbox'][data-part='control'][data-hover] {
+    background-color: var(--gis-input-background-hover);
+    border-color: var(--gis-input-border-hover);
+}
+
+[data-scope='checkbox'][data-part='control'][data-focus] {
+    outline: 1px solid var(--gis-focus-outline);
+}
+
+[data-scope='checkbox'][data-part='control'][data-state='checked'] {
+    background-color: var(--gis-input-background-checked);
+    border-color: var(--gis-input-border-checked)
+}
+
+[data-scope='checkbox'][data-part='control'][data-state='checked'][data-hover] {
+    background-color: var(--gis-input-background-checked-hover);
+    border-color: var(--gis-input-border-checked-hover)
 }
 
 [data-scope='checkbox'][data-part='control'][data-state='checked']::after {

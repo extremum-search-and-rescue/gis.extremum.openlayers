@@ -8,7 +8,7 @@
   [data-scope='radio-group'][data-part='item'] {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
     position: relative;
     z-index: 2;
     cursor: pointer;
@@ -23,51 +23,35 @@
   }
   
   [data-scope='radio-group'][data-part='item-control'] {
-    height: 14px;
-    width: 14px;
+    height: 13px;
+    width: 13px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: solid 1px var(--gis-text-light);
+    border: solid 1px;
+    border-color: var(--gis-text-light);
+    background-color: var(--gis-input-background);
   }
   
-  @media (prefers-color-scheme: light){
-    [data-scope='radio-group'][data-part='item-control'] {
-        background-color: var(--gray-50);
-
-    }
-    [data-scope='radio-group'][data-part='item-control'][data-state='checked'] {
-        background-color: var(--blue-500);
-        border-color:  var(--blue-700);
-    }
-    [data-scope='radio-group'][data-part='item-control'][data-focus] {
-        outline: 1px solid var(--blue-300);
-      }  
     [data-scope='radio-group'][data-part='item-control'][data-hover] {
-        border: 1px solid var(--blue-800)
-      }
-    [data-scope='radio-group'][data-part='item-control'][data-state='checked'][data-hover] {
-        background: var(--blue-400);
-        border: 1px solid var(--blue-800)
+        background-color: var(--gis-input-background-hover);
+        border-color: var(--gis-input-border-hover);
     }
-}
-@media (prefers-color-scheme: dark){
-    [data-scope='radio-group'][data-part='item-control'] {
-        background-color: var(--gray-900);
-    }
+
     [data-scope='radio-group'][data-part='item-control'][data-focus] {
-        outline: 1px solid var(--blue-300);
-      }  
-      [data-scope='radio-group'][data-part='item-control'][data-hover] {
-        background-color: var(--blue-950);
-        border: 1px solid var(--blue-50);
-      }
-    [data-scope='radio-group'][data-part='item-control'][data-state='checked'] {
-        background-color: var(--blue-500);
-        border-color:  var(--blue-400);
+        outline: 1px solid var(--gis-focus-outline);
     }
-}
+    
+    [data-scope='radio-group'][data-part='item-control'][data-state='checked'] {
+        background-color: var(--gis-input-background-checked);
+        border-color: var(--gis-input-border-checked);
+    }
+    
+    [data-scope='radio-group'][data-part='item-control'][data-state='checked'][data-hover] {
+        background-color: var(--gis-input-background-checked-hover);
+        border-color: var(--gis-input-border-checked-hover)
+    }
   
   [data-scope='radio-group'][data-part='item-control'][data-state='checked']::after {
     display: initial;
