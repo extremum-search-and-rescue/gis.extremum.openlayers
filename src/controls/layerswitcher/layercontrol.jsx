@@ -66,7 +66,7 @@ class LayerControl extends Control {
 
         console.info('LayerControl constructor');
         const params = {
-            classes: 'ol-unselectable gis-layercontrol',
+            classes: 'ol-unselectable gis-control-toolbar gis-layercontrol',
             model: layerService,
         };
         console.info('adding LayerControl', params);

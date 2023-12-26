@@ -1,0 +1,13 @@
+.gis-drawtoolbar
+{
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    height: max-content;
+    gap: 2px;
+    padding: 0.25rem;
+}
+.gis-drawtoolbar button {
+    background-color: var(--gis-panel-background);
+    color: var(--gis-text-base);
+}

@@ -6,6 +6,12 @@ import {FullScreenMapContainer} from './components/fullscreenmap'
 import View from 'ol/View.js';
 import config from './config';
 import { ServiceRegistry } from 'solid-services';
+import { Control } from './controls/control';
+import LayerControl from './controls/layerswitcher/layercontrol';
+import Zoom from 'ol/control/Zoom'
+import Rotate from 'ol/control/Rotate'
+import ScaleLine from 'ol/control/ScaleLine'
+import { DrawToolbar } from './controls/draw/drawtoolbar';
 
 console.log('running index.js');
 
@@ -56,12 +62,22 @@ const view = new View({
     zoom: config.zoom,
 })
 
-render(() => <ServiceRegistry> <FullScreenMapContainer 
-    id={"indexMap"} 
-    basemaps={baseMaps} 
-    overlays={overlayMaps}
-    view={view}
-    /></ServiceRegistry>,
+render(() => 
+    <ServiceRegistry>
+        <FullScreenMapContainer 
+            id={"indexMap"} 
+            basemaps={baseMaps} 
+            overlays={overlayMaps}
+            view={view}>
+            <Control klass={LayerControl}/>
+            <Control klass={Zoom}/>
+            <Control klass={Rotate}/>
+            <Control klass={ScaleLine}/>
+            <Control klass={DrawToolbar}>
+                <button>111</button>
+            </Control>
+        </FullScreenMapContainer>
+    </ServiceRegistry>,
     document.body
     );
 

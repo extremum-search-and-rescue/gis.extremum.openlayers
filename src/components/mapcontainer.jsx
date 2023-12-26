@@ -1,5 +1,4 @@
 import Map from 'ol/Map.js';
-import LayerControl from '../controls/layerswitcher/layercontrol';
 import {Collection} from 'ol';
 import '../index.css';
 import '../../node_modules/ol/ol.css';
@@ -7,7 +6,6 @@ import { onMount } from "solid-js";
 import { useService } from 'solid-services';
 import { MapContext } from '../services/mapcontext';
 import { LayerService } from '../services/layerservice';
-import { Control } from '../controls/control';
 
 console.log('running mapcontainer.jsx');
 
@@ -25,6 +23,7 @@ export const MapContainer = props => {
         layerService().overlays = props.overlays;
         
         const getMap = useService(MapContext);
+        
         const indexMap = new Map({
             controls: new Collection(),
             layers: layerService().flat,
@@ -32,9 +31,9 @@ export const MapContainer = props => {
             view: props.view,
         });
         getMap().map = indexMap;
-
     });
+
   return (<div id={props.id}>
-    <Control klass={LayerControl}/>
+    {props.children}
   </div>)
 }

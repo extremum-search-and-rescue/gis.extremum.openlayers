@@ -3,13 +3,12 @@ import { MapContainer } from "./mapcontainer";
 
 export const FullScreenMapContainer = props => {
     return <Div100vh>
-      <MapContainer 
+      <MapContainer
           id={props.id}
           basemaps={props.basemaps} 
           overlays={props.overlays}
-          view={props.view}          
-          >
-
+          view={props.view}>
+        {props.children}
           </MapContainer>
     </Div100vh>;
 }
