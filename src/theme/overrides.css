@@ -1,0 +1,11 @@
+.ol-overlaycontainer-stopevent{
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+  }
+  @media print {
+    .ol-overlaycontainer-stopevent {
+      display: none;
+    }
+  }

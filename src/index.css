@@ -1,4 +1,6 @@
 @import url(theme/pallete.css);
+@import url(theme/generic.css);
+@import url(theme/overrides.css);
 body {
     margin: 0;
     padding: 0;
@@ -13,15 +15,4 @@ body {
   #indexMap {
     height: 100%;
     width: 100%;
-  }
-  .ol-overlaycontainer-stopevent{
-    display: grid;
-    gap: 0.5rem;
-    grid-template-columns: auto auto auto;
-    grid-template-rows: auto auto auto;
-  }
-  @media print {
-    .ol-overlaycontainer-stopevent {
-      display: none;
-    }
   }
