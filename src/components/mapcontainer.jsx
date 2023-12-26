@@ -7,12 +7,14 @@ import { onMount } from "solid-js";
 import { useService } from 'solid-services';
 import { MapContext } from '../services/mapcontext';
 import { LayerService } from '../services/layerservice';
+import { Control } from '../controls/control';
 
 console.log('running mapcontainer.jsx');
 
 export const MapContainer = props => {
     if(!props.id) throw new Error("no map div id in props");
     if(!props.view) throw new Error("no View in props");
+
     onMount(() => {
         
         console.log('initializing mapcontainer');
@@ -31,10 +33,8 @@ export const MapContainer = props => {
         });
         getMap().map = indexMap;
 
-    indexMap.addControl(new LayerControl());
-
     });
   return (<div id={props.id}>
-    
+    <Control klass={LayerControl}/>
   </div>)
 }
