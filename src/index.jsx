@@ -2,7 +2,7 @@ import './index.css';
 import './../node_modules/ol/ol.css';
 import { render } from 'solid-js/web';
 import * as Layers from './layers/index';
-import {FullScreenMapContainer} from './controls/fullscreenmap'
+import {FullScreenMapContainer} from './components/fullscreenmap'
 import View from 'ol/View.js';
 import config from './config';
 

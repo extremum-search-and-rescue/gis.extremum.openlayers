@@ -1,6 +1,6 @@
 import Map from 'ol/Map.js';
-import {LayersList} from './layerswitcher/layersmodel';
-import LayerControl from './layerswitcher/layercontrol';
+import {LayersList} from '../controls/layerswitcher/layersmodel';
+import LayerControl from '../controls/layerswitcher/layercontrol';
 import {createStore} from 'solid-js/store';
 import {Collection} from 'ol';
 import '../index.css';

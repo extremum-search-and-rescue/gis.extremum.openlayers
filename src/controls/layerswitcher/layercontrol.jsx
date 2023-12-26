@@ -2,8 +2,8 @@ import Control from 'ol/control/Control';
 import {LayersList} from './layersmodel';
 import {For, Index, Show, createComponent} from 'solid-js';
 import './layercontrol.css';
-import './../checkbox.css'
-import './../radiogroup.css'
+import './../../ark-styles/checkbox.css'
+import './../../ark-styles/radiogroup.css'
 import { Checkbox} from '@ark-ui/solid'
 import { RadioGroup } from '@ark-ui/solid';
 
