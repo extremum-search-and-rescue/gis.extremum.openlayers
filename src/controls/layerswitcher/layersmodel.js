@@ -1,5 +1,4 @@
 import BaseObject from 'ol/Object';
-import { createStore } from 'solid-js/store'
 /**
 * @type {{
 * name: string,

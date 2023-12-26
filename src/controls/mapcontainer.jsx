@@ -10,7 +10,8 @@ import { onMount } from "solid-js";
 console.log('running mapcontainer.jsx');
 
 export const MapContainer = props => {
-
+    if(!props.id) throw new Error("no map div id in props");
+    if(!props.view) throw new Error("no View in props");
     onMount(() => {
         console.log('initializing mapcontainer');
         console.log(props);
