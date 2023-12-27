@@ -12,6 +12,7 @@ import Zoom from 'ol/control/Zoom'
 import Rotate from 'ol/control/Rotate'
 import ScaleLine from 'ol/control/ScaleLine'
 import { DrawToolbar } from './controls/draw/drawtoolbar';
+import { ControlContainer } from './controls/controlcontainer';
 
 console.log('running index.js');
 
@@ -31,6 +32,7 @@ const baseMaps = [
     Layers.YandexMapsDark,
 ];
 const overlayMaps = [
+    Layers.Hillshading,
     Layers.MegafonCoverage,
     Layers.MtsRusCoverage,
     Layers.MtsByCoverage,
@@ -51,7 +53,6 @@ const overlayMaps = [
     Layers.MarineTraffic,
     Layers.OpenseamapMarks,
     Layers.OnlineTrackers,
-    Layers.Hillshading,
     Layers.GeolocationPublic,
     Layers.LiveTransport
 ];
@@ -69,13 +70,13 @@ render(() =>
             basemaps={baseMaps} 
             overlays={overlayMaps}
             view={view}>
-            <Control klass={LayerControl}/>
+                <ControlContainer classes="gis-flex-column">
+                    <Control klass={LayerControl}/>
+                </ControlContainer>
             <Control klass={Zoom}/>
             <Control klass={Rotate}/>
             <Control klass={ScaleLine}/>
-            <Control klass={DrawToolbar}>
-                <button>111</button>
-            </Control>
+            <Control klass={DrawToolbar}/>
         </FullScreenMapContainer>
     </ServiceRegistry>,
     document.body

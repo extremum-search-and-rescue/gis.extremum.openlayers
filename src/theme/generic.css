@@ -11,3 +11,8 @@
 /* About backdrop-filter
 https://stackoverflow.com/questions/60997948/backdrop-filter-not-working-for-nested-elements-in-chrome
 */
+.gis-flex-column
+{
+    display: flex;
+    flex-direction: column;
+}

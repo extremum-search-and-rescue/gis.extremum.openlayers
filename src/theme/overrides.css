@@ -1,11 +1,31 @@
+/* control container */
 .ol-overlaycontainer-stopevent{
     display: grid;
     gap: 0.5rem;
     grid-template-columns: auto auto auto;
     grid-template-rows: auto auto auto;
+    justify-items: flex-start;
+    align-items: flex-start;
   }
   @media print {
     .ol-overlaycontainer-stopevent {
       display: none;
     }
   }
+
+  .ol-zoom {
+    float: inline-start;
+    top: unset !important;
+    left: unset !important;
+    grid-column: 1;
+    grid-row: 1;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+}
+
+.ol-zoom.ol-control
+{
+    position: relative;
+}
