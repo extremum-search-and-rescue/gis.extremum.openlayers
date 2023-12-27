@@ -44,6 +44,7 @@ function getPoint(feature, resolution, type) {
         image: new Icon({
             src: `https://gis.extremum.org/images/${type}.png`,
             rotation: type === 'plane' ? rotation : undefined,
+            rotateWithView: type ==='plane',
         }),
         text: resolution < 12 ? createTextStyle(feature, resolution) : undefined,
     });

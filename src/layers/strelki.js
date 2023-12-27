@@ -43,7 +43,8 @@ function pointStyleFunction(feature, resolution) {
     return new Style({
         image: new Icon({
             src: url,
-            rotation: rotation
+            rotation: rotation,
+            rotateWithView: true,
         }),
         text: resolution<15 ? createTextStyle(feature, resolution) : undefined,
     });
