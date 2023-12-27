@@ -165,7 +165,7 @@ accent colors --xxx-600
         --gis-text-base: rgba(0,0,0,0.9);
         --gis-text-light: rgba(0,0,0,0.7);
         --gis-text-subtle: rgba(0,0,0,0.5);
-        --gis-outline: rgba(0,0,0,0.5);
+        --gis-outline: rgba(0,0,0,0.15);
         
         --gis-focus-outline: var(--blue-300);
 
@@ -185,7 +185,7 @@ accent colors --xxx-600
     --gis-text-base: rgba(255,255,255,0.9);
     --gis-text-light: rgba(255,255,255,0.7);
     --gis-text-subtle: rgba(255,255,255,0.55);
-    --gis-outline: rgba(255,255,255,0.5);
+    --gis-outline: rgba(255,255,255,0.15);
 
     --gis-focus-outline: var(--blue-300);
 

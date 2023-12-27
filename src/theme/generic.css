@@ -2,7 +2,7 @@
     opacity: 0.87;
     background: var(--gis-panel-background);
     border-radius: 0.25rem;
-    outline: 2px solid var(--gis-outline);
+    outline: 1px solid var(--gis-outline);
     -webkit-backdrop-filter: blur(4px);
     -moz-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
