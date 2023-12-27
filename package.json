@@ -20,6 +20,7 @@
         "proj4": "^2.9.0",
         "solid-js": "^1.8.7",
         "solid-services": "^4.3.2",
+        "solid-transition-group": "^0.2.3",
         "solidjs-div-100vh": "^1.0.1"
     },
     "devDependencies": {

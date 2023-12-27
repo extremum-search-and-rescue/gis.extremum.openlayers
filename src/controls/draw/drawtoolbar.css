@@ -23,8 +23,21 @@
 }
 
 .gis-drawtoolbar button[aria-pressed='true'] {
-    background-color: var(--gis-input-background-checked);)
+    background-color: var(--gis-input-background-checked);
 }
 .gis-drawtoolbar button:hover {
     background-color: var(--gis-input-background-checked-hover);
+}
+
+.highlight-enter-active,
+.highlight-exit-active
+{
+    transition: color 0.5s;
+}
+.highlight-enter,
+.highlight-exit-to {
+    color: var(--gis-text-base);
+}
+.highlight-enter {
+  color: var(--orange-400);
 }

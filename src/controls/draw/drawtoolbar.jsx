@@ -6,6 +6,7 @@ import { useService } from "solid-services";
 import { LayerService } from "../../services/layerservice";
 import Draw from 'ol/interaction/Draw'
 import { useCurrentlyHeldKey } from "@solid-primitives/keyboard";
+import { Transition } from 'solid-transition-group'
 
 const DrawToolbarComponent = props => {
     console.log('drawing buttons')
@@ -44,50 +45,52 @@ export class DrawToolbar extends Control {
                 type: 'LineString',
                 toggled: false,
                 content: () => (
-                <Switch >
-                    <Match when={!isFreehand()}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.5 11.5H2.5V13.5H0.5V11.5Z" stroke="currentColor"/>
-                        <path d="M12.5 4.5H14.5V6.5H12.5V4.5Z" stroke="currentColor"/>
-                        <path d="M12.5 6L2.50001 12.5" stroke="currentColor"/>
-                    </svg>
-                    </Match>
-                    <Match when={isFreehand()}>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0.5 11.5H2.5V13.5H0.5V11.5Z" stroke="currentColor"/>
-                        <path d="M12.5 4.5H14.5V6.5H12.5V4.5Z" stroke="currentColor"/>
-                        <path d="M12.4999 5.99995C12.4999 5.99995 10 15.5 4.99993 7.99996C3.88479 6.32725 2.49993 12.4999 2.49993 12.4999" stroke="currentColor"/>
-                    </svg>
-                    </Match>
-                </Switch>
+                    <Transition name={'highlight'} appear={true}>
+                        <Switch >
+                            <Match when={!isFreehand()}>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.5 11.5H2.5V13.5H0.5V11.5Z" stroke="currentColor"/>
+                                <path d="M12.5 4.5H14.5V6.5H12.5V4.5Z" stroke="currentColor"/>
+                                <path d="M12.5 6L2.50001 12.5" stroke="currentColor"/>
+                            </svg>
+                            </Match>
+                            <Match when={isFreehand()}>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M13 5C13 5 10 15.5 4.99993 7.99996C3.88479 6.32726 2 14 2 14" stroke="currentColor"/>
+                            </svg>
+                            </Match>
+                        </Switch>
+                    </Transition>  
                 )
             },
             {
                 type: 'Polygon',
                 toggled: false,
                 content: () => (
-                    <Switch>
-                        <Match when={!isFreehand()}>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="10.5" y="1.5" width="2" height="2" stroke="currentColor"/>
-                            <rect x="11.5" y="11.5" width="2" height="2" stroke="currentColor"/>
-                            <path d="M1.5 5.5H3.5V7.5H1.5V5.5Z" stroke="currentColor"/>
-                            <path d="M3.5 7.5L11.265 12.576" stroke="currentColor"/>
-                            <path d="M3.49999 6L10.803 2.54043" stroke="currentColor"/>
-                            <path d="M11.5 3.50002L12.5 11.5" stroke="currentColor"/>
-                        </svg>
-                        </Match>
-                        <Match when={isFreehand()}>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect x="10.5" y="1.5" width="2" height="2" stroke="currentColor"/>
-                            <rect x="11.5" y="11.5" width="2" height="2" stroke="currentColor"/>
-                            <path d="M1.5 5.5H3.5V7.5H1.5V5.5Z" stroke="currentColor"/>
-                            <path d="M3.5 7.49999C3.5 7.49999 9.765 8.07599 7.3825 10.038C5 12 11.265 12.576 11.265 12.576" stroke="currentColor"/>
-                            <path d="M2.5 5.5C1.5 0.500012 7 4.50001 10.803 2.54042" stroke="currentColor"/>
-                            <path d="M12 3.5C15.5 5.5 12.5 11.5 12.5 11.5" stroke="currentColor"/>
-                        </svg>
-                        </Match>
-                    </Switch>              
+                    <Transition name={'highlight'} appear={true}>
+                        <Switch>
+                            <Match when={!isFreehand()}>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10.5" y="1.5" width="2" height="2" stroke="currentColor"/>
+                                <rect x="11.5" y="11.5" width="2" height="2" stroke="currentColor"/>
+                                <path d="M1.5 5.5H3.5V7.5H1.5V5.5Z" stroke="currentColor"/>
+                                <path d="M3.5 7.5L11.265 12.576" stroke="currentColor"/>
+                                <path d="M3.49999 6L10.803 2.54043" stroke="currentColor"/>
+                                <path d="M11.5 3.50002L12.5 11.5" stroke="currentColor"/>
+                            </svg>
+                            </Match>
+                            <Match when={isFreehand()}>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10.5" y="1.5" width="2" height="2" stroke="currentColor"/>
+                                <rect x="11.5" y="11.5" width="2" height="2" stroke="currentColor"/>
+                                <path d="M1.5 5.5H3.5V7.5H1.5V5.5Z" stroke="currentColor"/>
+                                <path d="M3.5 7.49999C3.5 7.49999 9.765 8.07599 7.3825 10.038C5 12 11.265 12.576 11.265 12.576" stroke="currentColor"/>
+                                <path d="M2.5 5.5C1.5 0.500012 7 4.50001 10.803 2.54042" stroke="currentColor"/>
+                                <path d="M12 3.5C15.5 5.5 12.5 11.5 12.5 11.5" stroke="currentColor"/>
+                            </svg>
+                            </Match>
+                        </Switch>       
+                    </Transition>       
                 )
             },
             {
