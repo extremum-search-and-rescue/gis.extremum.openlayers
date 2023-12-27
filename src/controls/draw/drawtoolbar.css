@@ -28,6 +28,10 @@
 .gis-drawtoolbar button:hover {
     background-color: var(--gis-input-background-checked-hover);
 }
+.gis-drawtoolbar button:active
+{
+    outline: 2px solid var(--gis-outline);
+}
 
 .highlight-enter-active,
 .highlight-exit-active

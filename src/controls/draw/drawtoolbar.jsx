@@ -81,12 +81,7 @@ export class DrawToolbar extends Control {
                             </Match>
                             <Match when={isFreehand()}>
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="10.5" y="1.5" width="2" height="2" stroke="currentColor"/>
-                                <rect x="11.5" y="11.5" width="2" height="2" stroke="currentColor"/>
-                                <path d="M1.5 5.5H3.5V7.5H1.5V5.5Z" stroke="currentColor"/>
-                                <path d="M3.5 7.49999C3.5 7.49999 9.765 8.07599 7.3825 10.038C5 12 11.265 12.576 11.265 12.576" stroke="currentColor"/>
-                                <path d="M2.5 5.5C1.5 0.500012 7 4.50001 10.803 2.54042" stroke="currentColor"/>
-                                <path d="M12 3.5C15.5 5.5 12.5 11.5 12.5 11.5" stroke="currentColor"/>
+                                <path d="M14.5 13.5C7 13 7.5 8.50001 1.5 6.5C5 1.50001 8.5 4 11 2.5C14 4.5 12.5 8.49999 14.5 13.5Z" stroke="currentColor"/>
                             </svg>
                             </Match>
                         </Switch>       
@@ -130,7 +125,7 @@ export class DrawToolbar extends Control {
 
         super({
             element: element(),
-            target: undefined,
+            target: options.target || undefined,
         });
     }
     setMap(map){
