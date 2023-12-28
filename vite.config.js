@@ -20,6 +20,7 @@ export default defineConfig({
     server: {
       port: 8085,
       https: false,
+      host: '0.0.0.0',
       open: '/dist/index.html',
     },
   })
