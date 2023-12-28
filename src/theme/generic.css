@@ -1,3 +1,7 @@
+@import url('../controls/layerswitcher/layercontrol.css');
+@import url('../ark-styles/checkbox.css');
+@import url('../ark-styles/radiogroup.css');
+
 .gis-control-toolbar {
     opacity: 0.87;
     background: var(--gis-panel-background);
@@ -6,7 +10,6 @@
     -webkit-backdrop-filter: blur(4px);
     -moz-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
-    margin: 0.5rem;
 }
 /* About backdrop-filter
 https://stackoverflow.com/questions/60997948/backdrop-filter-not-working-for-nested-elements-in-chrome
@@ -16,3 +19,54 @@ https://stackoverflow.com/questions/60997948/backdrop-filter-not-working-for-nes
     display: flex;
     flex-direction: column;
 }
+#ol-container-1-1
+{
+    display: flex;
+    pointer-events: auto;
+    gap: 1rem;
+    grid-row: 1;
+    grid-column: 1;
+    margin: 0.5rem;
+}
+
+.gis-zoom {
+    position: unset;
+    top: unset;
+    left: unset;
+    right: unset;
+    background-color: var(--gis-panel-background) !important;
+    width: -moz-fit-content !important;
+    width: fit-content !important;
+    padding: 3px !important;
+    outline: 1px solid var(--gis-outline);
+    opacity: 0.87;
+    border-radius: 3px !important;
+}
+.gis-zoom button {
+   width: 1.5rem !important;
+   height: 1.5rem !important;
+   background-color: unset !important;
+   color: var(--gis-text-base) !important;
+}
+
+
+.gis-rotate {
+    padding: 3px !important;
+    outline: 1px solid var(--gis-outline);
+    position: unset;
+    top: unset;
+    left: unset;
+    right: unset;
+    background-color: var(--gis-panel-background) !important;
+    width: -moz-fit-content !important;
+    width: fit-content !important;
+    opacity: 0.87;
+    border-radius: 3px !important;
+}
+.gis-rotate button {
+   width: 1.5rem !important;
+   height: 1.5rem !important;
+   background-color: unset !important;
+   color: var(--gis-text-base) !important;
+}
+

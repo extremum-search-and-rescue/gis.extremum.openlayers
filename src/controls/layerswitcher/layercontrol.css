@@ -13,6 +13,7 @@
     max-height: calc(100vh - 1.5rem);
     color: var(--gis-text-base);
     overflow: auto;
+    margin: 0.5rem;
 }
 
 /* https://stackoverflow.com/questions/306252/how-to-align-checkboxes-and-their-labels-consistently-cross-browsers */

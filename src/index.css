@@ -1,6 +1,6 @@
 @import url(theme/pallete.css);
-@import url(theme/generic.css);
 @import url(theme/overrides.css);
+@import url(theme/generic.css);
 body {
     margin: 0;
     padding: 0;

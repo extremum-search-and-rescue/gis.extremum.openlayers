@@ -1,3 +1,5 @@
+@import url('../../node_modules/ol/ol.css');
+
 /* control container */
 .ol-overlaycontainer-stopevent{
     display: grid;
@@ -13,19 +15,12 @@
     }
   }
 
-  .ol-zoom {
-    float: inline-start;
-    top: unset !important;
-    left: unset !important;
-    grid-column: 1;
-    grid-row: 1;
-    width: -moz-fit-content;
-    width: fit-content;
-    height: -moz-fit-content;
-    height: fit-content;
+.ol-control {
+  position: unset !important;
 }
-
-.ol-zoom.ol-control
-{
-    position: relative;
+.ol-scale-line{
+  -webkit-backdrop-filter: blur(1px);
+  -moz-backdrop-filter: blur(1px);
+  backdrop-filter: blur(1px);
+  background: unset !important;
 }

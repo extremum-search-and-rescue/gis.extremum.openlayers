@@ -7,6 +7,8 @@ import { Checkbox} from '@ark-ui/solid'
 import { RadioGroup } from '@ark-ui/solid';
 import { useService } from 'solid-services';
 import { LayerService } from '../../services/layerservice';
+import { useKeyDownEvent } from "@solid-primitives/keyboard";
+import { createSignal } from "solid-js";
 
 const BaseMapSelector = (params) => {
     console.info('adding BaseMapSelector', params);
@@ -62,8 +64,18 @@ const LayerControlComponent = (params) => {
 
 class LayerControl extends Control {
     constructor() {
+
         const layerService = useService(LayerService);
 
+        const keydown = useKeyDownEvent();
+
+        const [isHotkey, setHotkey] = createSignal(false);
+        createEffect(()=> {
+            const event = keydown();
+            if(event.code >= 0 && event.code<=9)
+                setHotkey()
+        });
+        
         console.info('LayerControl constructor');
         const params = {
             classes: 'ol-unselectable gis-control-toolbar gis-layercontrol',

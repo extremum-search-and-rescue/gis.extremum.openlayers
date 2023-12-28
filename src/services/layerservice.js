@@ -22,7 +22,6 @@ export function LayerService() {
     setUl([vectorDrawingLayer]);
 
     const getMapcontext = useService(MapContext);
-
     return {
         get basemaps() {
             return bm;

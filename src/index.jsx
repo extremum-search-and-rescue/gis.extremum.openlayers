@@ -70,13 +70,13 @@ render(() =>
             basemaps={baseMaps} 
             overlays={overlayMaps}
             view={view}>
-                <ControlContainer classes="gis-flex-column">
-                    <Control klass={LayerControl}/>
-                </ControlContainer>
-            <Control klass={Zoom}/>
-            <Control klass={Rotate}/>
+            <Control klass={LayerControl}/>
+            <ControlContainer id={'ol-container-1-1'} classes="gis-flex-column">
+                <Control klass={Zoom} classes={'gis-zoom'} target={'ol-container-1-1'}/>
+                <Control klass={DrawToolbar} target={'ol-container-1-1'}/>
+                <Control klass={Rotate} classes={'gis-rotate'} target={'ol-container-1-1'}/>
+            </ControlContainer>
             <Control klass={ScaleLine}/>
-            <Control klass={DrawToolbar}/>
         </FullScreenMapContainer>
     </ServiceRegistry>,
     document.body
