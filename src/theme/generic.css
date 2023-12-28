@@ -73,3 +73,43 @@ https://stackoverflow.com/questions/60997948/backdrop-filter-not-working-for-nes
    background-color: unset !important;
    color: var(--gis-text-base) !important;
 }
+.gis-mainmenu
+{
+    z-index: 1;
+    opacity: 1;
+}
+.gis-control-toolbar.gis-mainmenu
+{
+    opacity: 0.87;
+}
+
+div[data-scope='menu'][data-part='content'][data-state='open']{
+    background-color: var(--gis-panel-background);
+    box-shadow: black 0 0 16px;
+    margin: -0.25rem -0.25rem;
+    padding: 0.25rem 0;
+    border-radius: 3px;
+    opacity: 1;
+}
+div[data-scope='menu'][data-part='content'][data-state='open']:focus-visible{
+    outline: 2px solid var(--gis-outline);
+}
+div[data-scope='menu'][data-part='item']{
+    color: var(--gis-text-base);
+    padding: 0.25rem 1rem;
+    font-size: small;
+}
+div[data-scope='menu'][data-part='item']:hover{
+    background-color: var(--gis-input-background-hover);
+}
+div[data-scope='menu'][data-part='item'][aria-disabled='true']{
+    color: var(--gis-text-subtle);
+}
+hr[data-scope='menu'][data-part='separator']{
+    all: unset;
+    display: block;
+    height: 1px;
+    margin: 0.25rem 0.25rem;
+    width: calc(100%-2rem);
+    background-color: var(--gis-outline);
+}

@@ -14,6 +14,7 @@ import ScaleLine from 'ol/control/ScaleLine'
 import { DrawToolbar } from './controls/draw/drawtoolbar';
 import { ControlContainer } from './controls/controlcontainer';
 import { Locate } from './controls/geolocation/locate';
+import { MainMenu } from './controls/mainmenu/menu';
 
 console.log('running index.js');
 
@@ -73,6 +74,7 @@ render(() =>
             view={view}>
             <Control klass={LayerControl}/>
             <ControlContainer id={'ol-container-1-1'} classes="gis-flex-column">
+                <Control klass={MainMenu} classes={'gis-mainmenu'} target={'ol-container-1-1'}/>
                 <Control klass={Zoom} classes={'gis-zoom'} target={'ol-container-1-1'}/>
                 <Control klass={DrawToolbar} target={'ol-container-1-1'}/>
                 <Control klass={Rotate} classes={'gis-rotate'} target={'ol-container-1-1'}/>
