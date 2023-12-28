@@ -8,7 +8,7 @@ import { RadioGroup } from '@ark-ui/solid';
 import { useService } from 'solid-services';
 import { LayerService } from '../../services/layerservice';
 import { useKeyDownEvent } from "@solid-primitives/keyboard";
-import { createSignal } from "solid-js";
+import { createSignal, createEffect } from "solid-js";
 
 const BaseMapSelector = (params) => {
     console.info('adding BaseMapSelector', params);
@@ -72,8 +72,12 @@ class LayerControl extends Control {
         const [isHotkey, setHotkey] = createSignal(false);
         createEffect(()=> {
             const event = keydown();
-            if(event.code >= 0 && event.code<=9)
+            let code = event && event.code && Number.parseInt(event.code)
+            if(code && code >= 0 && code<=9){
+                console.warn(code)
                 setHotkey()
+            }
+                
         });
         
         console.info('LayerControl constructor');

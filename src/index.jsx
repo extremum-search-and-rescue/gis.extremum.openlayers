@@ -13,6 +13,7 @@ import Rotate from 'ol/control/Rotate'
 import ScaleLine from 'ol/control/ScaleLine'
 import { DrawToolbar } from './controls/draw/drawtoolbar';
 import { ControlContainer } from './controls/controlcontainer';
+import { Locate } from './controls/geolocation/locate';
 
 console.log('running index.js');
 
@@ -75,6 +76,7 @@ render(() =>
                 <Control klass={Zoom} classes={'gis-zoom'} target={'ol-container-1-1'}/>
                 <Control klass={DrawToolbar} target={'ol-container-1-1'}/>
                 <Control klass={Rotate} classes={'gis-rotate'} target={'ol-container-1-1'}/>
+                <Control klass={Locate} classes={'gis-locate'} target={'ol-container-1-1'}/>
             </ControlContainer>
             <Control klass={ScaleLine}/>
         </FullScreenMapContainer>

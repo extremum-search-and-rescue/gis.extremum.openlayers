@@ -1,14 +1,11 @@
-.gis-drawtoolbar
+.gis-toolbar
 {
-    position: relative;
     display: flex;
     flex-direction: column;
-    width: max-content;
-    height: max-content;
-    gap: 2px;
-    padding: 0.25rem;
 }
-.gis-drawtoolbar button {
+
+.gis-toolbar-button
+{
     all: unset;
     width: 1.5rem;
     height: 1.5rem;
@@ -20,13 +17,15 @@
     color: var(--gis-text-base);
 }
 
-.gis-drawtoolbar button[aria-pressed='true'] {
+.gis-toolbar-button[aria-pressed='true']{
     background-color: var(--gis-input-background-checked);
 }
-.gis-drawtoolbar button:hover {
+
+.gis-toolbar-button:hover {
     background-color: var(--gis-input-background-checked-hover);
 }
-.gis-drawtoolbar button:active
+
+.gis-toolbar-button:active
 {
     outline: 2px solid var(--gis-outline);
 }

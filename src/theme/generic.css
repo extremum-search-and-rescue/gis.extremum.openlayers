@@ -1,6 +1,6 @@
-@import url('../controls/layerswitcher/layercontrol.css');
 @import url('../ark-styles/checkbox.css');
 @import url('../ark-styles/radiogroup.css');
+@import url('../controls/layerswitcher/layercontrol.css');
 
 .gis-control-toolbar {
     opacity: 0.87;
@@ -10,6 +10,10 @@
     -webkit-backdrop-filter: blur(4px);
     -moz-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
+    width: max-content;
+    height: max-content;
+    gap: 2px;
+    padding: 0.25rem;
 }
 /* About backdrop-filter
 https://stackoverflow.com/questions/60997948/backdrop-filter-not-working-for-nested-elements-in-chrome
@@ -69,4 +73,3 @@ https://stackoverflow.com/questions/60997948/backdrop-filter-not-working-for-nes
    background-color: unset !important;
    color: var(--gis-text-base) !important;
 }
-

@@ -100,8 +100,9 @@ export class DrawToolbar extends Control {
         ]);
         
         const params = {
-            classes: 'gis-control-toolbar gis-drawtoolbar ol-unselectable',
+            classes: 'gis-control-toolbar gis-toolbar ol-unselectable',
             buttons: buttons,
+            buttonClasses: 'gis-toolbar-button',
             interaction: (type) => {
                 const drawLayer = getLayers().userDrawingLayer;
                 if(activeDraw) {

@@ -19,7 +19,14 @@ export function LayerService() {
         source: userDrawingSurface,
     });
     vectorDrawingLayer.setVisible(true);
-    setUl([vectorDrawingLayer]);
+
+    const userLocationLayer = new VectorLayer({
+        id: 'user-geo',
+        visible: true,
+        source: new VectorSource()
+    })
+
+    setUl([vectorDrawingLayer, userLocationLayer]);
 
     const getMapcontext = useService(MapContext);
     return {
@@ -67,15 +74,20 @@ export function LayerService() {
         get userDrawingLayer(){
             return ul[0].get('source');
         },
+        get userGeolocationLayer(){
+            return ul[1].get('source');
+        },
         get flat(){
             console.info('getting flat list of layers');
             const layersToAdd = bm
                 .flatMap((b) => b.layers.map((l) => Object.assign(l, {id: b.id, type: 'base', visible: b.visible || false})))
                 .concat(om.flatMap((o) => o.layers.map((l) => Object.assign(l, {id: o.id, visible: o.visible || false}))))
-                .concat(vectorDrawingLayer);
+                .concat(vectorDrawingLayer)
+                .concat(userLocationLayer);
 
             layersToAdd.forEach((l) => l.setVisible(l.visible || false));
             vectorDrawingLayer.setVisible(true);
+            userLocationLayer.setVisible(true);
             return layersToAdd;
         }
     }

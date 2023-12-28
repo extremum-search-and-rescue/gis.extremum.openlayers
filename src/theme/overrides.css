@@ -19,8 +19,9 @@
   position: unset !important;
 }
 .ol-scale-line{
-  -webkit-backdrop-filter: blur(1px);
+   -webkit-backdrop-filter: blur(1px);
   -moz-backdrop-filter: blur(1px);
   backdrop-filter: blur(1px);
   background: unset !important;
+  mix-blend-mode: difference !important;
 }
