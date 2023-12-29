@@ -15,7 +15,8 @@ export default defineConfig({
             }
           }
         }
-      }
+      },
+      chunkSizeWarningLimit: 800000,
     },
     server: {
       port: 8085,
