@@ -22,7 +22,7 @@ const MenuComponent = props => {
                         Import Grid
                     </Menu.Item>
                     <MenuSeparator/>
-                    <Menu.Item id='print'>
+                    <Menu.Item id='print' onclick={()=> window.print()}>
                         Print
                     </Menu.Item>
                     <MenuSeparator/>
