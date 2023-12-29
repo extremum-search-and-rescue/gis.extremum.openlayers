@@ -110,6 +110,5 @@ hr[data-scope='menu'][data-part='separator']{
     display: block;
     height: 1px;
     margin: 0.25rem 0.25rem;
-    width: calc(100%-2rem);
     background-color: var(--gis-outline);
 }
