@@ -1,4 +1,4 @@
-import {Image as ImageLayer, Tile as TileLayer} from 'ol/layer.js';
+import {Image as ImageLayer} from 'ol/layer.js';
 import {Raster, XYZ} from 'ol/source.js';
 
 /**
@@ -134,21 +134,21 @@ const raster = new Raster({
 });
 
 raster.on('beforeoperations', function (event) {
-    const data = event.data;
-    data.resolution = event.resolution;
-    data['sunEl'] = 60;
-    data['vert'] = 3;
-    data['sunAz'] = 0;
-  });
+  const data = event.data;
+  data.resolution = event.resolution;
+  data['sunEl'] = 60;
+  data['vert'] = 3;
+  data['sunAz'] = 0;
+});
 
 export const Hillshading = {
-    id: 'HS',
-    title: 'Hillshading',
-    visible: false,
-    layers: [
-        new ImageLayer({
-            opacity: 0.3,
-            source: raster,
-        })
-    ]
-}
+  id: 'HS',
+  title: 'Hillshading',
+  visible: false,
+  layers: [
+    new ImageLayer({
+      opacity: 0.3,
+      source: raster,
+    })
+  ]
+};

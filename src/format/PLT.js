@@ -1,12 +1,13 @@
-import TextFeature from "ol/format/TextFeature";
-import { LineString, MultiLineString } from "ol/geom";
-import { abstract } from "ol/util";
-import { get as getProjection, getUserProjection, useGeographic } from 'ol/proj.js'
-import { Feature } from "ol";
-import { transformGeometryWithOptions } from "ol/format/Feature.js";
+/* eslint-disable no-unused-vars */
+import TextFeature from 'ol/format/TextFeature';
+import { LineString, MultiLineString } from 'ol/geom';
+import { abstract } from 'ol/util';
+import { get as getProjection, getUserProjection, useGeographic } from 'ol/proj.js';
+import { Feature } from 'ol';
+import { transformGeometryWithOptions } from 'ol/format/Feature.js';
 // PTL spec: https://www.oziexplorer4.com/eng/help/fileformats.html
 
-const PLT_LINE_REGEX = /(\d{1,2}\.\d{1,16}),\s*(-?\d{1,3}\.\d{1,16}),\s*([0,1]),\s*(-?\d+(\.\d+)?),\s*(\d{1,6}\.\d{1,15})?/
+const PLT_LINE_REGEX = /(\d{1,2}\.\d{1,16}),\s*(-?\d{1,3}\.\d{1,16}),\s*([0,1]),\s*(-?\d+(\.\d+)?),\s*(\d{1,6}\.\d{1,15})?/;
 
 const FIELD_LATITUDE = 0;
 const FIELD_LONGITUDE = 1;
@@ -24,7 +25,7 @@ class PLT extends TextFeature
     this.dataProjection = getProjection(
       options.dataProjection ? options.dataProjection : 'EPSG:4326');
 
-    this.defaultFeatureProjection = getProjection('EPSG:3857')
+    this.defaultFeatureProjection = getProjection('EPSG:3857');
   }
   /**
    * Read the feature from the source.
@@ -79,12 +80,11 @@ class PLT extends TextFeature
     let currentTrack;
     for(let i = 6; i< lines.length; i++)
     {
-      let line = lines[i].match(PLT_LINE_REGEX)
+      let line = lines[i].match(PLT_LINE_REGEX);
       if(!line) continue;
 
-      const lon = parseFloat(line[1+FIELD_LONGITUDE])
+      const lon = parseFloat(line[1+FIELD_LONGITUDE]);
       const lat = parseFloat(line[1+FIELD_LATITUDE]);
-      if(!lat || !lon) debugger;
 
       const coord = [lon, lat];
 
@@ -114,7 +114,7 @@ class PLT extends TextFeature
         false,
         this.adaptOptions(options)
       ));
-      return [feature];
+    return [feature];
   }
 
   /**
@@ -151,7 +151,6 @@ class PLT extends TextFeature
    * @api
    */
   readProjection(source) {
-    //return this.readProjectionFromText(getText(source));
     return this.dataProjection;
   }
 
@@ -251,7 +250,7 @@ function getText(source) {
  * @return {Array<string>} Lines.
  */
 function getLines(source){
-  return getText(source).split(/[\n\u0085\u2028\u2029]|\r\n?/g)
+  return getText(source).split(/[\n\u0085\u2028\u2029]|\r\n?/g);
 }
 
 export default PLT;

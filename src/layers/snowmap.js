@@ -1,5 +1,5 @@
-import TileLayer from "ol/layer/Tile";
-import XYZ from "ol/source/XYZ";
+import TileLayer from 'ol/layer/Tile';
+import XYZ from 'ol/source/XYZ';
 
 export const OpenSnowMap = {
   id: 'oSN',
@@ -11,16 +11,16 @@ export const OpenSnowMap = {
     new TileLayer({
       preload: Infinity,
       source: new XYZ({
-          maxZoom: 18,
-          url: 'https://tiles.opensnowmap.org/base_snow_map/{z}/{x}/{y}.png?debug1'
-          }),
+        maxZoom: 18,
+        url: 'https://tiles.opensnowmap.org/base_snow_map/{z}/{x}/{y}.png?debug1'
       }),
-      new TileLayer({
-        preload: Infinity,
-        source: new XYZ({
-            maxZoom: 18,
-            url: 'https://tiles.opensnowmap.org/pistes/{z}/{x}/{y}.png'
-            }),
-        })
+    }),
+    new TileLayer({
+      preload: Infinity,
+      source: new XYZ({
+        maxZoom: 18,
+        url: 'https://tiles.opensnowmap.org/pistes/{z}/{x}/{y}.png'
+      }),
+    })
   ]
-}
+};
