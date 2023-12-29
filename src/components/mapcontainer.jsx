@@ -9,6 +9,7 @@ import { MapContext } from '../services/mapcontext';
 import { LayerService } from '../services/layerservice';
 import { defaults } from 'ol/interaction/defaults'
 import ArrayGeoJSON from '../format/ArrayGeoJSON';
+import PLT from '../format/PLT';
 import DragAndDrop from 'ol/interaction/DragAndDrop'
 
 console.log('running mapcontainer.jsx');
@@ -46,8 +47,8 @@ export const MapContainer = props => {
           dragAndDropInteraction = new DragAndDrop({
             formatConstructors: [
               GPX,
-              GeoJSON,
               ArrayGeoJSON,
+              PLT
             ],
           });
           dragAndDropInteraction.on('addfeatures', (event)=> layerService().addFeatures(event, indexMap));
