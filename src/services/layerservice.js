@@ -36,9 +36,15 @@ export function LayerService() {
 
   const getMapcontext = useService(MapContext);
   return {
-    addFeatures(event, map){
+    addFeaturesFromEvent(event, map){
       const source = localUserObjectsLayer.get('source');
       source.addFeatures(event.features);
+      map.getView().fit(source.getExtent());
+    },
+    addFeatures(features, map)
+    {
+      const source = localUserObjectsLayer.get('source');
+      source.addFeatures(features);
       map.getView().fit(source.getExtent());
     },
     get basemaps() {

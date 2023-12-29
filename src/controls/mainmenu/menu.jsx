@@ -1,8 +1,45 @@
 import { Menu, MenuSeparator } from '@ark-ui/solid';
 import Control from 'ol/control/Control';
 import { createComponent } from 'solid-js';
+import { createFileUploader } from '@solid-primitives/upload';
+import { useService } from 'solid-services';
+import { LayerService} from '../../services/layerservice';
+import GPX from 'ol/format/GPX';
+import PLT from '../../format/PLT.js';
+import { MapContext } from '../../services/mapcontext.js';
+import { get as getProjection} from 'ol/proj.js';
 
-const MenuComponent = () => {    
+const MenuComponent = () => {
+  // eslint-disable-next-line no-unused-vars
+  const { files, selectFiles } = createFileUploader({ multiple: true, accept: '*' });
+  const getLayerService = useService(LayerService);
+  const getMapContext = useService(MapContext);
+
+  async function read(inputFile){
+    try {
+      const layerService = getLayerService();
+      const map = getMapContext().map();
+      let features;
+      const fileNameInLowerCase = inputFile.name.toLowerCase();
+      if(fileNameInLowerCase.endsWith('.gpx')) {
+        features = new GPX().readFeatures(await inputFile.file.text(), { featureProjection: getProjection('EPSG:3857') });
+      }
+      else if(fileNameInLowerCase.endsWith('.plt')){
+        features = new PLT().readFeatures(await inputFile.file.text());
+      }
+      if(features != null) 
+      {
+        layerService.addFeatures(features, map);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+        
+  function onFileImport(){
+    selectFiles(filesFromDialog => filesFromDialog.forEach(async inputFile => await read(inputFile)));
+  }
+  
   return (
     <div class="gis-control-toolbar gis-mainmenu">
       <Menu.Root>
@@ -15,7 +52,7 @@ const MenuComponent = () => {
         </Menu.Trigger>
         <Menu.Positioner>
           <Menu.Content>
-            <Menu.Item id='import-tracks'>
+            <Menu.Item id='import-tracks' onclick={onFileImport}>
                         Import tracks
             </Menu.Item>
             <Menu.Item id='import-grids'>

@@ -2,7 +2,7 @@
 import TextFeature from 'ol/format/TextFeature';
 import { LineString, MultiLineString } from 'ol/geom';
 import { abstract } from 'ol/util';
-import { get as getProjection, getUserProjection, useGeographic } from 'ol/proj.js';
+import { get as getProjection} from 'ol/proj.js';
 import { Feature } from 'ol';
 import { transformGeometryWithOptions } from 'ol/format/Feature.js';
 // PTL spec: https://www.oziexplorer4.com/eng/help/fileformats.html

@@ -53,7 +53,7 @@ export const MapContainer = props => {
           PLT
         ],
       });
-      dragAndDropInteraction.on('addfeatures', (event)=> layerService().addFeatures(event, indexMap));
+      dragAndDropInteraction.on('addfeatures', (event)=> layerService().addFeaturesFromEvent(event, indexMap));
       indexMap.addInteraction(dragAndDropInteraction);
     }
     setInteraction();
