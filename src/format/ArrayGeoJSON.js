@@ -34,7 +34,6 @@ class ArrayGeoJSON extends GeoJSON {
    * @api
    */
     readFeatures(source, options) {
-        console.info(source);
         if(source == null || source == '') return [];
         if(source instanceof Array)
         {
@@ -46,7 +45,6 @@ class ArrayGeoJSON extends GeoJSON {
                 if(feature.type === 'FeatureCollection' && isEmptyFeature(feature))
                     continue;
                 
-                console.info(source[i]);
                 retval.push(this.readFeaturesFromObject(
                     getObject(feature),
                     this.getReadOptions(feature, options)
