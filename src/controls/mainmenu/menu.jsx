@@ -55,7 +55,7 @@ const MenuComponent = () => {
             <Menu.Item id='import-tracks' onclick={onFileImport}>
                         Import tracks
             </Menu.Item>
-            <Menu.Item id='import-grids'>
+            <Menu.Item id='import-grids' disabled>
                         Import Grid
             </Menu.Item>
             <MenuSeparator/>
@@ -63,11 +63,11 @@ const MenuComponent = () => {
                         Print
             </Menu.Item>
             <MenuSeparator/>
-            <Menu.Item id='about'>
+            <Menu.Item id='about' disabled>
                         About
             </Menu.Item>
             <MenuSeparator/>
-            <Menu.Item id='exit'>
+            <Menu.Item id='exit' disabled>
                         Log in
             </Menu.Item>
           </Menu.Content>
