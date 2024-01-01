@@ -8,7 +8,6 @@ export const Control = (props) => {
   if(!controlKlass) throw new Error('props.klass must contain class for Control instance');
     
   onMount(()=> {
-    console.log(`mounting control ${props.classes || props.target}`);
     const getMap = useService(MapContext);
     let options = props.options || {};
     if(props.classes){

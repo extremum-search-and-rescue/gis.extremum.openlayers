@@ -17,8 +17,6 @@ import { Locate } from './controls/geolocation/locate';
 import { MainMenu } from './controls/mainmenu/menu';
 import { SunmoonCircle } from './controls/suncalc/sunmooncircle';
 
-console.log('running index.js');
-
 const baseMaps = [
   Layers.BasicOsm,
   Layers.OpenTopoMap,

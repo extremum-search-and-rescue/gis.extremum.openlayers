@@ -9,7 +9,6 @@ import { useService } from 'solid-services';
 import { LayerService } from '../../services/layerservice';
 
 const BaseMapSelector = (params) => {
-  console.info('adding BaseMapSelector', params);
   return (
     <div class="set">
       <RadioGroup.Root value={params.model().currentBasemapId} 
@@ -37,8 +36,6 @@ const OverlayItem = (params) => {
 };
 
 const OverlaySelector = (params) => {
-  console.info('adding OverlaySelector', params);
-
   return (
     <div class="set">
       <For each={params.model().overlays}>
@@ -51,7 +48,6 @@ const OverlaySelector = (params) => {
 };
 
 const LayerControlComponent = (params) => {
-  console.info('adding LayerControlComponent', params);
   return (
     <div class={params.classes}>
       <BaseMapSelector model={params.model}/>
@@ -79,12 +75,10 @@ class LayerControl extends Control {
                 
     });
     */  
-    console.info('LayerControl constructor');
     const params = {
       classes: 'ol-unselectable gis-control-toolbar gis-layercontrol',
       model: layerService,
     };
-    console.info('adding LayerControl', params);
     const element = createComponent(LayerControlComponent, params);
 
     super({
