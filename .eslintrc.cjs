@@ -28,9 +28,15 @@ module.exports = {
     'solid'
   ],
   'rules': {
+    'no-unused-vars': [
+      'warn'
+    ],
     'indent': [
       'warn',
       2
+    ],
+    'no-console': [
+      'warn'
     ],
     'linebreak-style': [
       'warn',
@@ -45,4 +51,4 @@ module.exports = {
       'always'
     ]
   }
-}
+};

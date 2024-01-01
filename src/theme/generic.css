@@ -1,6 +1,7 @@
 @import url('../ark-styles/checkbox.css');
 @import url('../ark-styles/radiogroup.css');
 @import url('../controls/layerswitcher/layercontrol.css');
+@import url('../controls/suncalc/suncalc.css');
 
 .gis-control-toolbar {
     opacity: 0.87;
@@ -14,6 +15,7 @@
     height: max-content;
     gap: 2px;
     padding: 0.25rem;
+    pointer-events: auto;
 }
 /* About backdrop-filter
 https://stackoverflow.com/questions/60997948/backdrop-filter-not-working-for-nested-elements-in-chrome
@@ -23,6 +25,19 @@ https://stackoverflow.com/questions/60997948/backdrop-filter-not-working-for-nes
     display: flex;
     flex-direction: column;
 }
+#ol-grid-container {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto auto;
+    justify-items: flex-start;
+    align-items: flex-start;
+}
 #ol-container-1-1
 {
     display: flex;
@@ -31,6 +46,22 @@ https://stackoverflow.com/questions/60997948/backdrop-filter-not-working-for-nes
     grid-row: 1;
     grid-column: 1;
     margin: 0.5rem;
+}
+#ol-container-100vh-100vw
+{
+    top: 0;
+    left: 0;
+    position: absolute;
+    pointer-events: none;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+.suncalc
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 .gis-zoom {

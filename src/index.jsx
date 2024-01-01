@@ -15,6 +15,7 @@ import { DrawToolbar } from './controls/draw/drawtoolbar';
 import { ControlContainer } from './controls/controlcontainer';
 import { Locate } from './controls/geolocation/locate';
 import { MainMenu } from './controls/mainmenu/menu';
+import { SunmoonCircle } from './controls/suncalc/sunmooncircle';
 
 console.log('running index.js');
 
@@ -60,7 +61,7 @@ const overlayMaps = [
 ];
 
 console.log('initialized layers');
-const view = new View({
+const view = window.View = new View({
   center: config.center,
   zoom: config.zoom,
 });
@@ -72,15 +73,20 @@ render(() =>
       basemaps={baseMaps} 
       overlays={overlayMaps}
       view={view}>
-      <Control klass={LayerControl}/>
-      <ControlContainer id={'ol-container-1-1'} classes="gis-flex-column">
-        <Control klass={MainMenu} classes={'gis-mainmenu'} target={'ol-container-1-1'}/>
-        <Control klass={Zoom} classes={'gis-zoom'} target={'ol-container-1-1'}/>
-        <Control klass={DrawToolbar} target={'ol-container-1-1'}/>
-        <Control klass={Rotate} classes={'gis-rotate'} target={'ol-container-1-1'}/>
-        <Control klass={Locate} classes={'gis-locate'} target={'ol-container-1-1'}/>
+      <ControlContainer id={'ol-container-100vh-100vw'}>
+        <Control klass={SunmoonCircle} classes={'suncalc'} target={'ol-container-100vh-100vw'} />
       </ControlContainer>
-      <Control klass={ScaleLine}/>
+      <ControlContainer id={'ol-grid-container'}>
+        <Control klass={LayerControl} target={'ol-grid-container'}/>
+        <ControlContainer id={'ol-container-1-1'} classes="gis-flex-column" target={'ol-grid-container'}>
+          <Control klass={MainMenu} classes={'gis-mainmenu'} target={'ol-container-1-1'}/>
+          <Control klass={Zoom} classes={'gis-zoom'} target={'ol-container-1-1'}/>
+          <Control klass={DrawToolbar} target={'ol-container-1-1'}/>
+          <Control klass={Rotate} classes={'gis-rotate'} target={'ol-container-1-1'}/>
+          <Control klass={Locate} classes={'gis-locate'} target={'ol-container-1-1'}/>
+        </ControlContainer>
+        <Control klass={ScaleLine}/>
+      </ControlContainer>
     </FullScreenMapContainer>
   </ServiceRegistry>,
 document.body

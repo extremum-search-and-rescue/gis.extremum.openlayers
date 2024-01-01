@@ -1,5 +1,7 @@
 import {Image as ImageLayer} from 'ol/layer.js';
+import { toLonLat } from 'ol/proj';
 import {Raster, XYZ} from 'ol/source.js';
+import SunCalc from 'suncalc';
 
 /**
  * Generates a shaded relief image given elevation data.  Uses a 3x3
@@ -131,14 +133,17 @@ const raster = new Raster({
   sources: [elevation],
   operationType: 'image',
   operation: shade,
+  threads: 4,
 });
+
 
 raster.on('beforeoperations', function (event) {
   const data = event.data;
+  const center = toLonLat(window.View.get('center'));
   data.resolution = event.resolution;
-  data['sunEl'] = 60;
-  data['vert'] = 3;
-  data['sunAz'] = 0;
+  data['sunEl'] = SunCalc.getPosition(new Date(), center[1],center[0]).altitude * 180 / Math.PI;
+  data['vert'] = 1;
+  data['sunAz'] = SunCalc.getPosition(new Date(), center[1], center[0]).azimuth * 180 / Math.PI;
 });
 
 export const Hillshading = {

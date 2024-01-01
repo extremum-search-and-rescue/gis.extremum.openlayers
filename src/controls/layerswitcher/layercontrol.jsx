@@ -61,7 +61,7 @@ const LayerControlComponent = (params) => {
 };
 
 class LayerControl extends Control {
-  constructor() {
+  constructor(options) {
 
     const layerService = useService(LayerService);
 
@@ -89,7 +89,7 @@ class LayerControl extends Control {
 
     super({
       element: element(),
-      target: undefined,
+      target: options.target,
     });
   }
   setMap(map){

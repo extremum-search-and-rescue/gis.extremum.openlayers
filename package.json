@@ -15,6 +15,7 @@
     },
     "dependencies": {
         "@ark-ui/solid": "^1.2.0",
+        "@solid-primitives/bounds": "^0.0.118",
         "@solid-primitives/keyboard": "^1.2.5",
         "@solid-primitives/upload": "^0.0.114",
         "ol": "latest",
@@ -22,7 +23,9 @@
         "solid-js": "^1.8.7",
         "solid-services": "^4.3.2",
         "solid-transition-group": "^0.2.3",
-        "solidjs-div-100vh": "^1.0.1"
+        "solidjs-div-100vh": "^1.0.1",
+        "suncalc": "^1.9.0",
+        "tz-lookup": "^6.1.25"
     },
     "devDependencies": {
         "eslint-plugin-solid": "^0.13.0",

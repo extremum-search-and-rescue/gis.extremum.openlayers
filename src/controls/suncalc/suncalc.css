@@ -1,0 +1,76 @@
+#suncalc-container{
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+    outline: 1px solid red;
+}
+#suncalc-circle
+{
+    outline: 1px solid green;
+}
+#suncalc{
+    transition: transform 0.2s;
+    outline: 1px solid blue;
+}
+.suncalc-sun {
+    fill: var(--yellow-200);
+}
+.suncalc-shaded
+{
+    opacity: 0.5;
+}
+.suncalc-sun-label
+{
+    font-size: x-small;
+}
+
+.suncalc-control {
+    pointer-events: none;
+}
+.suncalc-dusk {
+    fill: red;
+    stroke-width: 0;
+    fill-opacity: 0.5;
+}
+
+.suncalc-dawn {
+    fill: yellow;
+    stroke-width: 0;
+    fill-opacity: 0.5;
+}
+
+@media (pointer: coarse) {
+    .suncalc-sun-label {
+        font-size: 9px;
+    }
+}
+
+@media (pointer: fine) {
+    .suncalc-sun-label {
+        font-size: 11px;
+    }
+}
+
+.suncalc-sun-path {
+    stroke-width: 2;
+    stroke-opacity: 0.7;
+    stroke-dasharray: 7px 3px;
+    fill: none;
+    stroke: orange;
+}
+
+.suncalc-moon-path {
+    stroke-width: 2;
+    stroke-dasharray: 2 2;
+    stroke-opacity: 0.7;
+    fill: none;
+    stroke: white;
+}
+
+.suncalc-azimuth-circle {
+    stroke-width: 2;
+    stroke-opacity: 0.8;
+    fill: none;
+    stroke: white
+}
