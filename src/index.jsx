@@ -60,7 +60,6 @@ const overlayMaps = [
   Layers.LiveTransport
 ];
 
-console.log('initialized layers');
 const view = window.View = new View({
   center: config.center,
   zoom: config.zoom,
@@ -91,5 +90,3 @@ render(() =>
   </ServiceRegistry>,
 document.body
 );
-
-console.log('created map');

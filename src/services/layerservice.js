@@ -5,7 +5,6 @@ import { Vector as VectorSource } from 'ol/source.js';
 import { Vector as VectorLayer } from 'ol/layer.js';
 
 export function LayerService() {
-  console.info('creating LayerService');
   const [bm, setBm] = createStore([]);
   const [om, setOm] = createStore([]);
   const [ul, setUl] = createStore([]);
@@ -55,14 +54,12 @@ export function LayerService() {
          */
     set basemaps(basemaps){
       setBm(basemaps);
-      console.info('basemaps set');
     },
     get overlays() {
       return om; 
     },
     set overlays(overlays) {
       setOm(overlays);
-      console.info('overlays set');
     },
     toggleOverlay(id, checked) {
       setOm(l => l.id === id , 'visible', checked );
@@ -95,7 +92,6 @@ export function LayerService() {
       return ul[1].get('source');
     },
     get flat(){
-      console.info('getting flat list of layers');
       const layersToAdd = bm
         .flatMap((b) => b.layers.map((l) => Object.assign(l, {id: b.id, type: 'base', visible: b.visible || false})))
         .concat(om.flatMap((o) => o.layers.map((l) => Object.assign(l, {id: o.id, visible: o.visible || false}))))

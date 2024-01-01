@@ -1,12 +1,13 @@
-import Secrets from "./secrets";
-import { fromLonLat } from "ol/proj";
+import Secrets from './secrets';
+import { fromLonLat } from 'ol/proj';
 
 if(!window.ENV)
 {
-    console.info("ENV variable should be defined in real application before this script")
-    window.ENV = {
+  // eslint-disable-next-line no-console
+  console.warn('ENV variable should be defined in real application before this script');
+  var ENV = window.ENV = {
 
-    };
+  };
 }
 
 /**
@@ -16,9 +17,9 @@ if(!window.ENV)
 * }}
 */
 const Backend = {
-    scheme: 'https',
-    host: 'layers.extremum.org'
-}
+  scheme: 'https',
+  host: 'layers.extremum.org'
+};
 
 /**
  * @type {{
@@ -26,8 +27,8 @@ const Backend = {
 * }}
 */
 const Frontend = {
-    images: 'https://gis.extremum.org/images'
-}
+  images: 'https://gis.extremum.org/images'
+};
 
 /**
  * @type {{
@@ -38,11 +39,11 @@ const Frontend = {
  * }}
  */
 const Config = {
-    backend: Backend,
-    frontend: Frontend,
-    center: fromLonLat([30, 60]),
-    zoom: 11,
-    ...ENV,
-    ...Secrets
-}
+  backend: Backend,
+  frontend: Frontend,
+  center: fromLonLat([30, 60]),
+  zoom: 11,
+  ...ENV,
+  ...Secrets
+};
 export default Config;

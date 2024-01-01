@@ -11,7 +11,7 @@ export default defineConfig({
       output: {
         manualChunks: (id) => {
           if (id.includes('node_modules')) {
-            return 'vendor'
+            return 'vendor';
           }
         }
       }
@@ -24,4 +24,4 @@ export default defineConfig({
     host: '0.0.0.0',
     open: '/dist/index.html',
   },
-})
+});

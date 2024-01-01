@@ -30,13 +30,11 @@ export function LocationService()
     }
   }
   function geolocationFn(pos){
-    console.info(pos);
     setLocation(pos);
     setError(null);
     setLocating(false);
   }
   function errorFn(err){
-    console.info(err);
     setError(err);
   }
   return {

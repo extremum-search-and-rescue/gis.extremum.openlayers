@@ -1,16 +1,14 @@
-import { Switch, createComponent, createEffect, createSignal, For, Match } from 'solid-js'
-import Control from 'ol/control/Control'
-import { createStore } from 'solid-js/store'
-import './drawtoolbar.css'
-import { useService } from 'solid-services'
-import { LayerService } from '../../services/layerservice'
-import Draw from 'ol/interaction/Draw'
-import { useCurrentlyHeldKey } from '@solid-primitives/keyboard'
-import { Transition } from 'solid-transition-group'
+import { Switch, createComponent, createEffect, createSignal, For, Match } from 'solid-js';
+import Control from 'ol/control/Control';
+import { createStore } from 'solid-js/store';
+import './drawtoolbar.css';
+import { useService } from 'solid-services';
+import { LayerService } from '../../services/layerservice';
+import Draw from 'ol/interaction/Draw';
+import { useCurrentlyHeldKey } from '@solid-primitives/keyboard';
+import { Transition } from 'solid-transition-group';
 
-const DrawToolbarComponent = props => {
-  console.log('drawing buttons')
-    
+const DrawToolbarComponent = props => {    
   return (
     <div class={props.classes}>
       <For each={props.buttons}>
@@ -19,16 +17,16 @@ const DrawToolbarComponent = props => {
         }
       </For>
     </div>
-  )
-}
+  );
+};
 
 export class DrawToolbar extends Control {
   constructor(options, children) {  
-    const getLayers = useService(LayerService)        
-    let activeDraw
-    const key = useCurrentlyHeldKey()
-    const [isFreehand, setFreehand] = createSignal(false)
-    createEffect(()=> setFreehand( key() == 'SHIFT') )
+    const getLayers = useService(LayerService);        
+    let activeDraw;
+    const key = useCurrentlyHeldKey();
+    const [isFreehand, setFreehand] = createSignal(false);
+    createEffect(()=> setFreehand( key() == 'SHIFT') );
 
     const [buttons, setButtons] = createStore([
       {
@@ -97,40 +95,40 @@ export class DrawToolbar extends Control {
           </svg>
         )
       },
-    ])
+    ]);
         
     const params = {
       classes: 'gis-control-toolbar gis-toolbar ol-unselectable',
       buttons: buttons,
       buttonClasses: 'gis-toolbar-button',
       interaction: (type) => {
-        const drawLayer = getLayers().userDrawingLayer
+        const drawLayer = getLayers().userDrawingLayer;
         if(activeDraw) {
-          this._map.removeInteraction(activeDraw)
-          setButtons((b) => b.type == activeDraw.mode_,'toggled',false)
+          this._map.removeInteraction(activeDraw);
+          setButtons((b) => b.type == activeDraw.mode_,'toggled',false);
         }
         if(!activeDraw || type != activeDraw.mode_)
         {
           activeDraw = new Draw({
             source: drawLayer,
             type: type,
-          })
-          setButtons((b) => b.type == type, 'toggled', true )
-          this._map.addInteraction(activeDraw)
+          });
+          setButtons((b) => b.type == type, 'toggled', true );
+          this._map.addInteraction(activeDraw);
         }
       },
       children: children
-    }
+    };
 
-    const element = createComponent(DrawToolbarComponent, params)
+    const element = createComponent(DrawToolbarComponent, params);
 
     super({
       element: element(),
       target: options.target || undefined,
-    })
+    });
   }
   setMap(map){
-    super.setMap(map)
-    this._map = map
+    super.setMap(map);
+    this._map = map;
   }
 }

@@ -7,7 +7,6 @@ export function MapContext() {
       return getMap;
     },
     set map(map){
-      console.info('map set');
       setMap(map);
     }
   };

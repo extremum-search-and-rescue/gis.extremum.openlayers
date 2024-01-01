@@ -11,7 +11,7 @@ import VectorTileLayer from 'ol/layer/VectorTile';
  */
 // eslint-disable-next-line no-unused-vars
 function featureStyleFunction(feature, resolution) {
-  console.info(feature);
+  
 }
 
 // eslint-disable-next-line no-unused-vars

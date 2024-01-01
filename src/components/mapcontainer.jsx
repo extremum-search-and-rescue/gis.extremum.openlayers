@@ -12,8 +12,6 @@ import ArrayGeoJSON from '../format/ArrayGeoJSON';
 import PLT from '../format/PLT';
 import DragAndDrop from 'ol/interaction/DragAndDrop';
 
-console.log('running mapcontainer.jsx');
-
 export const MapContainer = props => {
   // eslint-disable-next-line solid/reactivity
   if(!props.id) throw new Error('no map div id in props');
@@ -21,9 +19,6 @@ export const MapContainer = props => {
   if(!props.view) throw new Error('no View in props');
 
   onMount(() => {
-        
-    console.log('initializing mapcontainer');
-    console.log(props);
     const layerService = useService(LayerService);
 
     layerService().basemaps = props.basemaps;
