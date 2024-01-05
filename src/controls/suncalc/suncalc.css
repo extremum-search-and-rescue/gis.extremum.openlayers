@@ -28,22 +28,12 @@
 .suncalc-sun-label
 {
     font-size: x-small;
-    stroke: var(--yellow-300)
+    fill: var(--yellow-100);
+    text-shadow: 0px 0px 4px black;
 }
 
 .suncalc-control {
     pointer-events: none;
-}
-.suncalc-dusk {
-    fill: red;
-    stroke-width: 0;
-    fill-opacity: 0.5;
-}
-
-.suncalc-dawn {
-    fill: yellow;
-    stroke-width: 0;
-    fill-opacity: 0.5;
 }
 
 @media (pointer: coarse) {
