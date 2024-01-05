@@ -16,7 +16,7 @@ let suncalcStyle;
 
 const TimeLabel = props => {
   const date = ()=> (props.date && props.date()) 
-  || getDateForHour(props.hour + props.timeOffetMinutes()/60, props.startTime);
+  || getDateForHour(props.hour + props.timeOffetMinutes()/60, props.startTime && props.startTime());
 
   const valid = () => date() instanceof Date && !isNaN(date()) 
     && date() >= props.startTime()  
@@ -62,10 +62,11 @@ const Sun = props => {
 };
 
 function getDateForHour(hour, startTime) {
-  startTime ??= () => new Date();
+  startTime = new Date();
   hour ??= 0;
-  return new Date(startTime().getFullYear(), startTime().getMonth(), startTime().getDate(), hour, 0);
+  return new Date(startTime.getFullYear(), startTime.getMonth(), startTime.getDate(), hour, 0);
 }
+
 
 function calculateTimeOffset(date, lonlat) {
   const mapcenterTimezone = tzlookup(lonlat[1], lonlat[0]);
