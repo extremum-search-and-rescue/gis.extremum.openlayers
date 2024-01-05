@@ -1,0 +1,42 @@
+/* display div borders without affecting layout */
+.css-debug div {
+    outline: 0.5px solid red;
+}
+
+    /* div width single div child */
+    .css-debug div > div:first-child:last-child,
+    .css-debug div:has(> div:first-child:last-child) {
+        border: 2px solid limegreen;
+        padding: 2px;
+    }
+
+/* containers */
+.css-debug div:not(:has(>*:not(div))):has(>div:nth-child(3)) > div {
+    outline: 3px solid blue;
+}
+
+/* elements deeper than specified level */
+/** > * > * > * > * > * > * > * > * > * {
+    background-color: rgba(255,0,0,0.2) !important;
+}*/
+
+/* depth level of div */
+.css-debug :root {
+    background-color: limegreen;
+}
+    .css-debug :root div {
+        background-color: rgba(255,0,0,0.07) !important;
+    }
+    .css-debug :root * {
+        background-color: rgba(0,0,0,0) !important;
+    }
+
+/* div with custom styles */
+.css-debug div[style]:not([style*="width"]):not([style*="height"]) {
+    background-color: rgba(0,13,255,0.116);
+}
+
+/* empty style rule */
+.css-debug *[style=""]{
+    background-color: red;
+}
