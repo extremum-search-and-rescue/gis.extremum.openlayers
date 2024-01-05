@@ -3,15 +3,20 @@
     top: 50%;
     transform: translate(-50%,-50%);
     position: absolute;
+}
+#suncalc-container.css-debug{
     outline: 1px solid red;
 }
-#suncalc-circle
+.css-debug #suncalc-circle
 {
     outline: 1px solid green;
 }
 #suncalc{
     transition: transform 0.2s;
+}
+.css-debug #suncalc{
     outline: 1px solid blue;
+    pointer-events: all;
 }
 .suncalc-sun {
     fill: var(--yellow-200);
@@ -23,6 +28,7 @@
 .suncalc-sun-label
 {
     font-size: x-small;
+    stroke: var(--yellow-300)
 }
 
 .suncalc-control {
@@ -57,7 +63,7 @@
     stroke-opacity: 0.7;
     stroke-dasharray: 7px 3px;
     fill: none;
-    stroke: orange;
+    stroke: var(--yellow-200);
 }
 
 .suncalc-moon-path {
@@ -72,5 +78,8 @@
     stroke-width: 2;
     stroke-opacity: 0.8;
     fill: none;
-    stroke: white
+    stroke: white;
+}
+.css-debug .suncalc-azimuth-circle {
+    outline: 1px solid lime;
 }

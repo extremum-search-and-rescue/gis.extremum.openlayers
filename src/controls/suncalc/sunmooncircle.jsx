@@ -23,7 +23,7 @@ const TimeLabel = props => {
     && date() <= props.endTime();
   
   let position = () => SunCalc.getPosition(date(), props.center()[1], props.center()[0]);
-  let xy = () => getXY(position(), 0, 0, props.circleSize());
+  let xy = () => getXY(position(), -16, 32, props.circleSize());
   
   const localDate = () => valid() && new Date(date().getTime() + (props.timeOffetMinutes() * 60 * 1000));
   const localDateFormatted = () => valid() && `${zeroPad(localDate().getHours(),2)}:${zeroPad(localDate().getMinutes(),2)}`;
@@ -92,6 +92,9 @@ const SunPathCircle = props => {
       <circle class="suncalc-sun-path" clip-path="url(#mask1)" id="sunPath" cx={sunPathCenter()+2} cy={sunPathCenter()+2} r={sunPathCenter() + 4}/>
     </>);
 };
+
+//FIXME replace by arc
+//https://stackoverflow.com/questions/5736398/how-to-calculate-the-svg-path-for-an-arc-of-a-circle
 function getPathClipPoints(dawn, dusk, positionFunction, lonlat, offset, circleSize) {
   const points = [];
   const xy = getXYforTimes(getTimesFromDuskTillDown(dawn, dusk), positionFunction, lonlat, offset, circleSize);
@@ -107,7 +110,7 @@ function getTimesFromDuskTillDown(start, end) {
   end = end instanceof Date && !isNaN(end) ? end : getDateForHour(23, start);
   if (start > end)
     end = end.addDays(1);
-  for (let date = start; date < end; date = addMinutes(date,15)) {
+  for (let date = start; date <= end; date = addMinutes(date,5)) {
     times.push(date);
   }
   return times;
@@ -115,7 +118,7 @@ function getTimesFromDuskTillDown(start, end) {
 function getXYforTimes(times, positionFunction, lonlat, offset, circleSize) {
   const xy = [];
   for (let i = 0; i < times.length; i++) {
-    xy.push(getXY(positionFunction(times[i], lonlat[1], lonlat[0]), offset, 0, circleSize));
+    xy.push(getXY(positionFunction(times[i], lonlat[1], lonlat[0]), 0, 20, circleSize));
   }
   return xy;
 }
@@ -160,7 +163,7 @@ const SunmoonCircleComponent = () => {
   });
   createEffect(()=> bounds);
   
-  let circleSize = () => Math.min(Math.min(bounds.width, bounds.height) - 80, 500);
+  let circleSize = () => Math.min(Math.min(bounds.width, bounds.height) - 80, 480);
   let fullControlSize = () => circleSize() + controlMargin * 2;
   let viewBox = () => `0 0 ${fullControlSize()} ${fullControlSize()}`;
 
@@ -205,12 +208,12 @@ const SunmoonCircleComponent = () => {
 */
 
   return (
-    <svg id={'suncalc-container'} class={'css-debug'} width={fullControlSize()} height={fullControlSize()} xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox={viewBox()}>
-      <g filter="url(#filter1_d)">
-        <circle class="suncalc-azimuth-circle" id="azimuthCircle" cx={circleSize()/2+2} cy={circleSize()/2+2} r={circleSize()/2}/>
-      </g>
-      <SunPathCircle sunrise={sunrise} sunset={sunset} center={center} circleSize={circleSize}/>
-      <svg id={'suncalc-circle'} class="suncalc-circle" width={fullControlSize} height={fullControlSize} xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox={viewBox}>
+    <svg id={'suncalc-container'} width={fullControlSize()} height={fullControlSize()} xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox={viewBox()}>
+      <svg id={'suncalc-circle'} x={controlMargin} y={controlMargin} class="suncalc-circle" width={fullControlSize()} height={fullControlSize()} xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox={viewBox()}>
+        <g filter="url(#filter1_d)">
+          <circle class="suncalc-azimuth-circle" id="azimuthCircle" cx={circleSize()/2+2} cy={circleSize()/2+2} r={circleSize()/2}/>
+        </g>
+        <SunPathCircle sunrise={sunrise} sunset={sunset} center={center} circleSize={circleSize}/>
         <TimeLabel date={sunrise} startTime={dawn} endTime={dusk} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
         <TimeLabel date={dawn} startTime={dawn} endTime={dusk} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
         <TimeLabel date={dusk} startTime={dawn} endTime={dusk} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
@@ -225,7 +228,7 @@ const SunmoonCircleComponent = () => {
         <TimeLabel hour={21} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
       </svg>
 
-      <svg id={'suncalc'} x={controlMargin} y={controlMargin} class="suncalc" width={fullControlSize()} height={fullControlSize()} xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox={viewBox()}>
+      <svg id={'suncalc'} x={controlMargin} y={controlMargin} class="suncalc" width={fullControlSize()} height={fullControlSize()} xmlns="http://www.w3.org/2000/svg" overflow="visible">
         <defs>
           <filter id="filter0_d" x="0" y="0" width={fullControlSize()} height={fullControlSize()} filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
             <feFlood flood-opacity="0" result="BackgroundImageFix"/>
