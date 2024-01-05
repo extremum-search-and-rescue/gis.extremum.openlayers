@@ -211,10 +211,10 @@ const SunmoonCircleComponent = () => {
       </g>
       <SunPathCircle sunrise={sunrise} sunset={sunset} center={center} circleSize={circleSize}/>
       <svg id={'suncalc-circle'} class="suncalc-circle" width={fullControlSize} height={fullControlSize} xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox={viewBox}>
-        <TimeLabel date={sunrise} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
-        <TimeLabel date={dawn} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
-        <TimeLabel date={dusk} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
-        <TimeLabel date={sunset} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+        <TimeLabel date={sunrise} startTime={dawn} endTime={dusk} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+        <TimeLabel date={dawn} startTime={dawn} endTime={dusk} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+        <TimeLabel date={dusk} startTime={dawn} endTime={dusk} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+        <TimeLabel date={sunset} startTime={dawn} endTime={dusk} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
         <TimeLabel hour={0} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
         <TimeLabel hour={3} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
         <TimeLabel hour={6} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
