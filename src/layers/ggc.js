@@ -5,7 +5,7 @@ export const GosGisCenter = {
   id: 'ggc',
   title: 'GosGisCenter',
   type: 'base',
-  baseLayer: true,
+  tint: 'vivid-topo',
   layers: [
     new TileLayer({
       preload: 4,

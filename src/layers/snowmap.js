@@ -5,7 +5,7 @@ export const OpenSnowMap = {
   id: 'oSN',
   title: 'Opensnowmap',
   type: 'base',
-  baseLayer: true,
+  tint: 'light-topo',
   visible: false,
   layers: [
     new TileLayer({

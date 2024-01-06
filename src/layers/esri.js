@@ -7,7 +7,7 @@ export const EsriSatellite = {
   id: 'esrI',
   type: 'base',
   title: 'ESRI Satellite',
-  baseLayer: true,
+  tint: 'dark-sat',
   layers: [
     new TileLayer({
       preload: Infinity,

@@ -5,6 +5,7 @@ export const PkkRosreestr = {
   id: 'ppk',
   type: 'base',
   baseLayer: true,
+  tint: 'vivid-topo',
   title: 'Росреестр',
   layers: [
     new TileLayer({

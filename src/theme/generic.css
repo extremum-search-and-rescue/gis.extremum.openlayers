@@ -148,8 +148,11 @@ hr[data-scope='menu'][data-part='separator']{
 .map-dark-topo,
 .map-dark-sat {
     --map-text-base: white;
+    background-color: var(--gray-700);
 }
+.map-default,
 .map-light-topo,
 .map-vivid-topo {
     --map-text-base: black;
+    background-color: var(--gray-50);
 }

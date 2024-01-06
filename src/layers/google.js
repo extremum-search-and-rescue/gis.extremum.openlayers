@@ -4,7 +4,7 @@ import XYZ from 'ol/source/XYZ';
 export const GoogleSatellite = { 
   id: 'gSat',
   type: 'base',
-  baseLayer: true,
+  tint: 'dark-sat',
   title: 'Google Satellite',
   layers: [
     new TileLayer({

@@ -54,9 +54,7 @@ const Sun = props => {
   
   return (
     <Show when={sunVisible()}>
-      <g filter='url(#filter0_d)'>
-        <circle class='suncalc-sun' cx={sunX()} cy={sunY()} r='13' id='suncalc-sun'/>
-      </g>
+      <circle class='suncalc-sun' cx={sunX()} cy={sunY()} r='13' id='suncalc-sun'/>
     </Show>
   );
 };
@@ -229,15 +227,6 @@ const SunmoonCircleComponent = () => {
 
       <svg id={'suncalc'} x={controlMargin} y={controlMargin} class="suncalc" width={fullControlSize()} height={fullControlSize()} xmlns="http://www.w3.org/2000/svg" overflow="visible">
         <defs>
-          <filter id="filter0_d" x="0" y="0" width={fullControlSize()} height={fullControlSize()} filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-            <feOffset/>
-            <feGaussianBlur stdDeviation="10"/>
-            <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 0.72 0 0 0 0 0 0 0 0 1 0"/>
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-          </filter>
           <filter id="filter1_d" x="0" y="0" width={fullControlSize()} height={fullControlSize()} filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
             <feFlood flood-opacity="0" result="BackgroundImageFix"/>
             <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>

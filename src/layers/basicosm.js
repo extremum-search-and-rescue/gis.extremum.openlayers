@@ -5,7 +5,7 @@ export const BasicOsm = {
   id: 'osm',
   title: 'Openstreetmap',
   type: 'base',
-  baseLayer: true,
+  tint: 'light-topo',
   visible: true,
   layers: [
     new TileLayer({

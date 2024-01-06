@@ -19,6 +19,9 @@
     pointer-events: all;
 }
 
+.suncalc-sun{
+    filter: blur(0.5px);
+}
 .map-dark-sat .suncalc-sun,
 .map-dark-topo .suncalc-sun {
     fill: var(--yellow-200);
@@ -29,15 +32,37 @@
     fill: var(--yellow-300);
 }
 
-.suncalc-sun-label
+.map-vivid-topo .suncalc-sun {
+    fill: var(--yellow-100);
+}
+
+.map-dark-sat .suncalc-moon,
+.map-dark-topo .suncalc-moon {
+    fill: var(--gray-50);
+}
+
+.map-default .suncalc-moon,
+.map-light-topo .suncalc-moon,
+.map-vivid-topo .suncalc-moon {
+    fill: var(--gray-950);
+}
+
+.map-default .suncalc-sun-label,
+.map-light-topo .suncalc-sun-label
 {
-    font-size: x-small;
+    fill: var(--gray-900);
+    text-shadow: 0px 0px 4px white;
+}
+
+.map-dark-sat .suncalc-sun-label,
+.map-dark-topo .suncalc-sun-label
+{
     fill: var(--yellow-50);
     text-shadow: 0px 0px 4px black;
 }
+
 .suncalc-shaded
 {
-    font-size: x-small;
     fill: var(--yellow-300);
     text-shadow: 0px 0px 4px var(--yellow-900);
 }
@@ -59,11 +84,26 @@
 }
 
 .suncalc-sun-path {
+    fill: none;
     stroke-width: 2;
     stroke-opacity: 0.7;
     stroke-dasharray: 7px 3px;
-    fill: none;
+}
+
+.map-dark-topo .suncalc-sun-path,
+.map-dark-sat .suncalc-sun-path {
     stroke: var(--yellow-200);
+}
+
+.map-light-topo .suncalc-sun-path,
+.map-default .suncalc-sun-path {
+    stroke: var(--orange-400);
+}
+
+.map-vivid-topo .suncalc-sun-path,
+.map-light-topo .suncalc-sun-path,
+.map-default .suncalc-sun-path {
+    stroke: var(--orange-500);
 }
 
 .suncalc-moon-path {
@@ -78,8 +118,22 @@
     stroke-width: 2;
     stroke-opacity: 0.8;
     fill: none;
+}
+
+.map-dark-topo .suncalc-azimuth-circle,
+.map-dark-sat .suncalc-azimuth-circle {
     stroke: white;
 }
+
+.map-light-topo .suncalc-azimuth-circle,
+.map-default .suncalc-azimuth-circle {
+    stroke: var(--gray-600);
+}
+
+.map-vivid-topo .suncalc-azimuth-circle {
+    stroke: var(--gray-950);
+}
+
 .css-debug .suncalc-azimuth-circle {
     outline: 1px solid lime;
 }

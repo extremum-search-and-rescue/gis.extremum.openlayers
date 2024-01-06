@@ -2,9 +2,9 @@ import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
 
 export const OpenTopoMap = {
-  id: 'oTopoG',
+  id: 'oTG',
   type: 'base',
-  baseLayer: true,
+  tint: 'vivid-topo',
   title: 'Opentopomap.org',
   layers: [
     new TileLayer({
@@ -20,6 +20,7 @@ export const OpenTopoMap = {
 export const OpenTopoMapCZ = { 
   id: 'oTopo',
   type: 'base',
+  tint: 'vivid-topo',
   title: 'Opentopomap.cz',
   layers: [
     new TileLayer({

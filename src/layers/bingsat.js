@@ -4,7 +4,7 @@ import Config from './../config';
 
 export const BingSat = { 
   id: 'bS',
-  baseLayer: true,
+  tint: 'dark-sat',
   type: 'base',
   title: 'Bing Aerial',
   layers: [ 

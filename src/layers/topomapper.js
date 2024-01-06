@@ -5,7 +5,7 @@ export const Topomapper = {
   id: 'tm',
   title: 'Topomapper',
   type: 'base',
-  baseLayer: true,
+  tint: 'vivid-topo',
   layers: [
     new TileLayer({
       preload: 4,
