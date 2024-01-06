@@ -11,10 +11,13 @@ import VectorTileLayer from 'ol/layer/VectorTile';
  */
 // eslint-disable-next-line no-unused-vars
 function polylineStyleFunction(feature, resolution) {
+  const mapStyles = window.getComputedStyle(document.getElementsByClassName('ol-viewport')[0]);
+  let color = feature.get('color');
+  if(color == '#A9A9A9') color = mapStyles.getPropertyValue('--map-line-base');
   const da = feature.get('dashArray');
   return new Style({
     stroke: new Stroke({
-      color: feature.get('color'), 
+      color: color, 
       width: feature.get('weight'),
       lineDash: da != null ? da.split(' ') : undefined,
       lineCap: 'butt'

@@ -5,25 +5,26 @@ import VectorSource from 'ol/source/Vector';
 import Config from '../config';
 import { toRadians } from 'ol/math';
 
-const bodyStyles = window.getComputedStyle(document.body);
 /**
  * @param {GeoJSON.Point} feature
  * @param {number} resolution
  * @returns {Text}
  */
 const createTextStyle = function (feature, resolution) {
-  const fill = bodyStyles.getPropertyValue('--gray-950');
+  const mapStyles = window.getComputedStyle(document.getElementsByClassName('ol-viewport')[0]);
+  const fill = mapStyles.getPropertyValue('--map-text-base');
+  const shade = mapStyles.getPropertyValue('--map-inverse');
   const text = resolution > 3 
     ? feature.get('number')
     : `${feature.get('number')} ${feature.get('text')}`;
   return new Text({
-    font: 'Arial 12px',
+    font: 'sans-serif 12px',
     justify: 'left',
     textAlign: 'left',
     text: text,
     fill: new Fill({color: fill}),
-    stroke: new Stroke({color: 'white', width: 1}),
-    offsetX: 8,
+    stroke: new Stroke({color: shade, width: 1}),
+    offsetX: 12,
     offsetY: 0,
     placement: 'point',
     maxAngle: '45',

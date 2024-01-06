@@ -20,3 +20,12 @@
   background: unset !important;
   mix-blend-mode: difference !important;
 }
+
+.ol-scale-line-inner{
+  color: var(--map-text-base) !important;
+  border-color: var(--map-text-base) !important;
+}
+
+.map-vivid-topo .ol-scale-line-inner{
+  font-weight: 900;
+}
