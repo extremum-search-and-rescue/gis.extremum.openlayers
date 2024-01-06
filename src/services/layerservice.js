@@ -4,6 +4,16 @@ import { MapContext } from './mapcontext';
 import { Vector as VectorSource } from 'ol/source.js';
 import { Vector as VectorLayer } from 'ol/layer.js';
 
+function updateMapTint(map, bm){
+  if(!map) throw new Error('no map context');
+  if(!bm) throw new Error('no vibisble basemap in tint function');
+  const targetElement = map.getTargetElement();
+  //const visibleBasemapLayerTint = bm.layers.filter(l => l.visible).tint;
+  const visibleBasemapTint = bm.tint;
+  targetElement.classList = '';
+  targetElement.classList.toggle(`map-${visibleBasemapTint || 'default'}`);
+}
+
 export function LayerService() {
   const [bm, setBm] = createStore([]);
   const [om, setOm] = createStore([]);
@@ -49,9 +59,6 @@ export function LayerService() {
     get basemaps() {
       return bm;
     },
-    /**
-         * set basemaps: Array
-         */
     set basemaps(basemaps){
       setBm(basemaps);
     },
@@ -77,6 +84,11 @@ export function LayerService() {
         .getAllLayers()
         .filter(l => l.type == 'base')
         .forEach(l =>l.setVisible(l.id === id));
+      
+      updateMapTint(getMapcontext().map(), bm.filter(bm => bm.visible)[0]);
+    },
+    get mapTint(){
+      return bm.filter(b => b.visible)[0].layers.filter(l => l.visible)[0].tint;
     },
     get currentBasemap(){
       return bm.filter(b => b.visible)[0];

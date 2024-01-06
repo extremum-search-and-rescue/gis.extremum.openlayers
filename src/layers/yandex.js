@@ -18,6 +18,7 @@ export const YandexSatellite = {
   id: 'yaSat',
   type: 'base',
   baseLayer: true,
+  tint: 'dark-sat',
   title: 'YandexSatellite',
   layers: [
     new TileLayer({
@@ -35,6 +36,7 @@ export const YandexMaps = {
   id: 'yaMap',
   type: 'base',
   baseLayer: true,
+  tint: 'light-topo',
   title: 'Yandex Maps Day',
   layers: [
     new TileLayer({
@@ -51,6 +53,7 @@ export const YandexMapsDark = {
   id: 'yaMn',
   type: 'base',
   baseLayer: true,
+  tint: 'dark-topo',
   title: 'Yandex Maps Night',
   layers: [
     new TileLayer({

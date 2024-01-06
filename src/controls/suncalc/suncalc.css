@@ -18,18 +18,28 @@
     outline: 1px solid blue;
     pointer-events: all;
 }
-.suncalc-sun {
+
+.map-dark-sat .suncalc-sun,
+.map-dark-topo .suncalc-sun {
     fill: var(--yellow-200);
 }
-.suncalc-shaded
-{
-    opacity: 0.5;
+
+.map-default .suncalc-sun,
+.map-light-topo .suncalc-sun {
+    fill: var(--yellow-300);
 }
+
 .suncalc-sun-label
 {
     font-size: x-small;
-    fill: var(--yellow-100);
+    fill: var(--yellow-50);
     text-shadow: 0px 0px 4px black;
+}
+.suncalc-shaded
+{
+    font-size: x-small;
+    fill: var(--yellow-300);
+    text-shadow: 0px 0px 4px var(--yellow-900);
 }
 
 .suncalc-control {

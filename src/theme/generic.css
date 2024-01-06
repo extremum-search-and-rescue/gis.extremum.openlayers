@@ -143,3 +143,13 @@ hr[data-scope='menu'][data-part='separator']{
     margin: 0.25rem 0.25rem;
     background-color: var(--gis-outline);
 }
+
+
+.map-dark-topo,
+.map-dark-sat {
+    --map-text-base: white;
+}
+.map-light-topo,
+.map-vivid-topo {
+    --map-text-base: black;
+}

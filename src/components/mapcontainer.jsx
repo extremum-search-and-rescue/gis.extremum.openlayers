@@ -57,7 +57,7 @@ export const MapContainer = props => {
     getMap().map = indexMap;
   });
 
-  return (<div id={props.id}>
+  return (<div id={props.id} class='map-default'>
     {props.children}
   </div>);
 };

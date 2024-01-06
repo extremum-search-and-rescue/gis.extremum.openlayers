@@ -133,7 +133,6 @@ const SunmoonCircleComponent = () => {
 
   // eslint-disable-next-line solid/reactivity
   SunmoonCircleComponent.placeChanged = function(view) {
-    console.log('placeChanged');
     const center = toLonLat(view.get('center'));
     setRotation(Math.round(360+(-90+(view.get('rotation') * 180 / Math.PI)) % 360));
     setCenter(center);
