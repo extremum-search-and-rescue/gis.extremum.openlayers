@@ -108,6 +108,7 @@ https://stackoverflow.com/questions/60997948/backdrop-filter-not-working-for-nes
 {
     z-index: 1;
     opacity: 1;
+    pointer-events: auto;
 }
 .gis-control-toolbar.gis-mainmenu
 {
@@ -125,11 +126,13 @@ div[data-scope='menu'][data-part='content'][data-state='open']{
 div[data-scope='menu'][data-part='content'][data-state='open']:focus-visible{
     outline: 2px solid var(--gis-outline);
 }
+div[data-scope='menu'][data-part='trigger-item'],
 div[data-scope='menu'][data-part='item']{
     color: var(--gis-text-base);
     padding: 0.25rem 1rem;
     font-size: small;
 }
+div[data-scope='menu'][data-part='trigger-item']:hover,
 div[data-scope='menu'][data-part='item']:hover{
     background-color: var(--gis-input-background-hover);
 }

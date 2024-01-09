@@ -29,3 +29,10 @@
 .map-vivid-topo .ol-scale-line-inner{
   font-weight: 900;
 }
+.unset
+{
+  all: unset;
+}
+body{
+  -webkit-touch-callout: none;
+}

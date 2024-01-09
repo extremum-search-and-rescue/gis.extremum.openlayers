@@ -14,7 +14,8 @@ import ScaleLine from 'ol/control/ScaleLine';
 import { DrawToolbar } from './controls/draw/drawtoolbar';
 import { ControlContainer } from './controls/controlcontainer';
 import { Locate } from './controls/geolocation/locate';
-import { MainMenu } from './controls/mainmenu/menu';
+import { ContextMenu } from './controls/menu/contextmenu';
+import { MainMenu } from './controls/menu/mainmenu';
 import { SunmoonCircle } from './controls/suncalc/sunmooncircle';
 
 const baseMaps = [
@@ -70,6 +71,7 @@ render(() =>
       basemaps={baseMaps} 
       overlays={overlayMaps}
       view={view}>
+      <Control klass={ContextMenu} classes={'contextmenu gis-mainmenu'} target={'ol-viewport'}/>
       <ControlContainer id={'ol-container-100vh-100vw'}>
         <Control klass={SunmoonCircle} classes={'suncalc'} target={'ol-container-100vh-100vw'} />
       </ControlContainer>

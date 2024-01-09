@@ -3,7 +3,7 @@ import Control from 'ol/control/Control';
 import { createComponent } from 'solid-js';
 import { createFileUploader } from '@solid-primitives/upload';
 import { useService } from 'solid-services';
-import { LayerService} from '../../services/layerservice';
+import { LayerService} from '../../services/layerservice.js';
 import GPX from 'ol/format/GPX';
 import PLT from '../../format/PLT.js';
 import { MapContext } from '../../services/mapcontext.js';
