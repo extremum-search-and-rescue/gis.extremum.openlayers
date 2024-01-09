@@ -11,6 +11,8 @@ import tzlookup from 'tz-lookup';
 import { zeroPad } from '../../utils/nums';
 import { addMinutes } from '../../utils/dates';
 
+
+const [rotationRad, setRotationRad] = createSignal(0);
 const controlMargin = 20;
 let suncalcStyle;
 
@@ -36,8 +38,8 @@ const TimeLabel = props => {
 };
 
 const Moon = props => {
-  let moonX = () => props.circleSize()/2 + (props.circleSize()/2 - (props.circleSize() / 4 + props.radius) * props.position().altitude) * Math.cos(props.position().azimuth + Math.PI / 2);
-  let moonY = () => props.circleSize()/2 + (props.circleSize()/2 - (props.circleSize() / 4 + props.radius) * props.position().altitude) * Math.sin(props.position().azimuth + Math.PI / 2);  
+  let moonX = () => props.circleSize()/2 + (props.circleSize()/2 - (props.circleSize() / 4 + props.radius) * props.position().altitude) * Math.cos(props.position().azimuth + rotationRad() + Math.PI / 2);
+  let moonY = () => props.circleSize()/2 + (props.circleSize()/2 - (props.circleSize() / 4 + props.radius) * props.position().altitude) * Math.sin(props.position().azimuth + rotationRad() + Math.PI / 2);  
   let moonVisible = () => props.position().altitude > -0.1;
   return (
     <Show when={moonVisible()}>
@@ -49,8 +51,8 @@ const Moon = props => {
 const Sun = props => {
   let sunVisible = () => (new Date() >= props.dawn() && new Date() <= props.dusk()) || props.sunPosition().altitude > 0;
 
-  let sunX = () => props.circleSize()/2 + (props.circleSize()/2 - (props.circleSize()/4 + props.radius) * props.sunPosition().altitude) * Math.cos(props.sunPosition().azimuth + Math.PI / 2);
-  let sunY = () => props.circleSize()/2 + (props.circleSize()/2 - (props.circleSize()/4 + props.radius) * props.sunPosition().altitude) * Math.sin(props.sunPosition().azimuth + Math.PI / 2);
+  let sunX = () => props.circleSize()/2 + (props.circleSize()/2 - (props.circleSize()/4 + props.radius) * props.sunPosition().altitude) * Math.cos(props.sunPosition().azimuth + rotationRad() + Math.PI / 2);
+  let sunY = () => props.circleSize()/2 + (props.circleSize()/2 - (props.circleSize()/4 + props.radius) * props.sunPosition().altitude) * Math.sin(props.sunPosition().azimuth + rotationRad() + Math.PI / 2);
   
   return (
     <Show when={sunVisible()}>
@@ -76,8 +78,8 @@ function getXY(position,controlMargin, modificator, circleSize) {
   const retval = [0,0];
   const offset = modificator ? modificator : 0;
   if(!circleSize) throw new RangeError('circleSize is empty');
-  retval[0] = Math.round((circleSize / 2 + controlMargin) + ((circleSize / 2 + offset) * Math.cos(position.azimuth + Math.PI / 2)));
-  retval[1] = Math.round((circleSize / 2 + controlMargin) + ((circleSize / 2 + offset) * Math.sin(position.azimuth + Math.PI / 2)));
+  retval[0] = Math.round((circleSize / 2 + controlMargin) + ((circleSize / 2 + offset) * Math.cos(position.azimuth + rotationRad() +  Math.PI / 2)));
+  retval[1] = Math.round((circleSize / 2 + controlMargin) + ((circleSize / 2 + offset) * Math.sin(position.azimuth  + rotationRad()+ Math.PI / 2)));
   return retval;
 }
 
@@ -124,7 +126,6 @@ function getXYforTimes(times, positionFunction, lonlat, offset, circleSize) {
 const SunmoonCircleComponent = () => {
   const getMapContext = useService(MapContext);
 
-  const [rotation, setRotation] = createSignal(0);
   const [center, setCenter] = createSignal();
 
   const [timeOffetMinutes, setTimeOffsetMinutes] = createSignal(0);
@@ -132,14 +133,13 @@ const SunmoonCircleComponent = () => {
   // eslint-disable-next-line solid/reactivity
   SunmoonCircleComponent.placeChanged = function(view) {
     const center = toLonLat(view.get('center'));
-    setRotation(Math.round(360+(-90+(view.get('rotation') * 180 / Math.PI)) % 360));
     setCenter(center);
     setTimeOffsetMinutes(calculateTimeOffset(new Date(), center));
 
     if(!suncalcStyle) {
-      suncalcStyle = document.getElementById('suncalc').style;
+      suncalcStyle = document.getElementById('suncalc-container').style;
     }
-    suncalcStyle.transform = `rotate(${rotation()}deg)`;
+    //suncalcStyle.transform = `rotate(${rotation()}deg)`;
   };
   setCenter(toLonLat(window.View && window.View.center || Config.center));
 
@@ -253,6 +253,17 @@ export class SunmoonCircle extends Control {
       element: element(),
       target: options.target || undefined,
     });
+  }
+  render(mapEvent) {
+    const frameState = mapEvent.frameState;
+    if (!frameState) {
+      return;
+    }
+    const rotation = frameState.viewState.rotation;
+    if (rotation != this.rotation_) {
+      setRotationRad(rotation);
+    }
+    this.rotation_ = rotation;
   }
   setMap(map){
     super.setMap(map);

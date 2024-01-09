@@ -1,7 +1,7 @@
 import {Image as ImageLayer} from 'ol/layer.js';
 import { toLonLat } from 'ol/proj';
 import {Raster, XYZ} from 'ol/source.js';
-import SunCalc from 'suncalc';
+import SunCalc, { getPosition } from 'suncalc';
 
 /**
  * Generates a shaded relief image given elevation data.  Uses a 3x3
@@ -22,8 +22,8 @@ function shade(inputs, data) {
   const pixel = [0, 0, 0, 0];
   const twoPi = 2 * Math.PI;
   const halfPi = Math.PI / 2;
-  const sunEl = (Math.PI * data.sunEl) / 180;
-  const sunAz = (Math.PI * data.sunAz) / 180;
+  const sunEl = data.sunEl;
+  const sunAz = data.sunAz;
   const cosSunEl = Math.cos(sunEl);
   const sinSunEl = Math.sin(sunEl);
   let pixelX,
@@ -141,9 +141,24 @@ raster.on('beforeoperations', function (event) {
   const data = event.data;
   const center = toLonLat(window.View.get('center'));
   data.resolution = event.resolution;
-  data['sunEl'] = SunCalc.getPosition(new Date(), center[1],center[0]).altitude * 180 / Math.PI;
-  data['vert'] = 1;
-  data['sunAz'] = SunCalc.getPosition(new Date(), center[1], center[0]).azimuth * 180 / Math.PI;
+  const sunPositon = SunCalc.getPosition(new Date(), center[1],center[0]);
+  const moonPosition =  SunCalc.getMoonPosition(new Date, center[1], center[0]);
+  let elevation = sunPositon.altitude;
+  let azimuth = sunPositon.azimuth;
+  if(elevation<0) 
+  {
+    elevation = moonPosition.altitude;
+    azimuth = moonPosition.azimuth;
+  }
+  if(Number.isNaN(elevation) || elevation < 0)
+  {
+    elevation = 1;
+    azimuth = 0;
+  }
+
+  data['sunEl'] = elevation;
+  data['vert'] = 4;
+  data['sunAz'] = azimuth;
 });
 
 export const Hillshading = {
@@ -152,7 +167,7 @@ export const Hillshading = {
   visible: false,
   layers: [
     new ImageLayer({
-      opacity: 0.3,
+      opacity: 0.2,
       source: raster,
     })
   ]
