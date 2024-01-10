@@ -22,6 +22,7 @@
 
 .suncalc-sun{
     filter: blur(0.5px);
+    opacity: 0.9;
 }
 .map-dark-sat .suncalc-sun,
 .map-dark-topo .suncalc-sun {

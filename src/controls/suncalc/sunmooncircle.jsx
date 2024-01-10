@@ -139,7 +139,6 @@ const SunmoonCircleComponent = () => {
     if(!suncalcStyle) {
       suncalcStyle = document.getElementById('suncalc-container').style;
     }
-    //suncalcStyle.transform = `rotate(${rotation()}deg)`;
   };
   setCenter(toLonLat(window.View && window.View.center || Config.center));
 
