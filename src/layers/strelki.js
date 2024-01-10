@@ -57,6 +57,7 @@ export const Strelki = {
   visible: false,
   layers: [
     new VectorLayer({
+      minZoom: 5,
       source: new VectorSource({
         url: `${Config.backend.scheme}://${Config.backend.host}/v3/strelki/all.geojson`,
         format: new GeoJSON(),

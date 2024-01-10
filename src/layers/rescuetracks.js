@@ -25,6 +25,7 @@ export const RescueTracks = {
   id: 'aT',
   title: 'Search tracks',
   visible: false,
+  minZoom: 7,
   layers: [
     new TileLayer({
       minZoom: 7,

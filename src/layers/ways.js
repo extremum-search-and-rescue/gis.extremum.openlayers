@@ -26,6 +26,7 @@ function polylineStyleFunction(feature, resolution) {
 }
 
 export const WaysLayer = new VectorTileLayer({
+  minZoom: 13,
   source: new VectorTileSource({
     minZoom: 13,
     maxZoom: 13,

@@ -48,6 +48,7 @@ export const Stations = {
   visible: false,
   layers: [
     new VectorTileLayer({
+      minZoom: 12,
       source: new VectorTileSource({
         minZoom: 12,
         maxZoom: 12,

@@ -66,6 +66,7 @@ export const MarineTraffic = {
   id: 'Mtr',
   title: 'Marine Traffic',
   visible: false,
+  minZoom: 5,
   layers: [
     new TileLayer({
       preload: 0,
