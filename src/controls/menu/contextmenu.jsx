@@ -9,6 +9,7 @@ import {CoordinateConverter} from './../../utils/coordinates';
 import { LayerService } from '../../services/layerservice';
 import { Feature } from 'ol';
 import { Point } from 'ol/geom';
+import { writeClipboard } from '@solid-primitives/clipboard';
 
 const ContextMenuComponent = () => {
   let trigger;
@@ -49,6 +50,13 @@ const ContextMenuComponent = () => {
     feature.setGeometry(new Point(map.getCoordinateFromPixel(pixel)));
     layerService().addFeatures([feature], map, false);
   }
+  function copyToClipboard(text){
+    writeClipboard([
+      new ClipboardItem({
+        'text/plain': new Blob([text], { type: 'text/plain' }),
+      }),
+    ]);
+  }
   onMount( () => {
     const viewport = document.getElementsByClassName('ol-layers')[0];
     viewport.addEventListener('contextmenu', onContextMenu, {}, true);
@@ -80,10 +88,27 @@ const ContextMenuComponent = () => {
               </Menu.TriggerItem>
               <Menu.Positioner>
                 <Menu.Content>
-                  <Menu.Item id='ctx_copy_link'>Link</Menu.Item>
-                  <Menu.Item id='ctx_copy_dd'>{CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.SIGNED_DEGREES)}</Menu.Item>
-                  <Menu.Item id='ctx_copy_dmm'>{CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.DEGREES_AND_MINUTES)}</Menu.Item>
-                  <Menu.Item id='ctx_copy_dms'>{CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.DEGREES_AND_MINUTES_AND_SECONDS)}</Menu.Item>
+                  <Menu.Item id='ctx_copy_link' disabled>
+                    Link
+                  </Menu.Item>
+                  <Menu.Item id='ctx_copy_dd' onclick={
+                    ()=> copyToClipboard(CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.SIGNED_DEGREES))}>
+                    {
+                      CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.SIGNED_DEGREES)
+                    }
+                  </Menu.Item>
+                  <Menu.Item id='ctx_copy_dmm' onclick={
+                    ()=> copyToClipboard(CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.DEGREES_AND_MINUTES))}>
+                    {
+                      CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.DEGREES_AND_MINUTES)
+                    }
+                  </Menu.Item>
+                  <Menu.Item id='ctx_copy_dms' onclick={
+                    ()=> copyToClipboard(CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.DEGREES_AND_MINUTES_AND_SECONDS))}>
+                    {
+                      CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.DEGREES_AND_MINUTES_AND_SECONDS)
+                    }
+                  </Menu.Item>
                 </Menu.Content>
               </Menu.Positioner>
             </Menu>

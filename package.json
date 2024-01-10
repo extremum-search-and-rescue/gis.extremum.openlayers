@@ -16,6 +16,7 @@
     "dependencies": {
         "@ark-ui/solid": "^1.2.0",
         "@solid-primitives/bounds": "^0.0.118",
+        "@solid-primitives/clipboard": "^1.5.7",
         "@solid-primitives/keyboard": "^1.2.5",
         "@solid-primitives/upload": "^0.0.114",
         "ol": "latest",
