@@ -50,11 +50,11 @@ export function LayerService() {
       source.addFeatures(event.features);
       map.getView().fit(source.getExtent());
     },
-    addFeatures(features, map)
+    addFeatures(features, map, fitMap = true)
     {
       const source = localUserObjectsLayer.get('source');
       source.addFeatures(features);
-      map.getView().fit(source.getExtent());
+      if(fitMap) map.getView().fit(source.getExtent());
     },
     get basemaps() {
       return bm;

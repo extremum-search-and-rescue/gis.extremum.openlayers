@@ -6,6 +6,9 @@ import { useService } from 'solid-services';
 import { MapContext } from '../../services/mapcontext';
 import { toLonLat } from 'ol/proj';
 import {CoordinateConverter} from './../../utils/coordinates';
+import { LayerService } from '../../services/layerservice';
+import { Feature } from 'ol';
+import { Point } from 'ol/geom';
 
 const ContextMenuComponent = () => {
   let trigger;
@@ -13,6 +16,7 @@ const ContextMenuComponent = () => {
   const [cursorFeatures, setCursorFeatures] = createSignal([]);
   let pixel;
   const mapContext = useService(MapContext);
+  const layerService = useService(LayerService);
 
   function onContextMenu(event){
     if(!event.isTrusted) {
@@ -39,6 +43,12 @@ const ContextMenuComponent = () => {
     });
     setCursorFeatures(features);
   }
+  function createMarker(){
+    const map = mapContext().map();
+    const feature = new Feature();
+    feature.setGeometry(new Point(map.getCoordinateFromPixel(pixel)));
+    layerService().addFeatures([feature], map, false);
+  }
   onMount( () => {
     const viewport = document.getElementsByClassName('ol-layers')[0];
     viewport.addEventListener('contextmenu', onContextMenu, {}, true);
@@ -62,7 +72,7 @@ const ContextMenuComponent = () => {
         </Menu.ContextTrigger>
         <Menu.Positioner>
           <Menu.Content class={'gis-mainmenu'}>
-            <Menu.Item id='ctx_new_marker'>Create marker</Menu.Item>
+            <Menu.Item id='ctx_new_marker' onclick={createMarker}>Create marker</Menu.Item>
             <Menu.Separator/>
             <Menu>
               <Menu.TriggerItem class={'gis-mainmenu'}>

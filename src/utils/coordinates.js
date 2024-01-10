@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 export class CoordinateConverter {
 
   static parse(text)
