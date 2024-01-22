@@ -103,19 +103,3 @@ export const GeolocationLizaAlert = {
     }),
   ],
 };
-
-export const GeolocationYarspas = {
-  id: 'gYs',
-  title: 'Geolocation (Yarspas)',
-  visible: false,
-  layers: [
-    new VectorLayer({
-      minZoom: 5,
-      source: new VectorSource({
-        url: `${Config.backend.scheme}://${Config.backend.host}/v3/geolocation/yarspas.geojson`,
-        format: new ArrayGeoJSON(),
-      }),
-      style: pointStyleFunction,
-    })
-  ],
-};
