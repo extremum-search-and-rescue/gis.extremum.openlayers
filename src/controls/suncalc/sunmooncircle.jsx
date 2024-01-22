@@ -159,7 +159,7 @@ const SunmoonCircleComponent = () => {
   });
   createEffect(()=> bounds);
   
-  let circleSize = () => Math.min(Math.min(bounds.width, bounds.height) - 80, 480);
+  let circleSize = () => Math.min(bounds.width, bounds.height) - 80;
   let fullControlSize = () => circleSize() + controlMargin * 2;
   let viewBox = () => `0 0 ${fullControlSize()} ${fullControlSize()}`;
 
