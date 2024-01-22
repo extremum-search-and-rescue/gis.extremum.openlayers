@@ -69,6 +69,7 @@ export const YandexMapsDark = {
 export const YandexHybridLayer = 
     new TileLayer({
       preload: 4,
+      maxZoom: 13,
       source: new XYZ({
         transition: 0,
         url: 'https://core-renderer-tiles.maps.yandex.net/tiles?l=skl&x={x}&y={y}&z={z}&scale=1&lang=ru_RU',

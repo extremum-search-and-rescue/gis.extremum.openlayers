@@ -34,7 +34,8 @@ const baseMaps = [
   Layers.YandexMapsDark,
 ];
 const overlayMaps = [
-  Layers.Hillshading,
+  Layers.HillshadingCPU,
+  Layers.HillshadingGPU,
   Layers.MegafonCoverage,
   Layers.MtsRusCoverage,
   Layers.MtsByCoverage,

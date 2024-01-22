@@ -29,6 +29,7 @@ export {RescueTracks as ResqueTracks} from './rescuetracks.js';
 export {Photos} from './photos.js';
 export {MarineTraffic} from './ships.js';
 export {OnlineTrackers} from './online-tracking.js';
-export {Hillshading} from './hillshade.js';
+export {HillshadingCPU} from './hillshade.js';
+export {HillshadingGPU} from './hillshadegpu.js';
 export {GeolocationPublic} from './geolocation.js';
 export {LiveTransport} from './live.js';
