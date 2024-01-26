@@ -11,6 +11,7 @@ import { defaults } from 'ol/interaction/defaults';
 import ArrayGeoJSON from '../format/ArrayGeoJSON';
 import PLT from '../format/PLT';
 import DragAndDrop from 'ol/interaction/DragAndDrop';
+import { GisLink } from '../interactions/link';
 
 export const MapContainer = props => {
   // eslint-disable-next-line solid/reactivity
@@ -37,7 +38,7 @@ export const MapContainer = props => {
 
     let dragAndDropInteraction;
 
-    function setInteraction() {
+    function setDragDropInteraction() {
       if (dragAndDropInteraction) {
         indexMap.removeInteraction(dragAndDropInteraction);
       }
@@ -51,7 +52,8 @@ export const MapContainer = props => {
       dragAndDropInteraction.on('addfeatures', (event)=> layerService().addFeaturesFromEvent(event, indexMap));
       indexMap.addInteraction(dragAndDropInteraction);
     }
-    setInteraction();
+    setDragDropInteraction();
+    indexMap.addInteraction(new GisLink());
 
     const getMap = useService(MapContext);
     getMap().map = indexMap;
