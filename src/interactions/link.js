@@ -290,7 +290,7 @@ export class GisLink extends Interaction {
     }
     let centerRaw = getParam(hash, 'c');
     if(centerRaw) {
-      centerRaw = centerRaw.split('/');
+      centerRaw = centerRaw.split(',');
       const center = fromLonLat([
         readNumber(centerRaw[1]),
         readNumber(centerRaw[0])],
