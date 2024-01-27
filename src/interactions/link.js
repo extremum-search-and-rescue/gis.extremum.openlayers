@@ -7,6 +7,8 @@ import MapEventType from 'ol/MapEventType.js';
 import {listen, unlistenByKey} from 'ol/events.js';
 import {toFixed} from 'ol/math.js';
 import { fromLonLat, toLonLat } from 'ol/proj.js';
+import { useService } from 'solid-services';
+import { LayerService } from '../services/layerservice.js';
 
 function getParam(hash, name){
   const r = new RegExp(`[#&]${name}=([^&]*)`);
@@ -319,14 +321,15 @@ export class GisLink extends Interaction {
     const layersParam = getParam(hash, 'l');
   
     if ('l' in this.params_ && layersParam) {
+      const layerService = useService(LayerService);
       const layerIds = layersParam.split('/');
       for (let i = 0; i < layerIds.length; i++ ) {
         const value = layerIds[i];
         const visible = Boolean(value);
         const layer = layers.find(l => l.id === value);
         if (layer && layer.getVisible() !== visible) {
-          //TODO: use LayerService to make correct layer update instead of direct ammending layer list
-          layer.setVisible(visible);
+          if(layer.type === 'base') layerService().changeBasemap(layer.id, map);
+          else layerService().toggleOverlay(layer.id, true, map);
         }
       }
     }

@@ -68,24 +68,26 @@ export function LayerService() {
     set overlays(overlays) {
       setOm(overlays);
     },
-    toggleOverlay(id, checked) {
+    toggleOverlay(id, checked, map) {
       setOm(l => l.id === id , 'visible', checked );
-      getMapcontext()
-        .map()
+      const currentMap = map ?? getMapcontext().map();
+      
+      currentMap
         .getAllLayers()
         .filter(l =>l.id === id)
         .forEach(l => l.setVisible(checked));
     },
-    changeBasemap(id){
+    changeBasemap(id, map){
       setBm({}, 'visible', false); //sets all basemaps as hidden
       setBm(l => l.id === id, 'visible', true);
-      getMapcontext()
-        .map()
+      const currentMap = map ?? getMapcontext().map();
+
+      currentMap
         .getAllLayers()
         .filter(l => l.type == 'base')
         .forEach(l =>l.setVisible(l.id === id));
       
-      updateMapTint(getMapcontext().map(), bm.filter(bm => bm.visible)[0]);
+      updateMapTint(currentMap, bm.filter(bm => bm.visible)[0]);
     },
     get mapTint(){
       return bm.filter(b => b.visible)[0].layers.filter(l => l.visible)[0].tint;
