@@ -133,6 +133,7 @@ const SunmoonCircleComponent = () => {
   // eslint-disable-next-line solid/reactivity
   SunmoonCircleComponent.placeChanged = function(view) {
     const center = toLonLat(view.get('center'));
+    if(isNaN(center[0]) || isNaN(center[1])) return;
     setCenter(center);
     setTimeOffsetMinutes(calculateTimeOffset(new Date(), center));
 
