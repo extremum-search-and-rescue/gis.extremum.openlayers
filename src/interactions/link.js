@@ -8,14 +8,14 @@ import {listen, unlistenByKey} from 'ol/events.js';
 import {toFixed} from 'ol/math.js';
 import { fromLonLat, toLonLat } from 'ol/proj.js';
 
-function getParam(name){
+function getParam(hash, name){
   const r = new RegExp(`[#&]${name}=([^&]*)`);
-  const exec = r.exec(window.location.hash);
+  const exec = r.exec(hash);
   return exec ? exec[1] : null;
 }
 
 function setOrReplaceParam(hash, name, value){
-  const param = getParam(name);
+  const param = getParam(hash, name);
   if(param)
     return hash.replace(param, value);
   else {
@@ -175,43 +175,6 @@ export class GisLink extends Interaction {
   }
 
   /**
-   * @private
-   * @param {string} name A parameter name.
-   * @return {string} A name with the prefix applied.
-   */
-  getParamName_(name) {
-    if (!this.prefix_) {
-      return name;
-    }
-    return this.prefix_ + name;
-  }
-
-  /**
-   * @private
-   * @param {string} hash The url's hash.
-   * @param {string} name The unprefixed parameter name.
-   * @param {string} value The param value.
-   */
-  set_(hash, name, value) {
-    if (!(name in this.params_)) {
-      return;
-    }
-    hash.set(this.getParamName_(name), value);
-  }
-
-  /**
-   * @private
-   * @param {string} hash The url's hash.
-   * @param {string} name The unprefixed parameter name.
-   */
-  delete_(hash, name) {
-    if (!(name in this.params_)) {
-      return;
-    }
-    hash.delete(this.getParamName_(name));
-  }
-
-  /**
    * @param {import("../Map.js").default|null} map Map.
    */
   setMap(map) {
@@ -225,7 +188,12 @@ export class GisLink extends Interaction {
     }
     if (map) {
       this.initial_ = true;
-      this.updateState_();
+      if(window.localStorage && !(new URL(window.location.href).hash)) {
+        const savedHash = window.localStorage.getItem('hash');
+        this.updateState_(savedHash);
+      }
+      else
+        this.updateState_();
       this.registerListeners_(map);
     }
   }
@@ -242,7 +210,7 @@ export class GisLink extends Interaction {
     );
 
     if (!this.replace_) {
-      addEventListener('popstate', this.updateState_);
+      addEventListener('hashchange', this.updateState_);
     }
   }
 
@@ -257,19 +225,11 @@ export class GisLink extends Interaction {
     this.listenerKeys_.length = 0;
 
     if (!this.replace_) {
-      removeEventListener('popstate', this.updateState_);
+      removeEventListener('hashchange', this.updateState_);
     }
 
-    /* if we need cleanup
-
     const url = new URL(window.location.href);
-    const params = url.searchParams;
-    this.delete_(params, 'z');
-    this.delete_(params, 'c');
-    this.delete_(params, 'l');
-    this.delete_(params, 'r');
-    window.history.replaceState(null, '', url);
-    */
+    window.history.replaceState(null, '', url.href.replace(url.hash,''));
   }
 
   /**
@@ -289,9 +249,10 @@ export class GisLink extends Interaction {
   /**
    * @private
    */
-  updateState_() {
+  updateState_(savedHash) {
+    const hash = savedHash ?? new URL(window.location.href).hash;
     for (const key in this.trackedCallbacks_) {
-      const value = getParam(key);
+      const value = getParam(hash, key);
       if (key in this.trackedCallbacks_ && value !== this.trackedValues_[key]) {
         this.trackedValues_[key] = value;
         this.trackedCallbacks_[key](value);
@@ -314,33 +275,31 @@ export class GisLink extends Interaction {
      */
     const viewProperties = {};
 
-    const zoom = readNumber(getParam('z'));
-    if ('z' in this.params_ && differentNumber(zoom, view.getZoom())) {
+    const zoom = readNumber(getParam(hash, 'z'));
+    if ('z' in this.params_ && !isNaN(zoom) && differentNumber(zoom, view.getZoom())) {
       updateView = true;
       viewProperties.zoom = zoom;
     }
 
-    const rotation = readNumber(getParam('r'));
+    const rotation = readNumber(getParam(hash, 'r'));
     if ('r' in this.params_ && differentNumber(rotation, view.getRotation())) {
       updateView = true;
       viewProperties.rotation = rotation;
     }
-    let centerRaw = getParam('c');
+    let centerRaw = getParam(hash, 'c');
     if(centerRaw) {
       centerRaw = centerRaw.split('/');
       const center = fromLonLat([
         readNumber(centerRaw[1]),
         readNumber(centerRaw[0])],
       'EPSG:3857');
-      if (
-        differentArray(center, view.getCenter())
-      ) {
+      if (!isNaN(center[0]) && !isNaN(center[1]) && differentArray(center, view.getCenter())) {
         updateView = true;
         viewProperties.center = center;
       }
     }
 
-    if (updateView) {
+    if (updateView) {      
       if (!this.initial_ && this.animationOptions_) {
         view.animate(Object.assign(viewProperties, this.animationOptions_));
       } else {
@@ -357,7 +316,7 @@ export class GisLink extends Interaction {
     }
 
     const layers = map.getAllLayers();
-    const layersParam = getParam('l');
+    const layersParam = getParam(hash, 'l');
   
     if ('l' in this.params_ && layersParam) {
       const layerIds = layersParam.split('/');
@@ -366,6 +325,7 @@ export class GisLink extends Interaction {
         const visible = Boolean(value);
         const layer = layers.find(l => l.id === value);
         if (layer && layer.getVisible() !== visible) {
+          //TODO: use LayerService to make correct layer update instead of direct ammending layer list
           layer.setVisible(visible);
         }
       }
@@ -454,7 +414,7 @@ export class GisLink extends Interaction {
 
   /**
    * @private
-   * @param {URL} url The URL.
+   * @param {string} hash Hash part of URL.
    */
   updateHistory_(hash) {
     if (hash !== window.location.hash) {
@@ -462,6 +422,9 @@ export class GisLink extends Interaction {
         const url = new URL(window.location.href);
         url.hash = hash;
         window.history.replaceState(history.state, '', url);
+        if(window.localStorage){
+          window.localStorage.setItem('hash', hash);
+        }
       } else {
         window.history.pushState(null, '', hash);
       }
