@@ -2,6 +2,7 @@
 @import url('../ark-styles/radiogroup.css');
 @import url('../controls/layerswitcher/layercontrol.css');
 @import url('../controls/suncalc/suncalc.css');
+@import url('../controls/reticle/reticle.css');
 
 .gis-control-toolbar {
     opacity: 0.87;

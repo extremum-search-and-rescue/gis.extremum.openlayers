@@ -17,6 +17,7 @@ import { Locate } from './controls/geolocation/locate';
 import { ContextMenu } from './controls/menu/contextmenu';
 import { MainMenu } from './controls/menu/mainmenu';
 import { SunmoonCircle } from './controls/suncalc/sunmooncircle';
+import { Reticle } from './controls/reticle/reticlecontrol';
 
 const baseMaps = [
   Layers.BasicOsm,
@@ -75,6 +76,7 @@ render(() =>
       <Control klass={ContextMenu} classes={'contextmenu gis-mainmenu'} target={'ol-viewport'}/>
       <ControlContainer id={'ol-container-100vh-100vw'}>
         <Control klass={SunmoonCircle} classes={'suncalc'} target={'ol-container-100vh-100vw'} />
+        <Control klass={Reticle} classes={'reticle'} target={'ol-container-100vh-100vw'} />
       </ControlContainer>
       <ControlContainer id={'ol-grid-container'}>
         <Control klass={LayerControl} target={'ol-grid-container'}/>
