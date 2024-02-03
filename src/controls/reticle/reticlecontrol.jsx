@@ -10,6 +10,7 @@ const _HALF = 1 / 2;
 const _QUARTER = 1 / 4;
 const _THREE_QUARTERS = 3 / 4;
 const [center, setCenter] = createSignal();
+const [rotationRad, setRotationRad] = createSignal(0);
 
 const Line = props => {
   return (
@@ -41,8 +42,13 @@ const ReticleComponent = () => {
     trackScroll: false, 
     trackResize: true
   });
-  
-  function onParamsChange(centerCoord){
+
+  function onRotationChange(){
+    onPlaceChange(center());
+  }
+
+  function onPlaceChange(centerCoord){
+    centerCoord ??= center();
     setHalfSize(Math.round(Math.min(bounds.width, bounds.height)/2) - 56);
 
     function _getScaleRatioLabel(maxDist) {
@@ -88,7 +94,8 @@ const ReticleComponent = () => {
     setHorizontalLineWidth(widthRatio * maxReticleWidth() - 8);
     setVerticalLineHeight(heightRatio * maxReticleHeight() - 8);
   }
-  createEffect(on(center, onParamsChange, {defer: true}));
+  createEffect(on(center, onPlaceChange, {defer: true}));
+  createEffect(on(rotationRad, onRotationChange, {defer: true}));
   setCenter(map.getView().getCenter());
 
   return (
@@ -126,7 +133,13 @@ export class Reticle extends Control {
     if (!frameState) {
       return;
     }
+    const rotation = frameState.viewState.rotation;
+    if (rotation != this.rotation_) {
+      setRotationRad(rotation);
+    }
+    this.rotation_ = rotation;
   }
+  
   setMap(map){
     super.setMap(map);
     this._map = map;
