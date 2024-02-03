@@ -4,9 +4,194 @@ import { createStore } from 'solid-js/store';
 import './drawtoolbar.css';
 import { useService } from 'solid-services';
 import { LayerService } from '../../services/layerservice';
-import Draw from 'ol/interaction/Draw';
+import { Draw, Modify } from 'ol/interaction';
+import { Fill, Stroke, Style, Text, Circle as CircleStyle, RegularShape} from 'ol/style.js';
+import { LineString, Point} from 'ol/geom.js';
 import { useCurrentlyHeldKey } from '@solid-primitives/keyboard';
 import { Transition } from 'solid-transition-group';
+import { getArea, getLength } from 'ol/sphere.js'
+
+
+const style = new Style({
+  fill: new Fill({
+    color: 'rgba(255, 255, 255, 0.2)',
+  }),
+  stroke: new Stroke({
+    color: 'rgba(0, 0, 0, 0.5)',
+    lineDash: [10, 10],
+    width: 2,
+  }),
+  image: new CircleStyle({
+    radius: 5,
+    stroke: new Stroke({
+      color: 'rgba(0, 0, 0, 0.7)',
+    }),
+    fill: new Fill({
+      color: 'rgba(255, 255, 255, 0.2)',
+    }),
+  }),
+});
+
+const labelStyle = new Style({
+  text: new Text({
+    font: '14px Calibri,sans-serif',
+    fill: new Fill({
+      color: 'rgba(255, 255, 255, 1)',
+    }),
+    backgroundFill: new Fill({
+      color: 'rgba(0, 0, 0, 0.7)',
+    }),
+    padding: [3, 3, 3, 3],
+    textBaseline: 'bottom',
+    offsetY: -15,
+  }),
+  image: new RegularShape({
+    radius: 8,
+    points: 3,
+    angle: Math.PI,
+    displacement: [0, 10],
+    fill: new Fill({
+      color: 'rgba(0, 0, 0, 0.7)',
+    }),
+  }),
+});
+
+const tipStyle = new Style({
+  text: new Text({
+    font: '12px Calibri,sans-serif',
+    fill: new Fill({
+      color: 'rgba(255, 255, 255, 1)',
+    }),
+    backgroundFill: new Fill({
+      color: 'rgba(0, 0, 0, 0.4)',
+    }),
+    padding: [2, 2, 2, 2],
+    textAlign: 'left',
+    offsetX: 15,
+  }),
+});
+
+const modifyStyle = new Style({
+  image: new CircleStyle({
+    radius: 5,
+    stroke: new Stroke({
+      color: 'rgba(0, 0, 0, 0.7)',
+    }),
+    fill: new Fill({
+      color: 'rgba(0, 0, 0, 0.4)',
+    }),
+  }),
+  text: new Text({
+    text: 'Drag to modify',
+    font: '12px Calibri,sans-serif',
+    fill: new Fill({
+      color: 'rgba(255, 255, 255, 1)',
+    }),
+    backgroundFill: new Fill({
+      color: 'rgba(0, 0, 0, 0.7)',
+    }),
+    padding: [2, 2, 2, 2],
+    textAlign: 'left',
+    offsetX: 15,
+  }),
+});
+
+const segmentStyle = new Style({
+  text: new Text({
+    font: '12px Calibri,sans-serif',
+    fill: new Fill({
+      color: 'rgba(255, 255, 255, 1)',
+    }),
+    backgroundFill: new Fill({
+      color: 'rgba(0, 0, 0, 0.4)',
+    }),
+    padding: [2, 2, 2, 2],
+    textBaseline: 'bottom',
+    offsetY: -12,
+  }),
+  image: new RegularShape({
+    radius: 6,
+    points: 3,
+    angle: Math.PI,
+    displacement: [0, 8],
+    fill: new Fill({
+      color: 'rgba(0, 0, 0, 0.4)',
+    }),
+  }),
+});
+
+const segmentStyles = [segmentStyle];
+
+const formatLength = function (line) {
+  const length = getLength(line);
+  let output;
+  if (length > 100) {
+    output = Math.round((length / 1000) * 100) / 100 + ' km';
+  } else {
+    output = Math.round(length * 100) / 100 + ' m';
+  }
+  return output;
+};
+
+const formatArea = function (polygon) {
+  const area = getArea(polygon);
+  let output;
+  if (area > 10000) {
+    output = Math.round((area / 1000000) * 100) / 100 + ' km\xB2';
+  } else {
+    output = Math.round(area * 100) / 100 + ' m\xB2';
+  }
+  return output;
+};
+
+function styleFunction(feature, segments, drawType, tip) {
+  const styles = [];
+  const geometry = feature.getGeometry();
+  const type = geometry.getType();
+  let point, label, line;
+  if (!drawType || drawType === type || type === 'Point') {
+    styles.push(style);
+    if (type === 'Polygon') {
+      point = geometry.getInteriorPoint();
+      label = formatArea(geometry);
+      line = new LineString(geometry.getCoordinates()[0]);
+    } else if (type === 'LineString') {
+      point = new Point(geometry.getLastCoordinate());
+      label = formatLength(geometry);
+      line = geometry;
+    }
+  }
+  if (segments && line) {
+    let count = 0;
+    line.forEachSegment(function (a, b) {
+      const segment = new LineString([a, b]);
+      const label = formatLength(segment);
+      if (segmentStyles.length - 1 < count) {
+        segmentStyles.push(segmentStyle.clone());
+      }
+      const segmentPoint = new Point(segment.getCoordinateAt(0.5));
+      segmentStyles[count].setGeometry(segmentPoint);
+      segmentStyles[count].getText().setText(label);
+      styles.push(segmentStyles[count]);
+      count++;
+    });
+  }
+  if (label) {
+    labelStyle.setGeometry(point);
+    labelStyle.getText().setText(label);
+    styles.push(labelStyle);
+  }
+  if (
+    tip &&
+    type === 'Point' &&
+    !DrawToolbar.modify.getOverlay().getSource().getFeatures().length
+  ) {
+    DrawToolbar.tipPoint = geometry;
+    tipStyle.getText().setText(tip);
+    styles.push(tipStyle);
+  }
+  return styles;
+}
 
 const DrawToolbarComponent = props => {    
   return (
@@ -21,12 +206,25 @@ const DrawToolbarComponent = props => {
 };
 
 export class DrawToolbar extends Control {
+
+  
+  static modify;
+
+  static tipPoint;
+
+
+
   constructor(options, children) {  
     const getLayers = useService(LayerService);        
     let activeDraw;
+    
     const key = useCurrentlyHeldKey();
     const [isFreehand, setFreehand] = createSignal(false);
     createEffect(()=> setFreehand( key() == 'SHIFT') );
+    DrawToolbar.modify = new Modify({
+      source: getLayers().userDrawingLayer, 
+      style: DrawToolbar.modifyStyle
+    });
 
     const [buttons, setButtons] = createStore([
       {
@@ -96,15 +294,20 @@ export class DrawToolbar extends Control {
         )
       },
     ]);
-        
+    
     const params = {
       classes: 'gis-control-toolbar gis-toolbar ol-unselectable',
       buttons: buttons,
       buttonClasses: 'gis-toolbar-button',
       interaction: (type) => {
+        const activeTip =
+        'Click to continue drawing the ' +
+        (type === 'Polygon' ? 'polygon' : 'line');
+        const idleTip = 'Click to start measuring';
+        let tip = idleTip;
         const drawLayer = getLayers().userDrawingLayer;
         if(activeDraw) {
-          this._map.removeInteraction(activeDraw);
+          this.map_.removeInteraction(activeDraw);
           setButtons((b) => b.type == activeDraw.mode_,'toggled',false);
         }
         if(!activeDraw || type != activeDraw.mode_)
@@ -112,14 +315,30 @@ export class DrawToolbar extends Control {
           activeDraw = new Draw({
             source: drawLayer,
             type: type,
+            style: function (feature) {
+              return styleFunction(feature, type == 'LineString', type, tip);
+            },
           });
           setButtons((b) => b.type == type, 'toggled', true );
-          this._map.addInteraction(activeDraw);
+          activeDraw.on('drawstart', function () {
+            
+            DrawToolbar.modify.setActive(false);
+            tip = activeTip;
+          });
+          activeDraw.on('drawend', function () {
+            modifyStyle.setGeometry(DrawToolbar.tipPoint);
+            DrawToolbar.modify.setActive(true);
+            this.map_.once('pointermove', function () {
+              modifyStyle.setGeometry();
+            });
+            tip = idleTip;
+          });
+          DrawToolbar.modify.setActive(true);
+          this.map_.addInteraction(activeDraw);
         }
       },
       children: children
     };
-
     const element = createComponent(DrawToolbarComponent, params);
 
     super({
@@ -129,6 +348,7 @@ export class DrawToolbar extends Control {
   }
   setMap(map){
     super.setMap(map);
-    this._map = map;
+    this.map_ = map;
+    map.addInteraction(DrawToolbar.modify);
   }
 }
