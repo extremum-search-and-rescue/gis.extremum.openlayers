@@ -23,6 +23,7 @@
 .suncalc-sun{
     filter: blur(0.5px);
     opacity: 0.9;
+    transition: fill ease-out 1s;
 }
 .map-dark-sat .suncalc-sun,
 .map-dark-topo .suncalc-sun {
@@ -37,6 +38,9 @@
 .map-vivid-topo .suncalc-sun {
     fill: var(--yellow-100);
 }
+.suncalc-moon {
+    transition: fill ease-out 0.25s;
+}
 
 .map-dark-sat .suncalc-moon,
 .map-dark-topo .suncalc-moon {
@@ -47,6 +51,9 @@
 .map-light-topo .suncalc-moon,
 .map-vivid-topo .suncalc-moon {
     fill: var(--gray-950);
+}
+.suncalc-sun-label {
+    transition: fill ease-out 0.2s, text-shadow ease-out 0.5s;
 }
 
 .map-default .suncalc-sun-label,
@@ -95,6 +102,7 @@
     stroke-width: 2;
     stroke-opacity: 0.7;
     stroke-dasharray: 7px 3px;
+    transition: stroke ease-out 1s;
 }
 
 .map-dark-topo .suncalc-sun-path,
@@ -125,6 +133,7 @@
 }
 
 .suncalc-azimuth-circle {
+    transition: fill ease-out 0.2s, stroke ease-out 0.2s;
     stroke-width: 2;
     stroke-opacity: 0.8;
     fill: none;
