@@ -66,24 +66,25 @@ const ReticleComponent = () => {
       d = d >= 10 ? 10 : d >= 5 ? 5 : d >= 3 ? 3 : d >= 2 ? 2 : 1;
       return pow10 * d;
     }
-    const maxReticleWidth = () => Math.max(200, halfSize() - 20);
-    const maxReticleHeight = () => Math.max(200, halfSize() - 20);
+    const maxReticleWidth = () => Math.min(288, halfSize() - 20);
+    const maxReticleHeight = () => Math.min(320, halfSize() - 20);
     
     function _calculateMaxDistance(x, y) {
-      if(centerCoord == null || x() == null || y() == null) return 0;
+      if(centerCoord == null || x == null || y == null) return 0;
       const from = toLonLat(centerCoord);
-      const pixel = [x(), y()];
+      const pixel = [x, y];
       const toRaw = map.getCoordinateFromPixel(pixel);
       if(toRaw == null) return 0;
       const to = toLonLat(toRaw);
 
       return getDistance(from, to);
     }
-    const widthDist = _calculateMaxDistance(() => halfSize() + maxReticleWidth(), halfSize);
-    const heightDist = _calculateMaxDistance(halfSize, () => halfSize() + maxReticleHeight());
+    //halfSize != center. Depends from screen ratio
+    const widthDist = () => _calculateMaxDistance(bounds.width / 2 + maxReticleWidth(), bounds.width / 2);
+    const heightDist = () => _calculateMaxDistance(bounds.height / 2, bounds.height / 2 + maxReticleHeight());
 
-    const [widthRatio, wText] = _getScaleRatioLabel(widthDist);
-    const [heightRatio, hText] = _getScaleRatioLabel(heightDist);
+    const [widthRatio, wText] = _getScaleRatioLabel(widthDist());
+    const [heightRatio, hText] = _getScaleRatioLabel(heightDist());
     setWidthText(wText);
     setHeightText(hText);
     setHorizontalLineWidth(widthRatio * maxReticleWidth() - 8);

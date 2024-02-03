@@ -8,7 +8,9 @@
 .reticle-line{
     opacity: 0.7;
 }
-
+.reticle-text{
+    font-size: x-small;
+}
 .map-dark-sat .reticle-text, 
 .map-dark-topo .reticle-text,
 .map-dark-topo .reticle-line,
