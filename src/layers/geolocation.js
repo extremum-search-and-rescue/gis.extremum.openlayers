@@ -4,7 +4,8 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import Config from '../config';
 
-const bodyStyles = window.getComputedStyle(document.body);
+let bodyStyles = window.getComputedStyle(document.body);
+let mapstyles = false;
 /**
  * @param {GeoJSON.Point} feature
  * @param {number} resolution
@@ -12,7 +13,15 @@ const bodyStyles = window.getComputedStyle(document.body);
  */
 // eslint-disable-next-line no-unused-vars
 const createTextStyle = function (feature, resolution) {
-  const fill = bodyStyles.getPropertyValue('--red-700');
+  if(!mapstyles) {
+    const viewports = document.getElementsByClassName('ol-viewport');
+    if(viewports && viewports.length > 0) {
+      bodyStyles = window.getComputedStyle(viewports[0]);
+      mapstyles = true;
+    }
+  }
+  const fill = bodyStyles.getPropertyValue('--map-text-base');
+  const outline = bodyStyles.getPropertyValue('--map-inverse');
   const acc = feature.get('acc');
   const formattedText = `${feature.get('deviceName')}${acc ? `± ${acc}` : ''}`;
   return new Text({
@@ -20,7 +29,7 @@ const createTextStyle = function (feature, resolution) {
     align: 'left',
     text: formattedText,
     fill: new Fill({color: fill}),
-    stroke: new Stroke({color: 'white', width: 1}),
+    stroke: new Stroke({color: outline, width: 1}),
     offsetX: 8,
     offsetY: 0,
     placement: 'Point',
@@ -41,7 +50,7 @@ function pointStyleFunction(feature, resolution) {
     image: new Icon({
       src: `${Config.frontend.images}/${isLast ? 'last' : 'other' }.svg` 
     }),
-    text: resolution < 12 ? createTextStyle(feature, resolution) : undefined,
+    text: resolution < 12 && isLast ? createTextStyle(feature, resolution) : undefined,
   });
 }
 
