@@ -91,8 +91,8 @@ const ReticleComponent = () => {
     const [heightRatio, hText] = _getScaleRatioLabel(heightDist());
     setWidthText(wText);
     setHeightText(hText);
-    setHorizontalLineWidth(widthRatio * maxReticleWidth() - 8);
-    setVerticalLineHeight(heightRatio * maxReticleHeight() - 8);
+    setHorizontalLineWidth(Math.round(widthRatio * maxReticleWidth() - 8));
+    setVerticalLineHeight(Math.round(heightRatio * maxReticleHeight() - 8));
   }
   createEffect(on(center, onPlaceChange, {defer: true}));
   createEffect(on(rotationRad, onRotationChange, {defer: true}));
