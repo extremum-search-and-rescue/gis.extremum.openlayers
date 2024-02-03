@@ -14,7 +14,7 @@ const [center, setCenter] = createSignal();
 const Line = props => {
   return (
     <>
-      <rect class={props.classes} x={props.x} y={props.y} width={props.width} height={props.height}/>
+      <rect class={props.classes} x={props.x} y={props.y} width={props.width} height={props.height} style={props.style}/>
       {props.children}
     </>
   );
@@ -22,7 +22,7 @@ const Line = props => {
 
 const Label = props => {
   return (
-    <text class={props.classes} x={props.x} y={props.y}>{props.text()}</text>
+    <text class={props.classes} x={props.x} y={props.y} style={props.style}>{props.text()}</text>
   );
 };
 
@@ -93,20 +93,20 @@ const ReticleComponent = () => {
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" class='reticle-container' width={halfSize()*2} height={halfSize()*2}>
-      <Line classes='reticle-line x' x={halfSize()+8} y={halfSize()} width={horizontalLineWidth()-8} height={2}>
-        <rect class={'reticle-line'} x={_QUARTER*horizontalLineWidth()+halfSize()} width={2} y={halfSize()+2} height={4}/>
-        <rect class={'reticle-line'} x={_HALF*horizontalLineWidth()+halfSize()} width={2} y={halfSize()+2} height={8}/>
-        <rect class={'reticle-line'} x={_THREE_QUARTERS*horizontalLineWidth()+halfSize()} y={halfSize()+2} width={2} height={4}/>
-        <rect class={'reticle-line'} x={horizontalLineWidth()+halfSize()} y={halfSize()} width={2} height={10}/>
+      <Line classes='reticle-line x' x={halfSize()+8} y={halfSize()} style={{width: horizontalLineWidth()-8}} height={2}>
+        <rect class={'reticle-tick x'} x={_QUARTER*horizontalLineWidth()+halfSize()} width={2} y={halfSize()+2} height={4}/>
+        <rect class={'reticle-tick x'} x={_HALF*horizontalLineWidth()+halfSize()} width={2} y={halfSize()+2} height={8}/>
+        <rect class={'reticle-tick x'} x={_THREE_QUARTERS*horizontalLineWidth()+halfSize()} y={halfSize()+2} width={2} height={4}/>
+        <rect class={'reticle-tick x'} x={horizontalLineWidth()+halfSize()} y={halfSize()} width={2} height={10}/>
       </Line>
-      <Label classes='reticle-text' text={widthText} x={halfSize()+horizontalLineWidth()-20} y={halfSize()-4}/>
-      <Line classes='reticle-line y' x={halfSize()} y={halfSize()+8} width={2} height={verticalLineHight()-8}>
-        <rect class={'reticle-line'} y={_QUARTER*verticalLineHight()+halfSize()} x={halfSize()+2} width={4} height={2}/>
-        <rect class={'reticle-line'} y={_HALF*verticalLineHight()+halfSize()} x={halfSize()+2} width={8} height={2}/>
-        <rect class={'reticle-line'} y={_THREE_QUARTERS*verticalLineHight()+halfSize()} x={halfSize()+2} width={4} height={2}/>
-        <rect class={'reticle-line'} y={verticalLineHight()+halfSize()} x={halfSize()} width={10} height={2}/>
+      <Label classes='reticle-text x' text={widthText} x={halfSize()+horizontalLineWidth()-20} y={halfSize()-4}/>
+      <Line classes='reticle-line y' x={halfSize()} y={halfSize()+8} width={2} style={{height: verticalLineHight()-8}}>
+        <rect class={'reticle-tick y'} y={_QUARTER*verticalLineHight()+halfSize()} x={halfSize()+2} width={4} height={2}/>
+        <rect class={'reticle-tick y'} y={_HALF*verticalLineHight()+halfSize()} x={halfSize()+2} width={8} height={2}/>
+        <rect class={'reticle-tick y'} y={_THREE_QUARTERS*verticalLineHight()+halfSize()} x={halfSize()+2} width={4} height={2}/>
+        <rect class={'reticle-tick y'} y={verticalLineHight()+halfSize()} x={halfSize()} width={10} height={2}/>
       </Line>
-      <Label classes='reticle-text' text={heightText} x={halfSize()} y={halfSize()+verticalLineHight()+16}/>
+      <Label classes='reticle-text y' text={heightText} x={halfSize()} y={halfSize()+verticalLineHight()+16}/>
     </svg>
   );
 };

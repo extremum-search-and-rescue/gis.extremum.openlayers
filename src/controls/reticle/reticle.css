@@ -7,25 +7,40 @@
 }
 .reticle-line{
     opacity: 0.7;
+    
 }
+.reticle-line.x {
+    transition: width ease-out 0.1s;
+}
+.reticle-line.y {
+    transition: height ease-out 0.1s;
+}
+.reticle-tick.x{
+    transition: x ease-out 0.1s;
+}
+.reticle-tick.y{
+    transition: y ease-out 0.1s;
+}
+
 .reticle-text{
     font-size: x-small;
 }
-.map-dark-sat .reticle-text, 
-.map-dark-topo .reticle-text,
-.map-dark-topo .reticle-line,
-.map-dark-sat .reticle-line {
+.reticle-text x{
+    transition: x ease-out 0.2s;
+}
+.reticle-text y{
+    transition: y ease-out 0.2s;
+}
+
+.map-dark-sat .reticle-container ,
+.map-dark-topo .reticle-container {
     fill: white;
 }
 
-.map-default .reticle-text,
-.map-light-topo .reticle-text,
-.map-default .reticle-line,
-.map-light-topo .reticle-line{
+.map-default .reticle-container,
+.map-light-topo .reticle-container {
     fill: var(--gray-600);
 }
-
-.map-vivid-topo .reticle-text,
-.map-vivid-topo .reticle-line{
+.map-vivid-topo .reticle-container{
     fill: var(--gray-950);
 }
