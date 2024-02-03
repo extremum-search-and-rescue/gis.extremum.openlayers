@@ -35,15 +35,14 @@ const ReticleComponent = () => {
 
   const getMapContext = useService(MapContext);
   const map = getMapContext().map();
-  setCenter(map.getView().getCenter());
+  
   let bounds = createElementBounds(document.querySelector(`#${map.get('target')}`), { 
     trackMutation: false, 
     trackScroll: false, 
     trackResize: true
   });
-
   
-  createEffect(on(center, (centerCoord) => {
+  function onParamsChange(centerCoord){
     setHalfSize(Math.round(Math.min(bounds.width, bounds.height)/2) - 56);
 
     function _getScaleRatioLabel(maxDist) {
@@ -79,7 +78,6 @@ const ReticleComponent = () => {
 
       return getDistance(from, to);
     }
-    //halfSize != center. Depends from screen ratio
     const widthDist = () => _calculateMaxDistance(bounds.width / 2 + maxReticleWidth(), bounds.width / 2);
     const heightDist = () => _calculateMaxDistance(bounds.height / 2, bounds.height / 2 + maxReticleHeight());
 
@@ -89,7 +87,9 @@ const ReticleComponent = () => {
     setHeightText(hText);
     setHorizontalLineWidth(widthRatio * maxReticleWidth() - 8);
     setVerticalLineHeight(heightRatio * maxReticleHeight() - 8);
-  }));
+  }
+  createEffect(on(center, onParamsChange, {defer: true}));
+  setCenter(map.getView().getCenter());
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" class='reticle-container' width={halfSize()*2} height={halfSize()*2}>
