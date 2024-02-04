@@ -48,7 +48,7 @@ const ContextMenuComponent = () => {
     const map = mapContext().map();
     const feature = new Feature();
     feature.setGeometry(new Point(map.getCoordinateFromPixel(pixel)));
-    layerService().addFeatures([feature], map, false);
+    layerService().addMarker(feature, map, false);
   }
   function copyToClipboard(text){
     writeClipboard([
