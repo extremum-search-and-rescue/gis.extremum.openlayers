@@ -11,8 +11,9 @@ import tzlookup from 'tz-lookup';
 import { zeroPad } from '../../utils/nums';
 import { addMinutes } from '../../utils/dates';
 
-
+const [show, setShow] = createSignal(false);
 const [rotationRad, setRotationRad] = createSignal(0);
+
 const controlMargin = 20;
 let suncalcStyle;
 
@@ -138,7 +139,9 @@ const SunmoonCircleComponent = () => {
     setTimeOffsetMinutes(calculateTimeOffset(new Date(), center));
 
     if(!suncalcStyle) {
-      suncalcStyle = document.getElementById('suncalc-container').style;
+      const container = document.getElementById('suncalc-container');
+      if(container)
+        suncalcStyle = container.style;
     }
   };
   setCenter(toLonLat(window.View && window.View.center || Config.center));
@@ -206,45 +209,50 @@ const SunmoonCircleComponent = () => {
 
   return (
     <svg id={'suncalc-container'} width={fullControlSize()} height={fullControlSize()} xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox={viewBox()}>
-      <svg id={'suncalc-circle'} x={controlMargin} y={controlMargin} class="suncalc-circle" width={fullControlSize()} height={fullControlSize()} xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox={viewBox()}>
-        <g filter="url(#filter1_d)">
-          <circle class="suncalc-azimuth-circle" id="azimuthCircle" cx={circleSize()/2+2} cy={circleSize()/2+2} r={circleSize()/2}/>
-        </g>
-        <SunPathCircle sunrise={sunrise} sunset={sunset} center={center} circleSize={circleSize}/>
-        <TimeLabel date={sunrise} startTime={dawn} endTime={dusk} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
-        <TimeLabel date={dawn} startTime={dawn} endTime={dusk} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
-        <TimeLabel date={dusk} startTime={dawn} endTime={dusk} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
-        <TimeLabel date={sunset} startTime={dawn} endTime={dusk} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
-        <TimeLabel hour={0} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
-        <TimeLabel hour={3} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
-        <TimeLabel hour={6} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
-        <TimeLabel hour={9} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
-        <TimeLabel hour={12} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
-        <TimeLabel hour={15} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
-        <TimeLabel hour={18} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
-        <TimeLabel hour={21} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
-      </svg>
+      <Show when={show()}>
+        <svg id={'suncalc-circle'} x={controlMargin} y={controlMargin} class="suncalc-circle" width={fullControlSize()} height={fullControlSize()} xmlns="http://www.w3.org/2000/svg" overflow="visible" viewBox={viewBox()}>
+          <g filter="url(#filter1_d)">
+            <circle class="suncalc-azimuth-circle" id="azimuthCircle" cx={circleSize()/2+2} cy={circleSize()/2+2} r={circleSize()/2}/>
+          </g>
+          <SunPathCircle sunrise={sunrise} sunset={sunset} center={center} circleSize={circleSize}/>
+          <TimeLabel date={sunrise} startTime={dawn} endTime={dusk} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+          <TimeLabel date={dawn} startTime={dawn} endTime={dusk} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+          <TimeLabel date={dusk} startTime={dawn} endTime={dusk} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+          <TimeLabel date={sunset} startTime={dawn} endTime={dusk} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+          <TimeLabel hour={0} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+          <TimeLabel hour={3} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+          <TimeLabel hour={6} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+          <TimeLabel hour={9} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+          <TimeLabel hour={12} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+          <TimeLabel hour={15} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+          <TimeLabel hour={18} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+          <TimeLabel hour={21} startTime={sunrise} endTime={sunset} timeOffetMinutes={timeOffetMinutes} center={center} circleSize={circleSize}/>
+        </svg>
+      </Show>
 
       <svg id={'suncalc'} x={controlMargin} y={controlMargin} class="suncalc" width={fullControlSize()} height={fullControlSize()} xmlns="http://www.w3.org/2000/svg" overflow="visible">
-        <defs>
-          <filter id="filter1_d" x="0" y="0" width={fullControlSize()} height={fullControlSize()} filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
-            <feOffset/>
-            <feGaussianBlur stdDeviation="5"/>
-            <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0"/>
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
-            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
-          </filter>
-        </defs>
-        <Moon radius={6} position={moonPosition} illumination={moonIllumination} circleSize={circleSize}/>
-        <Sun circleSize={circleSize} radius={13} dawn={dawn} dusk={dusk} sunPosition={sunPosition}/>
+        <Show when={show()}>
+          <defs>
+            <filter id="filter1_d" x="0" y="0" width={fullControlSize()} height={fullControlSize()} filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+              <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+              <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+              <feOffset/>
+              <feGaussianBlur stdDeviation="5"/>
+              <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.5 0"/>
+              <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+              <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+            </filter>
+          </defs>
+          <Moon radius={6} position={moonPosition} illumination={moonIllumination} circleSize={circleSize}/>
+          <Sun circleSize={circleSize} radius={13} dawn={dawn} dusk={dusk} sunPosition={sunPosition}/>
+        </Show>
       </svg>
     </svg>
   );
 };
 
 export class SunmoonCircle extends Control {
+  asLayerId = 'SC';
   constructor(options) {
     options = options || {};
     const element = createComponent(SunmoonCircleComponent);
@@ -265,9 +273,17 @@ export class SunmoonCircle extends Control {
     }
     this.rotation_ = rotation;
   }
+  setVisible(state) {
+    setShow(state);
+  }
+  // eslint-disable-next-line solid/reactivity
+  getVisible(){
+    return show();
+  }
+
   setMap(map){
     super.setMap(map);
     this._map = map;
-    this._map.on('moveend', (event) => SunmoonCircleComponent.placeChanged(event.map.getView()));
+    this._map.on('moveend', (event) => show() && SunmoonCircleComponent.placeChanged(event.map.getView()));
   }
 }

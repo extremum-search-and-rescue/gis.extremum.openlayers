@@ -1,6 +1,7 @@
 import { onMount } from 'solid-js';
 import { useService } from 'solid-services';
 import { MapContext } from '../services/mapcontext';
+import { LayerService } from '../services/layerservice';
 
 export const Control = (props) => {
   // eslint-disable-next-line solid/reactivity
@@ -18,6 +19,11 @@ export const Control = (props) => {
     }
     const control = new controlKlass(options, props.children);
     getMap().map().addControl(control);
+    if(control.asLayerId && control.getVisible && control.getVisible()){
+      /** @type {import('solid-services').ServiceGetter<LayerService>} */
+      const layerService = useService(LayerService);
+      layerService().toggleControl(control.asLayerId, control.getVisible, getMap().map());
+    }
   });    
   return null;
 };

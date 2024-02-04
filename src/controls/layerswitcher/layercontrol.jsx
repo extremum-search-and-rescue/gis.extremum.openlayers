@@ -7,6 +7,7 @@ import { Checkbox} from '@ark-ui/solid';
 import { RadioGroup } from '@ark-ui/solid';
 import { useService } from 'solid-services';
 import { LayerService } from '../../services/layerservice';
+import { MapContext } from '../../services/mapcontext';
 
 const BaseMapSelector = (params) => {
   return (
@@ -28,19 +29,30 @@ const BaseMapSelector = (params) => {
 
 const OverlayItem = (params) => {
   return (
-    <Checkbox.Root checked={params.item.visible} onCheckedChange={(ev)=> params.model().toggleOverlay(params.item.id, ev.checked) }>
+    <Checkbox.Root checked={params.item.visible} onCheckedChange={params.onCheckedChange}>
       <Checkbox.Control/>
       <Checkbox.Label>{params.item.title}</Checkbox.Label>
     </Checkbox.Root>
   );
 };
 
+/** 
+ * @param {{
+ * model: ServiceGetter<LayerService>
+ * mapContext: ServiceGetter<MapContext>
+ * }} params
+*/
 const OverlaySelector = (params) => {
   return (
     <div class="set">
       <For each={params.model().overlays}>
         { (item) => 
-          <OverlayItem id={item.id} model={params.model} item={item}/>
+          <OverlayItem id={item.id} item={item} onCheckedChange={(ev)=> params.model().toggleOverlay(item.id, ev.checked) }/>
+        }
+      </For>
+      <For each={params.model().controlStates}>
+        { (control) => 
+          <OverlayItem id={control.asLayerId} item={control} onCheckedChange={ev => params.model().toggleControl(control.asLayerId, ev.checked)}/>
         }
       </For>
     </div>
@@ -51,7 +63,7 @@ const LayerControlComponent = (params) => {
   return (
     <div class={params.classes}>
       <BaseMapSelector model={params.model}/>
-      <OverlaySelector model={params.model}/>
+      <OverlaySelector model={params.model} mapContext={params.mapContext}/>
     </div>
   );
 };
@@ -59,8 +71,10 @@ const LayerControlComponent = (params) => {
 class LayerControl extends Control {
   constructor(options) {
 
+    /** @type {import('solid-services').ServiceGetter<LayerService>} */
     const layerService = useService(LayerService);
-
+    /** @type {import('solid-services').ServiceGetter<MapContext>} */
+    const mapContext = useService(MapContext);
     /*
     const keydown = useKeyDownEvent();
 
@@ -74,10 +88,12 @@ class LayerControl extends Control {
       }
                 
     });
-    */  
+    */
+     
     const params = {
       classes: 'ol-unselectable gis-control-toolbar gis-layercontrol',
       model: layerService,
+      mapContext: mapContext
     };
     const element = createComponent(LayerControlComponent, params);
 

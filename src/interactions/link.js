@@ -1,6 +1,3 @@
-/**
- * @module ol/interaction/GisLink
- */
 import EventType from 'ol/events/EventType.js';
 import Interaction from 'ol/interaction/Interaction.js';
 import MapEventType from 'ol/MapEventType.js';
@@ -208,6 +205,7 @@ export class GisLink extends Interaction {
     this.listenerKeys_.push(
       listen(map, MapEventType.MOVEEND, this.updateUrl_, this),
       listen(map.getLayerGroup(), EventType.CHANGE, this.updateUrl_, this),
+      listen(map.getControls(), EventType.CHANGE, this.updateUrl_, this),
       listen(map, 'change:layergroup', this.handleChangeLayerGroup_, this)
     );
 
@@ -325,11 +323,15 @@ export class GisLink extends Interaction {
       const layerIds = layersParam.split('/');
       for (let i = 0; i < layerIds.length; i++ ) {
         const value = layerIds[i];
-        const visible = Boolean(value);
         const layer = layers.find(l => l.id === value);
-        if (layer && layer.getVisible() !== visible) {
-          if(layer.type === 'base') layerService().changeBasemap(layer.id, map);
-          else layerService().toggleOverlay(layer.id, true, map);
+        if (layer) {
+          if(layer.getVisible() !== true) {
+            if(layer.type === 'base') layerService().changeBasemap(layer.id, map);
+            else layerService().toggleOverlay(layer.id, true, map);
+          }
+        }
+        else {
+          layerService().toggleControl(layerIds[i], true, map);
         }
       }
     }
@@ -394,6 +396,16 @@ export class GisLink extends Interaction {
     for (let i = 0; i < layers.length; i++) {
       if(layers[i].getVisible() && layers[i].id)
         visibilities.push(layers[i].id);
+    }
+    const controls = map.getControls().getArray();
+    if(controls && controls.length>0){
+      for (let i = 0; i < controls.length; i++) {
+        if(controls[i].asLayerId){
+          if(!controls[i].getVisible) throw new TypeError('Control with asLayerId must implement getVisible and setVisible');
+          if(!controls[i].getVisible() && !visibilities.find(v => v === controls[i].asLayerId))
+            visibilities.push(controls[i].asLayerId);
+        }
+      }
     }
 
     const url = new URL(window.location.href);

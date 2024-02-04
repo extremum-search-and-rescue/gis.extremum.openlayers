@@ -1,6 +1,6 @@
 import Control from 'ol/control/Control';
 import { getDistance } from 'ol/sphere.js';
-import { createComponent, createEffect, createSignal, on } from 'solid-js';
+import { createComponent, createEffect, createSignal, on, Show } from 'solid-js';
 import { createElementBounds } from '@solid-primitives/bounds';
 import { useService } from 'solid-services';
 import { MapContext } from '../../services/mapcontext';
@@ -11,6 +11,7 @@ const _QUARTER = 1 / 4;
 const _THREE_QUARTERS = 3 / 4;
 const [center, setCenter] = createSignal();
 const [rotationRad, setRotationRad] = createSignal(0);
+const [show, setShow] = createSignal(false);
 
 const Line = props => {
   return (
@@ -100,25 +101,28 @@ const ReticleComponent = () => {
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" class='reticle-container' width={halfSize()*2} height={halfSize()*2}>
-      <Line classes='reticle-line x' x={halfSize()+8} y={halfSize()} style={{width: horizontalLineWidth()-8}} height={2}>
-        <rect class={'reticle-tick x'} x={_QUARTER*horizontalLineWidth()+halfSize()} width={2} y={halfSize()+2} height={4}/>
-        <rect class={'reticle-tick x'} x={_HALF*horizontalLineWidth()+halfSize()} width={2} y={halfSize()+2} height={8}/>
-        <rect class={'reticle-tick x'} x={_THREE_QUARTERS*horizontalLineWidth()+halfSize()} y={halfSize()+2} width={2} height={4}/>
-        <rect class={'reticle-tick x'} x={horizontalLineWidth()+halfSize()} y={halfSize()} width={2} height={10}/>
-      </Line>
-      <Label classes='reticle-text x' text={widthText} x={halfSize()+horizontalLineWidth()-20} y={halfSize()-4}/>
-      <Line classes='reticle-line y' x={halfSize()} y={halfSize()+8} width={2} style={{height: verticalLineHight()-8}}>
-        <rect class={'reticle-tick y'} y={_QUARTER*verticalLineHight()+halfSize()} x={halfSize()+2} width={4} height={2}/>
-        <rect class={'reticle-tick y'} y={_HALF*verticalLineHight()+halfSize()} x={halfSize()+2} width={8} height={2}/>
-        <rect class={'reticle-tick y'} y={_THREE_QUARTERS*verticalLineHight()+halfSize()} x={halfSize()+2} width={4} height={2}/>
-        <rect class={'reticle-tick y'} y={verticalLineHight()+halfSize()} x={halfSize()} width={10} height={2}/>
-      </Line>
-      <Label classes='reticle-text y' text={heightText} x={halfSize()} y={halfSize()+verticalLineHight()+16}/>
+      <Show when={show()}>
+        <Line classes='reticle-line x' x={halfSize()+8} y={halfSize()} style={{width: horizontalLineWidth()-8}} height={2}>
+          <rect class={'reticle-tick x'} x={_QUARTER*horizontalLineWidth()+halfSize()} width={2} y={halfSize()+2} height={4}/>
+          <rect class={'reticle-tick x'} x={_HALF*horizontalLineWidth()+halfSize()} width={2} y={halfSize()+2} height={8}/>
+          <rect class={'reticle-tick x'} x={_THREE_QUARTERS*horizontalLineWidth()+halfSize()} y={halfSize()+2} width={2} height={4}/>
+          <rect class={'reticle-tick x'} x={horizontalLineWidth()+halfSize()} y={halfSize()} width={2} height={10}/>
+        </Line>
+        <Label classes='reticle-text x' text={widthText} x={halfSize()+horizontalLineWidth()-20} y={halfSize()-4}/>
+        <Line classes='reticle-line y' x={halfSize()} y={halfSize()+8} width={2} style={{height: verticalLineHight()-8}}>
+          <rect class={'reticle-tick y'} y={_QUARTER*verticalLineHight()+halfSize()} x={halfSize()+2} width={4} height={2}/>
+          <rect class={'reticle-tick y'} y={_HALF*verticalLineHight()+halfSize()} x={halfSize()+2} width={8} height={2}/>
+          <rect class={'reticle-tick y'} y={_THREE_QUARTERS*verticalLineHight()+halfSize()} x={halfSize()+2} width={4} height={2}/>
+          <rect class={'reticle-tick y'} y={verticalLineHight()+halfSize()} x={halfSize()} width={10} height={2}/>
+        </Line>
+        <Label classes='reticle-text y' text={heightText} x={halfSize()} y={halfSize()+verticalLineHight()+16}/>
+      </Show>
     </svg>
   );
 };
 
 export class Reticle extends Control {
+  asLayerId = 'SC';
   constructor(options) {
     options = options || {};
     const element = createComponent(ReticleComponent);
@@ -139,10 +143,16 @@ export class Reticle extends Control {
     }
     this.rotation_ = rotation;
   }
-  
+  setVisible(state) {
+    setShow(state);
+  }
+  // eslint-disable-next-line solid/reactivity
+  getVisible(){
+    return show();
+  }
   setMap(map){
     super.setMap(map);
     this._map = map;
-    this._map.on('moveend', (event) => setCenter(event.map.getView().getCenter()));
+    this._map.on('moveend', (event) => show() && setCenter(event.map.getView().getCenter()));
   }
 }
