@@ -14,7 +14,6 @@ export const Control = (props) => {
       const controlState = layerService().controlStates.find(c => c.asLayerId === control.asLayerId);
       if(controlState){
         control.setVisible(controlState.visible);
-        console.log(controlState);
       }
     }
     const getMap = useService(MapContext);
