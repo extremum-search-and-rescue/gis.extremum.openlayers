@@ -402,7 +402,7 @@ export class GisLink extends Interaction {
       for (let i = 0; i < controls.length; i++) {
         if(controls[i].asLayerId){
           if(!controls[i].getVisible) throw new TypeError('Control with asLayerId must implement getVisible and setVisible');
-          if(!controls[i].getVisible() && !visibilities.find(v => v === controls[i].asLayerId))
+          if(controls[i].getVisible() && !visibilities.find(v => v === controls[i].asLayerId))
             visibilities.push(controls[i].asLayerId);
         }
       }

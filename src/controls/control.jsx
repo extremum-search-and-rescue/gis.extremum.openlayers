@@ -7,8 +7,16 @@ export const Control = (props) => {
   // eslint-disable-next-line solid/reactivity
   const controlKlass = props.klass;
   if(!controlKlass) throw new Error('props.klass must contain class for Control instance');
-    
   onMount(()=> {
+    function toggleStateOfExternallyControlledVisibility(control){
+      /** @type {import('solid-services').ServiceGetter<LayerService>} */
+      const layerService = useService(LayerService);
+      const controlState = layerService().controlStates.find(c => c.asLayerId === control.asLayerId);
+      if(controlState){
+        control.setVisible(controlState.visible);
+        console.log(controlState);
+      }
+    }
     const getMap = useService(MapContext);
     let options = props.options || {};
     if(props.classes){
@@ -18,12 +26,10 @@ export const Control = (props) => {
       options.target = props.target;
     }
     const control = new controlKlass(options, props.children);
-    getMap().map().addControl(control);
-    if(control.asLayerId && control.getVisible && control.getVisible()){
-      /** @type {import('solid-services').ServiceGetter<LayerService>} */
-      const layerService = useService(LayerService);
-      layerService().toggleControl(control.asLayerId, control.getVisible, getMap().map());
+    if(control.asLayerId){
+      toggleStateOfExternallyControlledVisibility(control);
     }
+    getMap().map().addControl(control);
   });    
   return null;
 };
