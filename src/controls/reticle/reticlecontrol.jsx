@@ -153,6 +153,7 @@ export class Reticle extends Control {
   setMap(map){
     super.setMap(map);
     this._map = map;
+    // eslint-disable-next-line solid/reactivity
     this._map.on('moveend', (event) => show() && setCenter(event.map.getView().getCenter()));
   }
 }
