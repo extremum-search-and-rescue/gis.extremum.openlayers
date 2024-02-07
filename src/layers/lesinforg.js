@@ -21,6 +21,7 @@ export const GosLesHoz = {
     new TileLayer({
       preload: 4,
       minZoom: 8,
+      maxZoom: 18,
       source: new TileWMS({
         transition: 0,
         minZoom: 8,
