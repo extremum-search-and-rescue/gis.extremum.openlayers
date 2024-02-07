@@ -52,14 +52,14 @@ const MenuComponent = () => {
         </Menu.Trigger>
         <Menu.Positioner>
           <Menu.Content>
-            <Menu.Item id='import-tracks' onclick={onFileImport}>
+            <Menu.Item id='import-tracks' onpointerup={onFileImport}>
                         Import tracks
             </Menu.Item>
             <Menu.Item id='import-grids' disabled>
                         Import Grid
             </Menu.Item>
             <MenuSeparator/>
-            <Menu.Item id='print' onclick={()=> window.print()}>
+            <Menu.Item id='print' onpointerup={()=> window.print()}>
                         Print
             </Menu.Item>
             <MenuSeparator/>

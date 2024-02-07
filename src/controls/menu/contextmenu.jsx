@@ -29,9 +29,11 @@ const ContextMenuComponent = () => {
       stopPropagation(event);
     } 
     pixel = [clone.x, clone.y];
+    console.info(pixel);
     trigger.dispatchEvent(clone);
   }
   function onOpenChange(details){
+    console.log(pixel);
     if(!details.open)  {
       setCursorFeatures([]);
       return;
@@ -57,13 +59,22 @@ const ContextMenuComponent = () => {
       }),
     ]);
   }
+  function copyDegreesMinutes() {
+    copyToClipboard(CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.DEGREES_AND_MINUTES));
+  }
+  function copyDegrees(){
+    copyToClipboard(CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.SIGNED_DEGREES));
+  }
+  function copyDegreesMinutesSeconds(){
+    copyToClipboard(CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.DEGREES_AND_MINUTES_AND_SECONDS));
+  }
   onMount( () => {
     const viewport = document.getElementsByClassName('ol-layers')[0];
     viewport.addEventListener('contextmenu', onContextMenu, {}, true);
     
     //workaround on touch, at least on iOS
     viewport.addEventListener('pointerdown', onContextMenu);
-    viewport.addEventListener('pointermove', onContextMenu);
+    //viewport.addEventListener('pointermove', onContextMenu);
     viewport.addEventListener('pointerup', onContextMenu);
     //end of workaround
   });
@@ -80,7 +91,7 @@ const ContextMenuComponent = () => {
         </Menu.ContextTrigger>
         <Menu.Positioner>
           <Menu.Content class={'gis-mainmenu'}>
-            <Menu.Item id='ctx_new_marker' onclick={createMarker}>Create marker</Menu.Item>
+            <Menu.Item id='ctx_new_marker' onPointerUp={createMarker}>Create marker</Menu.Item>
             <Menu.Separator/>
             <Menu>
               <Menu.TriggerItem class={'gis-mainmenu'}>
@@ -91,20 +102,17 @@ const ContextMenuComponent = () => {
                   <Menu.Item id='ctx_copy_link' disabled>
                     Link
                   </Menu.Item>
-                  <Menu.Item id='ctx_copy_dd' onclick={
-                    ()=> copyToClipboard(CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.SIGNED_DEGREES))}>
+                  <Menu.Item id='ctx_copy_dd' onPointerUp={copyDegrees}>
                     {
                       CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.SIGNED_DEGREES)
                     }
                   </Menu.Item>
-                  <Menu.Item id='ctx_copy_dmm' onclick={
-                    ()=> copyToClipboard(CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.DEGREES_AND_MINUTES))}>
+                  <Menu.Item id='ctx_copy_dmm' onPointerUp={copyDegreesMinutes}>
                     {
                       CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.DEGREES_AND_MINUTES)
                     }
                   </Menu.Item>
-                  <Menu.Item id='ctx_copy_dms' onclick={
-                    ()=> copyToClipboard(CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.DEGREES_AND_MINUTES_AND_SECONDS))}>
+                  <Menu.Item id='ctx_copy_dms' onPointerUp={copyDegreesMinutesSeconds}>
                     {
                       CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.DEGREES_AND_MINUTES_AND_SECONDS)
                     }
