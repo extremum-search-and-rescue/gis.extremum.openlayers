@@ -5,6 +5,7 @@ import VectorTileLayer from 'ol/layer/VectorTile';
 import ArrayGeoJSON from '../format/ArrayGeoJSON';
 
 const bodyStyles = window.getComputedStyle(document.body);
+let mapStyles;
 /**
  * @param {GeoJSON.Point} feature
  * @param {number} resolution
@@ -12,14 +13,19 @@ const bodyStyles = window.getComputedStyle(document.body);
  */
 // eslint-disable-next-line no-unused-vars
 const createTextStyle = function (feature, resolution) {
-  const fill = bodyStyles.getPropertyValue('--gray-950');
+  if(!mapStyles)
+    mapStyles = window.getComputedStyle(document.getElementsByClassName('ol-viewport')[0]);
+
+  const stylesSource = mapStyles ?? bodyStyles;
+  const fill = stylesSource.getPropertyValue('--map-text-base');
+  const stroke = stylesSource.getPropertyValue('--map-inverse');
   return new Text({
-    font: 'Arial 12px',
+    font: 'Arial 14px',
     justify: 'left',
     textAlign: 'left',
     text: feature.get('name'),
     fill: new Fill({color: fill}),
-    stroke: new Stroke({color: 'white', width: 1}),
+    stroke: new Stroke({color: stroke, width: 1.5}),
     offsetX: 16,
     offsetY: 0,
     placement: 'point',
