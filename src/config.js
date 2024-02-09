@@ -1,4 +1,4 @@
-import Secrets from './secrets';
+import {Secrets } from './secrets';
 import { fromLonLat } from 'ol/proj';
 
 if(!window.ENV)
@@ -31,10 +31,12 @@ const Frontend = {
 };
 
 /**
+ * @mixes import('./secrets').Secrets
+ * @mixes ENV
  * @type {{
  * backend: Backend,
  * frontend: Frontend
- * center: import("ol/coordinate").Coordinate,
+ * center: import('ol/coordinate').Coordinate,
  * zoom: number
  * }}
  */

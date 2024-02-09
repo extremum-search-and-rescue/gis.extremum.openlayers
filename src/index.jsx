@@ -18,6 +18,7 @@ import { ContextMenu } from './controls/menu/contextmenu';
 import { MainMenu } from './controls/menu/mainmenu';
 import { SunmoonCircle } from './controls/suncalc/sunmooncircle';
 import { Reticle } from './controls/reticle/reticlecontrol';
+import IpToLocation from './services/iplocation';
 
 const baseMaps = [
   Layers.BasicOsm,
@@ -65,6 +66,7 @@ const view = window.View = new View({
   center: config.center,
   zoom: config.zoom,
 });
+IpToLocation.update();
 
 render(() => 
   <ServiceRegistry>
