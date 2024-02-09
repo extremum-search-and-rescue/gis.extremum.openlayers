@@ -16,7 +16,8 @@ function getObject(source) {
 }
 
 function isEmptyFeature(featureCollection) {
-  return featureCollection.features.length==1 && featureCollection.features[0].type == null;
+  if(featureCollection.features == null || featureCollection.features.length == 0) return true;
+  return featureCollection.features.length==1 && !featureCollection.features[0].type;
 }
 
 class ArrayGeoJSON extends GeoJSON {

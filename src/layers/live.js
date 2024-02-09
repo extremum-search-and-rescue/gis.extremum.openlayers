@@ -5,6 +5,12 @@ import VectorTileLayer from 'ol/layer/VectorTile';
 import Config from '../config';
 import { toRadians } from 'ol/math';
 
+setInterval(function(){
+  if(LiveTransport && LiveTransport.layers && LiveTransport.layers.find(f => f.getVisible())) {
+    LiveTransport.layers.forEach(l => l.getSource().refresh());
+  }
+}, 5000);
+
 const bodyStyles = window.getComputedStyle(document.body);
 /**
  * @param {GeoJSON.Point} feature
@@ -67,6 +73,7 @@ export const LiveTransport = {
   layers: [
     new VectorTileLayer({
       minZoom: 9,
+      preload: 0,
       source: new VectorTileSource({
         minZoom: 9,
         maxZoom: 9,

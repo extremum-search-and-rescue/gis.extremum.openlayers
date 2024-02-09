@@ -4,6 +4,18 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import Config from '../config';
 
+setInterval(function(){
+  if(GeolocationPublic && GeolocationPublic.layers && GeolocationPublic.layers.find(f => f.getVisible())) {
+    GeolocationPublic.layers.forEach(l => l.getSource().refresh());
+  }
+  if(GeolocationExtremum && GeolocationExtremum.layers && GeolocationExtremum.layers.find(f => f.getVisible())) {
+    GeolocationExtremum.layers.forEach(l => l.getSource().refresh());
+  }
+  if(GeolocationLizaAlert && GeolocationLizaAlert.layers && GeolocationLizaAlert.layers.find(f => f.getVisible())) {
+    GeolocationLizaAlert.layers.forEach(l => l.getSource().refresh());
+  }
+}, 10000);
+
 let bodyStyles = window.getComputedStyle(document.body);
 let mapstyles = false;
 /**

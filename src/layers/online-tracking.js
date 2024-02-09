@@ -4,6 +4,12 @@ import Config from '../config';
 import VectorTileSource from 'ol/source/VectorTile';
 import VectorTileLayer from 'ol/layer/VectorTile';
 
+setInterval(function(){
+  if(OnlineTrackers && OnlineTrackers.layers && OnlineTrackers.layers.find(f => f.getVisible())) {
+    OnlineTrackers.layers.forEach(l => l.getSource().refresh());
+  }
+}, 15000);
+
 /**
  * @param {GeoJSON.MultiLineString} feature
  * @param {number} resolution

@@ -5,6 +5,12 @@ import VectorTileSource from 'ol/source/VectorTile';
 import XYZ from 'ol/source/XYZ';
 import TileLayer from 'ol/layer/Tile';
 
+setInterval(function(){
+  if(MarineTraffic && MarineTraffic.layers && MarineTraffic.layers.find(f => f.getVisible())) {
+    MarineTraffic.layers.forEach(l => l.getSource().refresh());
+  }
+}, 60000);
+
 const bodyStyles = window.getComputedStyle(document.body);
 /**
  * @param {GeoJSON.Point} feature
