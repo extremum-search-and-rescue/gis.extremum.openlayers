@@ -1,8 +1,10 @@
-import { defineConfig } from 'vite'
-import solidPlugin from 'vite-plugin-solid'
+import { defineConfig } from 'vite';
+import solidPlugin from 'vite-plugin-solid';
+import basicSsl from '@vitejs/plugin-basic-ssl';
+
 
 export default defineConfig({
-  plugins: [solidPlugin()],
+  plugins: [solidPlugin(), basicSsl()],
   root: 'src',
   build: {
     outDir: '../dist',
@@ -19,8 +21,8 @@ export default defineConfig({
     chunkSizeWarningLimit: 800000,
   },
   server: {
-    port: 8025,
-    https: false,
+    port: 44325,
+    https: true,
     host: '0.0.0.0',
     open: '/dist/index.html',
   },
