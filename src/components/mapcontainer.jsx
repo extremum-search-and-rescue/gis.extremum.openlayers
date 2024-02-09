@@ -33,6 +33,8 @@ export const MapContainer = props => {
       layers: layerService().flat,
       target: props.id,
       view: props.view,
+      maxTilesLoading: 64,
+      moveTolerance: 1 //default value
     });
 
 
