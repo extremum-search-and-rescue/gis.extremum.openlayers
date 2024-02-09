@@ -394,7 +394,7 @@ export class GisLink extends Interaction {
     const layers = map.getAllLayers();
     const visibilities = new Array();
     for (let i = 0; i < layers.length; i++) {
-      if(layers[i].getVisible() && layers[i].id)
+      if(layers[i].getVisible() && layers[i].id && !visibilities.find(v => v === layers[i].id))
         visibilities.push(layers[i].id);
     }
     const controls = map.getControls().getArray();
