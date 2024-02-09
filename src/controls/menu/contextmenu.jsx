@@ -16,6 +16,7 @@ const ContextMenuComponent = () => {
   const [cursorCoord, setCursorCoord] = createSignal([0,0]);
   const [cursorFeatures, setCursorFeatures] = createSignal([]);
   let pixel;
+  let isOpen = false;
   const mapContext = useService(MapContext);
   const layerService = useService(LayerService);
 
@@ -30,6 +31,7 @@ const ContextMenuComponent = () => {
     } 
     pixel = [clone.x, clone.y];
     console.info(pixel);
+    console.info(isOpen);
     trigger.dispatchEvent(clone);
   }
   function onOpenChange(details){
@@ -38,6 +40,7 @@ const ContextMenuComponent = () => {
       setCursorFeatures([]);
       return;
     }
+    isOpen = true;
     const map = mapContext().map();
     setCursorCoord(toLonLat(map.getCoordinateFromPixel(pixel)));
     const features = [];
@@ -128,7 +131,7 @@ const ContextMenuComponent = () => {
                 <Menu.Content>
                   <For each={cursorFeatures()}>
                     {(item)=> 
-                      <Menu.Item id='ctx_copy_link'>{item.get('text') || item.get('name') || item.get('description')}</Menu.Item>
+                      <Menu.Item id='ctx_copy_link'>{item.get('text') ?? item.get('name') ?? item.get('description') ?? item.get('icon')} </Menu.Item>
                     }
                   </For>
                 </Menu.Content>
