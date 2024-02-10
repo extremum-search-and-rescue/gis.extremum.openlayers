@@ -3,6 +3,7 @@ import XYZ from 'ol/source/XYZ';
 import { fromLonLat, get as getProjection } from 'ol/proj';
 import { register } from 'ol/proj/proj4';
 import proj4 from 'proj4';
+import Config from '../config';
 
 proj4.defs(
   'EPSG:3395',
@@ -13,6 +14,32 @@ var proj3395 = getProjection('EPSG:3395');
 var half = Math.abs(fromLonLat([180, 0], proj3395)[0]);
 proj3395.setExtent([-half, -half, half, half]);
 proj3395.setGlobal(true);
+
+
+setInterval(function(){
+  if(YandexRainClouds && YandexRainClouds.layers && YandexRainClouds.layers.find(f => f.getVisible())) {
+    YandexRainClouds.layers.forEach(l => l.getSource().refresh());
+  }
+}, 60000);
+
+export const YandexRainClouds = {
+  id: 'rc',
+  title: 'Rain Clouds',
+  layers: [
+    new TileLayer({
+      preload: Infinity,
+      minZoom: 3,
+      maxZoom: 13,
+      opacity: 0.2,
+      source: new XYZ({
+        minZoom: 3,
+        maxZoom: 13,
+        url: `${Config.backend.scheme}://${Config.backend.host}/v2/other/rainclouds/{z}/{x}/{y}.png`,
+        projection: proj3395    
+      }),
+    })
+  ]
+};
 
 export const YandexSatellite = {
   id: 'yaSat',

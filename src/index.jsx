@@ -52,6 +52,7 @@ const overlayMaps = [
   Layers.Strelki,
   Layers.Stations,
   Layers.Wikimapia,
+  Layers.YandexRainClouds,
   Layers.LaGrids,
   Layers.ResqueTracks,
   Layers.Photos,

@@ -3,7 +3,13 @@ export {BasicOsm} from './basicosm';
 export {OpenSnowMap} from './snowmap';
 export {OpenseamapMarks} from './opensea';
 export {OpenTopoMap, OpenTopoMapCZ} from './opentopomap';
-export {YandexSatellite, YandexMaps, YandexMapsDark, YandexTracks} from './yandex';
+export {
+  YandexSatellite, 
+  YandexMaps,
+  YandexMapsDark,
+  YandexTracks,
+  YandexRainClouds
+} from './yandex';
 export {Topomapper} from './topomapper';
 export {GosGisCenter} from './ggc';
 export {EsriSatellite} from './esri';
