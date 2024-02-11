@@ -16,12 +16,11 @@ const ContextMenuComponent = () => {
   const [cursorCoord, setCursorCoord] = createSignal([0,0]);
   const [cursorFeatures, setCursorFeatures] = createSignal([]);
   let pixel;
-  let isOpen = false;
   const mapContext = useService(MapContext);
   const layerService = useService(LayerService);
 
   function onContextMenu(event){
-    if(!event.isTrusted) {
+    if(!event.isTrusted || event.dragging) {
       return;
     }
     const clone = new event.constructor(event.type, event);
@@ -30,17 +29,13 @@ const ContextMenuComponent = () => {
       stopPropagation(event);
     } 
     pixel = [clone.x, clone.y];
-    console.info(pixel);
-    console.info(isOpen);
     trigger.dispatchEvent(clone);
   }
   function onOpenChange(details){
-    console.log(pixel);
     if(!details.open)  {
       setCursorFeatures([]);
       return;
     }
-    isOpen = true;
     const map = mapContext().map();
     setCursorCoord(toLonLat(map.getCoordinateFromPixel(pixel)));
     const features = [];
@@ -77,7 +72,7 @@ const ContextMenuComponent = () => {
     
     //workaround on touch, at least on iOS
     viewport.addEventListener('pointerdown', onContextMenu);
-    //viewport.addEventListener('pointermove', onContextMenu);
+    viewport.addEventListener('pointermove', onContextMenu);
     viewport.addEventListener('pointerup', onContextMenu);
     //end of workaround
   });
