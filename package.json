@@ -20,6 +20,7 @@
         "@solid-primitives/keyboard": "^1.2.5",
         "@solid-primitives/upload": "^0.0.114",
         "ol": "latest",
+        "ol-mapbox-style": "^12.2.0",
         "proj4": "^2.9.0",
         "solid-js": "^1.8.7",
         "solid-services": "^4.3.2",

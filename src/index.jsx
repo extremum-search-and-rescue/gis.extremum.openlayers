@@ -33,6 +33,7 @@ const baseMaps = [
   Layers.YandexSatellite,
   Layers.YandexMaps,
   Layers.YandexMapsDark,
+  Layers.MapTilerLayer,
 ];
 const overlayMaps = [
   Layers.HillshadingCPU,

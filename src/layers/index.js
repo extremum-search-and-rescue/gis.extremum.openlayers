@@ -39,3 +39,4 @@ export {HillshadingCPU} from './hillshade.js';
 export {HillshadingGPU} from './hillshadegpu.js';
 export {GeolocationPublic} from './geolocation.js';
 export {LiveTransport} from './live.js';
+export {MapTilerLayer} from './maptiler.js';
