@@ -28,7 +28,7 @@ export class Toast extends Control {
   constructor(options) {
     options = options || {};
     const element = createComponent(ToastComponent, {
-      classes: options.className
+      classes: options.className ?? 'gis-toast'
     });
       
     super({
