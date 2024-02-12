@@ -20,6 +20,7 @@ import { SunmoonCircle } from './controls/suncalc/sunmooncircle';
 import { Reticle } from './controls/reticle/reticlecontrol';
 import IpToLocation from './services/iplocation';
 import { Toast } from './controls/messages/toast';
+import { Weather } from './controls/weather/weather';
 
 const view = window.View = new View({
   center: config.center,
@@ -77,6 +78,7 @@ render(() =>
       view={view}>
       <Control klass={ContextMenu} classes={'contextmenu gis-mainmenu'} target={'ol-viewport'}/>
       <ControlContainer id={'ol-container-100vh-100vw'}>
+        <Control klass={Weather} target={'ol-container-100vh-100vw'}/>
         <Control klass={SunmoonCircle} classes={'suncalc'} target={'ol-container-100vh-100vw'} />
         <Control klass={Reticle} classes={'reticle'} target={'ol-container-100vh-100vw'} />
       </ControlContainer>

@@ -1,0 +1,45 @@
+.gis-weather {
+    color: var(--map-text-base);
+    text-shadow: 0px 0px 4px var(--map-inverse);
+    fill: var(--map-text-base) !important;
+    pointer-events: none;
+    font-size: small;
+}
+
+.gis-weather.container{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+    top: 0.25rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+}
+
+.gis-weather span {
+    padding: 0.25rem;
+}
+.map-default .gis-weather .weather-info,
+.map-dark-topo .gis-weather .weather-info,
+.map-light-topo .gis-weather .weather-info,
+.map-dark-sat .gis-weather .weather-info{
+    opacity: 0.7;
+}
+.map-vivid-topo .gis-weather .weather-info{
+    font-weight: bold;
+}
+
+.gis-weather .icon{
+    position: absolute;
+    width: 24px;
+    height: 24px;
+}
+.gis-weather .icon.sun{
+    color: var(--orange-300);
+}
+.gis-weather .icon.moon{
+    color: var(--map-text-subtle);
+}
+.gis-weather .icon.cloud{
+    color: var(--map-text-subtle);
+}

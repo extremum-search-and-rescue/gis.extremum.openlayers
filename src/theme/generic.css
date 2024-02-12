@@ -4,6 +4,7 @@
 @import url('../controls/suncalc/suncalc.css');
 @import url('../controls/reticle/reticle.css');
 @import url('../controls/messages/toast.css');
+@import url('../controls/weather/weather.css');
 
 .gis-control-toolbar {
     opacity: 0.87;
@@ -163,6 +164,8 @@ hr[data-scope='menu'][data-part='separator']{
 .map-dark-topo,
 .map-dark-sat {
     --map-text-base: white;
+    --map-text-light: var(--gray-200);
+    --map-text-subtle: var(--gray-500);
     --map-line-base: var(--gray-100);
     --map-inverse: black;
     --map-inverse-light: rgba(0,0,0,0.7);
@@ -173,6 +176,8 @@ hr[data-scope='menu'][data-part='separator']{
 .map-light-topo,
 .map-vivid-topo {
     --map-text-base: black;
+    --map-text-light: var(--gray-900);
+    --map-text-subtle: var(--gray-600);
     --map-inverse: white;
     --map-inverse-light: rgba(255,255,255,0.7);
     --map-inverse-subtle: rgba(255,255,255,0.5);
