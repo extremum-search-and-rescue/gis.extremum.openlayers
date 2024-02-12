@@ -21,50 +21,6 @@ import { Reticle } from './controls/reticle/reticlecontrol';
 import IpToLocation from './services/iplocation';
 import { Toast } from './controls/messages/toast';
 
-const baseMaps = [
-  Layers.BasicOsm,
-  Layers.OpenTopoMap,
-  Layers.OpenTopoMapCZ,
-  Layers.BingSat,
-  Layers.Topomapper,
-  Layers.GosGisCenter,
-  Layers.EsriSatellite,
-  Layers.PkkRosreestr,
-  Layers.GoogleSatellite,
-  Layers.YandexSatellite,
-  Layers.YandexMaps,
-  Layers.YandexMapsDark,
-  Layers.MapTilerLayer,
-];
-const overlayMaps = [
-  Layers.HillshadingCPU,
-  Layers.HillshadingGPU,
-  Layers.MegafonCoverage,
-  Layers.MtsRusCoverage,
-  Layers.MtsByCoverage,
-  Layers.A1ByCoverage,
-  Layers.LifeByCoverage,
-  Layers.Tele2Coverage,
-  Layers.BeelineCoverage,
-  Layers.YandexTracks,
-  Layers.Strava,
-  Layers.OpenSnowMap,
-  Layers.Hybrid,
-  Layers.GosLesHoz,
-  Layers.Strelki,
-  Layers.Stations,
-  Layers.Wikimapia,
-  Layers.YandexRainClouds,
-  Layers.LaGrids,
-  Layers.ResqueTracks,
-  Layers.Photos,
-  Layers.MarineTraffic,
-  Layers.OpenseamapMarks,
-  Layers.OnlineTrackers,
-  Layers.GeolocationPublic,
-  Layers.LiveTransport
-];
-
 const view = window.View = new View({
   center: config.center,
   zoom: config.zoom,
@@ -75,8 +31,49 @@ render(() =>
   <ServiceRegistry>
     <FullScreenMapContainer 
       id={'indexMap'} 
-      basemaps={baseMaps} 
-      overlays={overlayMaps}
+      basemaps={[
+        Layers.BasicOsm,
+        Layers.OpenTopoMap,
+        Layers.OpenTopoMapCZ,
+        Layers.BingSat,
+        Layers.Topomapper,
+        Layers.GosGisCenter,
+        Layers.EsriSatellite,
+        Layers.PkkRosreestr,
+        Layers.GoogleSatellite,
+        Layers.YandexSatellite,
+        Layers.YandexMaps,
+        Layers.YandexMapsDark,
+        Layers.MapTilerLayer,
+      ]} 
+      overlays={[
+        Layers.HillshadingCPU,
+        Layers.HillshadingGPU,
+        Layers.MegafonCoverage,
+        Layers.MtsRusCoverage,
+        Layers.MtsByCoverage,
+        Layers.A1ByCoverage,
+        Layers.LifeByCoverage,
+        Layers.Tele2Coverage,
+        Layers.BeelineCoverage,
+        Layers.YandexTracks,
+        Layers.Strava,
+        Layers.OpenSnowMap,
+        Layers.Hybrid,
+        Layers.GosLesHoz,
+        Layers.Strelki,
+        Layers.Stations,
+        Layers.Wikimapia,
+        Layers.YandexRainClouds,
+        Layers.LaGrids,
+        Layers.ResqueTracks,
+        Layers.Photos,
+        Layers.MarineTraffic,
+        Layers.OpenseamapMarks,
+        Layers.OnlineTrackers,
+        Layers.GeolocationPublic,
+        Layers.LiveTransport
+      ]}
       view={view}>
       <Control klass={ContextMenu} classes={'contextmenu gis-mainmenu'} target={'ol-viewport'}/>
       <ControlContainer id={'ol-container-100vh-100vw'}>
