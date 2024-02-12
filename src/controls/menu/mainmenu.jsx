@@ -27,12 +27,16 @@ const MenuComponent = () => {
       else if(fileNameInLowerCase.endsWith('.plt')){
         features = new PLT().readFeatures(await inputFile.file.text());
       }
+      else{
+        const text = 'Unknown file type';
+        map.dispatchEvent({type: 'toast', message: `${text}: ${inputFile.name}`});
+      }
       if(features != null) 
       {
         layerService.addFeatures(features, map);
       }
     } catch (error) {
-      console.error(error);
+      getMapContext().map().dispatchEvent({type: 'toast', message: error.toString()});
     }
   }
         
