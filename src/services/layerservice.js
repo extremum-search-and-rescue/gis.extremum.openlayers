@@ -141,6 +141,8 @@ export function LayerService() {
       const source = localUserObjectsLayer.get('source');
       source.addFeatures(features);
       if(fitMap) map.getView().fit(source.getExtent());
+      const text = 'imported features';
+      map.dispatchEvent({ type: 'toast', message: `${text}: ${features.length}`, timeout: 7000});
     },
     /**
      * Adds Point feature with marker style

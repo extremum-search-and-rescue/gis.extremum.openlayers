@@ -19,6 +19,7 @@ import { MainMenu } from './controls/menu/mainmenu';
 import { SunmoonCircle } from './controls/suncalc/sunmooncircle';
 import { Reticle } from './controls/reticle/reticlecontrol';
 import IpToLocation from './services/iplocation';
+import { Toast } from './controls/messages/toast';
 
 const baseMaps = [
   Layers.BasicOsm,
@@ -92,6 +93,9 @@ render(() =>
           <Control klass={Locate} classes={'gis-locate'} target={'ol-container-1-1'}/>
         </ControlContainer>
         <Control klass={ScaleLine}/>
+      </ControlContainer>
+      <ControlContainer id={'modal-overlay'}>
+        <Control klass={Toast} classes={'gis-toast'} target={'modal-overlay'}/>
       </ControlContainer>
     </FullScreenMapContainer>
   </ServiceRegistry>,

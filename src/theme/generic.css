@@ -3,6 +3,7 @@
 @import url('../controls/layerswitcher/layercontrol.css');
 @import url('../controls/suncalc/suncalc.css');
 @import url('../controls/reticle/reticle.css');
+@import url('../controls/messages/toast.css');
 
 .gis-control-toolbar {
     opacity: 0.87;
@@ -34,7 +35,7 @@ https://stackoverflow.com/questions/60997948/backdrop-filter-not-working-for-nes
     position: absolute;
     display: grid;
     gap: 0.5rem;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1 auto 1;
     grid-template-rows: auto auto auto;
     justify-items: flex-start;
     align-items: flex-start;
@@ -42,12 +43,19 @@ https://stackoverflow.com/questions/60997948/backdrop-filter-not-working-for-nes
 #ol-container-1-1
 {
     display: flex;
-    pointer-events: auto;
+    pointer-events: none;
     gap: 1rem;
-    grid-row: 1;
     grid-column: 1;
+    grid-row: 1;
     margin: 0.5rem;
 }
+#modal-overlay{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
 #ol-container-100vh-100vw
 {
     top: 0;
@@ -66,6 +74,7 @@ https://stackoverflow.com/questions/60997948/backdrop-filter-not-working-for-nes
 }
 
 .gis-zoom {
+    
     position: unset;
     top: unset;
     left: unset;
@@ -79,6 +88,7 @@ https://stackoverflow.com/questions/60997948/backdrop-filter-not-working-for-nes
     border-radius: 3px !important;
 }
 .gis-zoom button {
+   pointer-events: auto;
    width: 1.5rem !important;
    height: 1.5rem !important;
    background-color: unset !important;
@@ -100,6 +110,7 @@ https://stackoverflow.com/questions/60997948/backdrop-filter-not-working-for-nes
     border-radius: 3px !important;
 }
 .gis-rotate button {
+   pointer-events: auto;
    width: 1.5rem !important;
    height: 1.5rem !important;
    background-color: unset !important;
@@ -154,6 +165,8 @@ hr[data-scope='menu'][data-part='separator']{
     --map-text-base: white;
     --map-line-base: var(--gray-100);
     --map-inverse: black;
+    --map-inverse-light: rgba(0,0,0,0.7);
+    --map-inverse-subtle: rgba(0,0,0,0.5);
     background-color: var(--gray-700);
 }
 .map-default,
@@ -161,6 +174,8 @@ hr[data-scope='menu'][data-part='separator']{
 .map-vivid-topo {
     --map-text-base: black;
     --map-inverse: white;
+    --map-inverse-light: rgba(255,255,255,0.7);
+    --map-inverse-subtle: rgba(255,255,255,0.5);
     --map-line-base: var(--gray-800);
     background-color: var(--gray-50);
 }

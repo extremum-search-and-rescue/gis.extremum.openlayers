@@ -1,0 +1,29 @@
+.gis-toast.container{
+    transform: translate(-50%,-50%);
+    position: absolute;
+    left: 50%;
+    bottom: 1rem;
+    min-width: 6rem;
+    min-height: 2rem;
+    pointer-events: none;
+    transition: opacity ease-in-out 0.25s;
+}
+.gis-toast.content{
+    pointer-events: none;
+    font-size: small;
+    padding: 0.25rem 1rem;
+    color: var(--map-text-base);
+    transition: opacity ease-in 0.5s, color ease-in 0.2s;
+}
+.gis-toast.background {
+    display: flex;
+    pointer-events: none;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    border-radius: 4px;
+    height: 100%;
+    outline: 1px solid var(--map-inverse-light);    
+    background-color: var(--map-inverse);
+    transition: background-color ease-in 0.1s;
+}
