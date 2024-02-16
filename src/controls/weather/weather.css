@@ -4,6 +4,7 @@
     fill: var(--map-text-base) !important;
     pointer-events: none;
     font-size: small;
+    transition: color ease-out .2s, fill ease-in .1s, text-shadow ease-in .1s, font-weight ease-in .2s;
 }
 
 .gis-weather.container{
@@ -38,7 +39,7 @@
     color: var(--orange-300);
 }
 .gis-weather .icon.moon{
-    color: var(--map-text-subtle);
+    color: var(--map-text-light);
 }
 .gis-weather .icon.cloud{
     color: var(--map-text-subtle);
