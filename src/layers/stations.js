@@ -1,8 +1,8 @@
 import {Icon, Fill, Stroke, Style, Text} from 'ol/style.js';
-import Config from '../config';
+import { Config } from '../config';
 import VectorTileSource from 'ol/source/VectorTile';
 import VectorTileLayer from 'ol/layer/VectorTile';
-import ArrayGeoJSON from '../format/ArrayGeoJSON';
+import { ArrayGeoJSON } from '../format/ArrayGeoJSON';
 
 const bodyStyles = window.getComputedStyle(document.body);
 let mapStyles;

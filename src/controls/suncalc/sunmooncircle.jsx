@@ -2,7 +2,7 @@ import Control from 'ol/control/Control';
 import { toLonLat } from 'ol/proj';
 import { createComponent, createEffect, createSignal, Show } from 'solid-js';
 import SunCalc from 'suncalc';
-import Config from '../../config';
+import { Config } from '../../config';
 import './suncalc.css';
 import { createElementBounds } from '@solid-primitives/bounds';
 import { useService } from 'solid-services';

@@ -1,8 +1,8 @@
-import ArrayGeoJSON from '../format/ArrayGeoJSON';
+import { ArrayGeoJSON } from '../format/ArrayGeoJSON';
 import {Icon, Fill, Stroke, Style, Text} from 'ol/style.js';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import Config from '../config';
+import { Config } from '../config';
 
 setInterval(function(){
   if(GeolocationPublic && GeolocationPublic.layers && GeolocationPublic.layers.find(f => f.getVisible())) {

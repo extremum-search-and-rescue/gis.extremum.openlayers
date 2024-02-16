@@ -2,7 +2,7 @@ import GeoJSON from 'ol/format/GeoJSON.js';
 import {Fill, Icon, Stroke, Style, Text} from 'ol/style.js';
 import VectorTileSource from 'ol/source/VectorTile';
 import VectorTileLayer from 'ol/layer/VectorTile';
-import Config from '../config';
+import { Config }from '../config';
 import { toRadians } from 'ol/math';
 
 setInterval(function(){

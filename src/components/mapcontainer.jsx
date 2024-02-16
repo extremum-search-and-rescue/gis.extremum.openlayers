@@ -8,8 +8,8 @@ import {GPX} from 'ol/format.js';
 import { MapContext } from '../services/mapcontext';
 import { LayerService } from '../services/layerservice';
 import { defaults } from 'ol/interaction/defaults';
-import ArrayGeoJSON from '../format/ArrayGeoJSON';
-import PLT from '../format/PLT';
+import { ArrayGeoJSON } from '../format/ArrayGeoJSON';
+import { PLT } from '../format/PLT';
 import DragAndDrop from 'ol/interaction/DragAndDrop';
 import { GisLink } from '../interactions/link';
 

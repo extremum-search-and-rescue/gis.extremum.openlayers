@@ -68,7 +68,7 @@ const LayerControlComponent = (params) => {
   );
 };
 
-class LayerControl extends Control {
+export class LayerControl extends Control {
   constructor(options) {
 
     /** @type {import('solid-services').ServiceGetter<LayerService>} */
@@ -107,5 +107,3 @@ class LayerControl extends Control {
     this._map = map;
   }
 }
-
-export default LayerControl;

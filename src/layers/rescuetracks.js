@@ -1,6 +1,6 @@
 import GeoJSON from 'ol/format/GeoJSON.js';
 import {Stroke, Style} from 'ol/style.js';
-import Config from '../config';
+import { Config } from '../config';
 import VectorTileSource from 'ol/source/VectorTile';
 import VectorTileLayer from 'ol/layer/VectorTile';
 import TileLayer from 'ol/layer/Tile';

@@ -40,7 +40,7 @@ const Frontend = {
  * zoom: number
  * }}
  */
-const Config = {
+export const Config = {
   backend: Backend,
   frontend: Frontend,
   center: fromLonLat([30, 60]),
@@ -48,4 +48,3 @@ const Config = {
   ...ENV,
   ...Secrets
 };
-export default Config;

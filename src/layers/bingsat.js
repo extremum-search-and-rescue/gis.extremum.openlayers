@@ -1,6 +1,6 @@
 import BingMaps from 'ol/source/BingMaps.js';
 import TileLayer from 'ol/layer/Tile.js';
-import Config from './../config';
+import { Config } from '../config';
 
 export const BingSat = { 
   id: 'bS',

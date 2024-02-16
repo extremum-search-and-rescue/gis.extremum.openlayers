@@ -3,7 +3,7 @@ import XYZ from 'ol/source/XYZ';
 import { fromLonLat, get as getProjection } from 'ol/proj';
 import { register } from 'ol/proj/proj4';
 import proj4 from 'proj4';
-import Config from '../config';
+import {Config } from '../config';
 
 proj4.defs(
   'EPSG:3395',

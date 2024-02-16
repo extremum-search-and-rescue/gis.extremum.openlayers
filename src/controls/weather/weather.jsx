@@ -1,7 +1,7 @@
 import Control from 'ol/control/Control';
 import { createStore } from 'solid-js/store';
 import { createComponent, createEffect, createSignal,on, Show } from 'solid-js';
-import Config from './../../config';
+import { Config } from './../../config';
 import SunCalc from 'suncalc';
 import { useService } from 'solid-services';
 import { MapContext } from '../../services/mapcontext';

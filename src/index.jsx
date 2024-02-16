@@ -4,10 +4,10 @@ import { render } from 'solid-js/web';
 import * as Layers from './layers/index';
 import {FullScreenMapContainer} from './components/fullscreenmap';
 import View from 'ol/View.js';
-import config from './config';
+import { Config } from './config';
 import { ServiceRegistry } from 'solid-services';
 import { Control } from './controls/control';
-import LayerControl from './controls/layerswitcher/layercontrol';
+import { LayerControl } from './controls/layerswitcher/layercontrol';
 import Zoom from 'ol/control/Zoom';
 import Rotate from 'ol/control/Rotate';
 import ScaleLine from 'ol/control/ScaleLine';
@@ -18,13 +18,13 @@ import { ContextMenu } from './controls/menu/contextmenu';
 import { MainMenu } from './controls/menu/mainmenu';
 import { SunmoonCircle } from './controls/suncalc/sunmooncircle';
 import { Reticle } from './controls/reticle/reticlecontrol';
-import IpToLocation from './services/iplocation';
+import { IpToLocation } from './services/iplocation';
 import { Toast } from './controls/messages/toast';
 import { Weather } from './controls/weather/weather';
 
 const view = window.View = new View({
-  center: config.center,
-  zoom: config.zoom,
+  center: Config.center,
+  zoom: Config.zoom,
 });
 IpToLocation.update();
 

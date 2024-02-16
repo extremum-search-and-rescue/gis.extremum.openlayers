@@ -2,7 +2,7 @@ import GeoJSON from 'ol/format/GeoJSON.js';
 import {Icon, Fill, Stroke, Style, Text} from 'ol/style.js';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import Config from '../config';
+import { Config } from '../config';
 import { toRadians } from 'ol/math';
 
 /**

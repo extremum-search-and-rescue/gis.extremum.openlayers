@@ -1,6 +1,6 @@
 import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
-import Config from '../config';
+import { Config } from '../config';
 
 export const MegafonCoverage = {
   id: 'MF',

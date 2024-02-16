@@ -1,4 +1,4 @@
-import Config from '../config';
+import { Config } from '../config';
 
 /**
  * @type {{
@@ -10,7 +10,7 @@ import Config from '../config';
  * loc: Array<number>
  * }}
  */
-const IpToLocation = {
+export const IpToLocation = {
   country: 'RU',
   timezone: 'Europe/Moscow',
   city: undefined,
@@ -51,5 +51,3 @@ const IpToLocation = {
     }
   }
 };
-
-export default IpToLocation;

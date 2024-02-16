@@ -1,9 +1,8 @@
-import GeoJSON from 'ol/format/GeoJSON.js';
 import {Stroke, Style} from 'ol/style.js';
-import Config from '../config';
+import { Config } from '../config';
 import VectorSource from 'ol/source/Vector';
 import VectorLayer from 'ol/layer/Vector';
-import ArrayGeoJSON from '../format/ArrayGeoJSON';
+import { ArrayGeoJSON } from '../format/ArrayGeoJSON';
 
 const bodyStyles = window.getComputedStyle(document.body);
 

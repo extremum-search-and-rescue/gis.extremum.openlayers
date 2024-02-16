@@ -1,4 +1,4 @@
-import Config from './../config.js';
+import { Config } from './../config.js';
 import {applyBackground, applyStyle} from 'ol-mapbox-style';
 import LayerGroup from 'ol/layer/Group.js';
 import VectorTileLayer from 'ol/layer/VectorTile.js';

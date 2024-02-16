@@ -20,7 +20,7 @@ function isEmptyFeature(featureCollection) {
   return featureCollection.features.length==1 && !featureCollection.features[0].type;
 }
 
-class ArrayGeoJSON extends GeoJSON {
+export class ArrayGeoJSON extends GeoJSON {
 
   constructor(options){
     super(options);
@@ -60,5 +60,3 @@ class ArrayGeoJSON extends GeoJSON {
       this.getReadOptions(source, options));
   }
 }
-
-export default ArrayGeoJSON;

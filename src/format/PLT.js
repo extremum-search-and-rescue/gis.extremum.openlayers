@@ -14,7 +14,7 @@ const FIELD_LONGITUDE = 1;
 const FIELD_IS_NEW_PART = 2;
 const NEW_PART = '1';
 
-class PLT extends TextFeature
+export class PLT extends TextFeature
 {
   constructor(options){
     options = options ? options : {};
@@ -252,5 +252,3 @@ function getText(source) {
 function getLines(source){
   return getText(source).split(/[\n\u0085\u2028\u2029]|\r\n?/g);
 }
-
-export default PLT;
