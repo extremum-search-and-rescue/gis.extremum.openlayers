@@ -2,52 +2,58 @@ import Control from 'ol/control/Control';
 import { createStore } from 'solid-js/store';
 import { createComponent, createEffect, createSignal,on, Show } from 'solid-js';
 import Config from './../../config';
-import { toLonLat } from 'ol/proj';
 import SunCalc from 'suncalc';
+import { useService } from 'solid-services';
+import { MapContext } from '../../services/mapcontext';
 
-setInterval(async () => await checkWeather(), 30000);
-let cancellation = new AbortController();
-let cancellationTimeoutId;
-
-const [center, setCenter] = createSignal(null);
-const [updated, setUpdated] = createSignal(false);
-
-async function checkWeather() {
-  setUpdated(false);
-  const url = `${Config.backend.scheme}://${Config.backend.host}/v3/weather/point/${center()[1].toFixed(2)},${center()[0].toFixed(2)}`;
-  if(cancellation){
-    clearTimeout(cancellationTimeoutId);
-    cancellation.abort();
-    cancellation = new AbortController();
-    cancellationTimeoutId = setTimeout(()=> cancellation.abort(), 15000);
-  }
-  fetch(url, {
-    signal: cancellation.signal,
-    priority: 'low'
-  }).then(response => {
-    clearTimeout(cancellationTimeoutId);
-    if(response.ok){
-      response.text().then(text => {
-        setWeather(JSON.parse(text));
-        setUpdated(true);
-      });
-    }
-  }).catch();
-}
-
-const [weather, setWeather] = createStore({
-  tempSurface: null,
-  windSurfaceSpeed: null,
-  windSurfaceDir: 0,
-  windSurfaceGust: null,
-  rain3h: null,
-  rainType: null,
-  cloudPercent: null,
-  isFog: false
-});
 
 const WeatherComponent = props =>{
-  createEffect(on(center,()=>center()));
+  const centerSignal = useService(MapContext)().centerLonLat;
+  createEffect(() => setCenter(centerSignal));
+
+  setInterval(async () => await checkWeather(), 3600000);
+  let cancellation = new AbortController();
+  let cancellationTimeoutId;
+
+  const [center, setCenter] = createSignal(null);
+  const [updated, setUpdated] = createSignal(false);
+
+  const checkWeather= async () => {
+    setUpdated(false);
+    if(centerSignal().length == 0) return;
+    const url = `${Config.backend.scheme}://${Config.backend.host}/v3/weather/point/${center()[1].toFixed(2)},${center()[0].toFixed(2)}`;
+    if(cancellation){
+      clearTimeout(cancellationTimeoutId);
+      if(!cancellation.signal.aborted) cancellation.abort();
+      cancellation = new AbortController();
+      cancellationTimeoutId = setTimeout(()=> cancellation.abort(), 15000);
+    }
+    fetch(url, {
+      signal: cancellation.signal,
+      priority: 'low'
+    }).then(response => {
+      clearTimeout(cancellationTimeoutId);
+      if(response.ok){
+        response.text().then(text => {
+          setWeather(JSON.parse(text));
+          setUpdated(true);
+        });
+      }
+    }).catch();
+  };
+
+  const [weather, setWeather] = createStore({
+    tempSurface: null,
+    windSurfaceSpeed: null,
+    windSurfaceDir: 0,
+    windSurfaceGust: null,
+    rain3h: null,
+    rainType: null,
+    cloudPercent: null,
+    isFog: false
+  });
+
+  createEffect(on(center,async ()=> await checkWeather()));
   const tempSurface = () => {
     const t = weather.tempSurface;
     if(t == null) return '';
@@ -149,14 +155,5 @@ export class Weather extends Control {
       element: element(),
       target: options.target || undefined,
     });
-  }
-
-  setMap(map){
-    super.setMap(map);
-    this.map_ = map;
-    setCenter(toLonLat(map.getView().getCenter()));
-    checkWeather();
-    //FIXME doesn't update component
-    map.on('moveend', ()=> setCenter(toLonLat(map.getView().getCenter())));
   }
 }
