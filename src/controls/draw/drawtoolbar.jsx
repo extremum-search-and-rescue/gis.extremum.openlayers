@@ -5,12 +5,11 @@ import './drawtoolbar.css';
 import { useService } from 'solid-services';
 import { LayerService } from '../../services/layerservice';
 import { Draw, Modify } from 'ol/interaction';
-import { Icon, Fill, Stroke, Style, Text, Circle as CircleStyle, RegularShape} from 'ol/style.js';
+import { Fill, Stroke, Style, Text, Circle as CircleStyle, RegularShape} from 'ol/style.js';
 import { LineString, Point} from 'ol/geom.js';
 import { useCurrentlyHeldKey } from '@solid-primitives/keyboard';
 import { Transition } from 'solid-transition-group';
 import { getArea, getLength } from 'ol/sphere.js';
-import { customGetNextColorPair } from '../../utils/colors';
 import { createMarkerStyle } from '../../utils/legacy-marker';
 
 const style = new Style({
@@ -151,6 +150,7 @@ function styleFunction(feature, segments, drawType, tip) {
   const type = geometry.getType();
   let point, label, line;
   if(drawType === type && (drawType == 'Point')){
+    feature.set('icon', 'marker');
     return createMarkerStyle(feature);
   }
   if (!drawType || drawType === type || type === 'Point') {
@@ -328,7 +328,13 @@ export class DrawToolbar extends Control {
             DrawToolbar.modify.setActive(false);
             tip = activeTip;
           });
-          activeDraw.on('drawend', function () {
+          activeDraw.on('drawend', function (e) {
+            const feature = e.feature;
+            if(feature.getGeometry().getType() =='Point')
+            {
+              feature.set('icon', 'marker');
+              feature.setStyle(createMarkerStyle);
+            }
             modifyStyle.setGeometry(DrawToolbar.tipPoint);
             DrawToolbar.modify.setActive(true);
             this.map_.once('pointermove', function () {
