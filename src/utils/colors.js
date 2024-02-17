@@ -33,6 +33,16 @@ export const gisColorPalette = [
   ]
 );
 
+export function customGetNextColor() {
+  let neededColor = gisColorPalette[customLeafletColorId];
+  customLeafletColorId++;
+
+  if (customLeafletColorId === gisColorPalette.length) {
+    customLeafletColorId = 0;
+  }
+  return neededColor[0];
+}
+
 let customLeafletColorId = 0;
 export function customGetNextColorPair() {
   let neededColor = gisColorPalette[customLeafletColorId];
@@ -42,4 +52,22 @@ export function customGetNextColorPair() {
     customLeafletColorId = 0;
   }
   return neededColor;
+}
+
+/**
+ * 
+ * @param {string} hex without leading #
+ * @param {number?} alpha 
+ * @returns {string}
+ */
+export function hexToRGB(hex, alpha) {
+  var r = parseInt(hex.slice(0, 2), 16),
+    g = parseInt(hex.slice(2, 4), 16),
+    b = parseInt(hex.slice(4, 6), 16);
+
+  if (alpha) {
+    return 'rgba(' + r + ', ' + g + ', ' + b + ', ' + alpha + ')';
+  } else {
+    return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+  }
 }

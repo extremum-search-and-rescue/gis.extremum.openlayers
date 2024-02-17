@@ -11,6 +11,7 @@ import { useCurrentlyHeldKey } from '@solid-primitives/keyboard';
 import { Transition } from 'solid-transition-group';
 import { getArea, getLength } from 'ol/sphere.js';
 import { createMarkerStyle } from '../../utils/legacy-marker';
+import { customGetNextColor, hexToRGB } from '../../utils/colors';
 
 const style = new Style({
   fill: new Fill({
@@ -298,7 +299,35 @@ export class DrawToolbar extends Control {
         )
       },
     ]);
-    
+    function onDrawEnd(e, tip, map){
+      const feature = e.feature;
+      const type = feature.getGeometry().getType();
+      if(type =='Point')
+      {
+        feature.set('icon', 'marker');
+        feature.setStyle(createMarkerStyle);
+      }
+      else {
+        const hex = customGetNextColor();
+        feature.setStyle(new Style({
+          fill: type === 'LineString' ? null 
+            : new Fill({
+              color: hexToRGB(hex, 0.15),
+            }),
+          stroke: new Stroke({
+            color: `#${hex}`,
+            width: 3
+          })
+        }));
+      }
+      modifyStyle.setGeometry(DrawToolbar.tipPoint);
+      DrawToolbar.modify.setActive(true);
+      map.once('pointermove', function () {
+        modifyStyle.setGeometry();
+      });
+      tip = '';
+    }
+
     const params = {
       classes: 'gis-control-toolbar gis-toolbar ol-unselectable',
       buttons: buttons,
@@ -328,20 +357,7 @@ export class DrawToolbar extends Control {
             DrawToolbar.modify.setActive(false);
             tip = activeTip;
           });
-          activeDraw.on('drawend', function (e) {
-            const feature = e.feature;
-            if(feature.getGeometry().getType() =='Point')
-            {
-              feature.set('icon', 'marker');
-              feature.setStyle(createMarkerStyle);
-            }
-            modifyStyle.setGeometry(DrawToolbar.tipPoint);
-            DrawToolbar.modify.setActive(true);
-            this.map_.once('pointermove', function () {
-              modifyStyle.setGeometry();
-            });
-            tip = idleTip;
-          });
+          activeDraw.on('drawend', (event) => onDrawEnd(event, tip, this.map_));
           DrawToolbar.modify.setActive(true);
           this.map_.addInteraction(activeDraw);
         }
