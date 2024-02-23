@@ -87,9 +87,9 @@ render(() =>
         <ControlContainer id={'ol-container-1-1'} classes="gis-flex-column" target={'ol-grid-container'}>
           <Control klass={MainMenu} classes={'gis-mainmenu'} target={'ol-container-1-1'}/>
           <Control klass={Zoom} classes={'gis-zoom'} target={'ol-container-1-1'}/>
+          <Control klass={Locate} classes={'gis-locate'} target={'ol-container-1-1'}/>
           <Control klass={DrawToolbar} target={'ol-container-1-1'}/>
           <Control klass={Rotate} classes={'gis-rotate'} target={'ol-container-1-1'}/>
-          <Control klass={Locate} classes={'gis-locate'} target={'ol-container-1-1'}/>
         </ControlContainer>
         <Control klass={ScaleLine}/>
       </ControlContainer>
