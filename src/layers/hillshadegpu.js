@@ -82,14 +82,13 @@ webGlTile.on('precompose', function (event) {
   }
   if(Number.isNaN(elevation) || elevation < 0)
   {
-    elevation = 1;
-    azimuth = 0;
+    elevation = 1,
+    azimuth = -1;
   }
   data['sunEl'] = elevation / Math.PI * 180;
   data['vert'] = 4;
   data['sunAz'] = 180 + azimuth / Math.PI * 180;
   data['resolution'] = viewState.resolution;
-  webGlTile.updateStyleVariables(data);
 });
 
 export const HillshadingGPU = {
