@@ -68,10 +68,9 @@ const webGlTile = new WebGLTile({
   },
 });
 
-webGlTile.on('beforeoperations', function (event) {
-  const data = event.data;
-  const center = toLonLat(window.View.get('center'));
-  data.resolution = event.resolution;
+webGlTile.on('precompose', function (event) {
+  const viewState = event.frameState.viewState;
+  const center = toLonLat(viewState.center);
   const sunPositon = SunCalc.getPosition(new Date(), center[1],center[0]);
   const moonPosition =  SunCalc.getMoonPosition(new Date(), center[1], center[0]);
   let elevation = sunPositon.altitude;
@@ -86,9 +85,10 @@ webGlTile.on('beforeoperations', function (event) {
     elevation = 1;
     azimuth = 0;
   }
-  data['sunEl'] = elevation;
+  data['sunEl'] = elevation / Math.PI * 180;
   data['vert'] = 4;
-  data['sunAz'] = azimuth;
+  data['sunAz'] = 180 + azimuth / Math.PI * 180;
+  data['resolution'] = viewState.resolution;
   webGlTile.updateStyleVariables(data);
 });
 
