@@ -93,9 +93,10 @@ render(() =>
         </ControlContainer>
         <Control klass={ScaleLine}/>
       </ControlContainer>
-      <ControlContainer id={'modal-overlay'}>
-        <Control klass={Toast} classes={'gis-toast'} target={'modal-overlay'}/>
+      <ControlContainer id={'toast-overlay'}>
+        <Control klass={Toast} classes={'gis-toast'} target={'toast-overlay'}/>
       </ControlContainer>
+      <ControlContainer id={'modal-overlay'}/>
     </FullScreenMapContainer>
   </ServiceRegistry>,
 document.body

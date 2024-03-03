@@ -1,0 +1,34 @@
+[data-scope='dialog'][data-part='backdrop'][data-state='open'] {
+    backdrop-filter: blur(8px);
+    background-color: black;
+    opacity: 0.7;
+    transition: background-color 0.05s;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+[data-scope='dialog'][data-part='positioner']{
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+[data-scope='dialog'][data-part='content'] {
+    border-radius: 4px;
+    box-shadow: 0px 0px 5px black;
+ }
+[data-scope='dialog'][data-part='content'][data-state='open'] {
+   background-color: var(--gis-panel-background);
+   color: var(--gis-text-base);
+   outline: 1px solid var(--gis-text-subtle);
+   opacity: 0.9;
+   padding: 1rem;
+   margin: 1rem;
+}
+

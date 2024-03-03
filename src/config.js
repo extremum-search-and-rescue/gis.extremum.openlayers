@@ -6,7 +6,10 @@ if(!window.ENV)
   // eslint-disable-next-line no-console
   console.warn('ENV variable should be defined in real application before this script');
   var ENV = window.ENV = {
-
+    VERSION_DATE: new Date().toLocaleString(),
+    INIT_DATE: new Date().toLocaleString(),
+    INIT_DATE_FORMATTED: new Date().toUTCString(),
+    IS_DEVELOPMENT: true
   };
 }
 

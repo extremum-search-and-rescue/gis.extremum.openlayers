@@ -1,6 +1,6 @@
 import { Menu, MenuSeparator } from '@ark-ui/solid';
 import Control from 'ol/control/Control';
-import { createComponent } from 'solid-js';
+import { createComponent, createSignal } from 'solid-js';
 import { createFileUploader } from '@solid-primitives/upload';
 import { useService } from 'solid-services';
 import { LayerService} from '../../services/layerservice.js';
@@ -8,10 +8,12 @@ import GPX from 'ol/format/GPX';
 import { PLT } from '../../format/PLT.js';
 import { MapContext } from '../../services/mapcontext.js';
 import { get as getProjection} from 'ol/proj.js';
+import { About } from '../../components/about.jsx';
 
 const MenuComponent = () => {
   // eslint-disable-next-line no-unused-vars
   const { files, selectFiles } = createFileUploader({ multiple: true, accept: '*' });
+  const [isAboutOpen, setAboutOpen ] = createSignal(false);
   const getLayerService = useService(LayerService);
   const getMapContext = useService(MapContext);
 
@@ -43,7 +45,9 @@ const MenuComponent = () => {
   function onFileImport(){
     selectFiles(filesFromDialog => filesFromDialog.forEach(async inputFile => await read(inputFile)));
   }
-  
+  function onAbout() {
+    setAboutOpen(true);
+  }
   return (
     <div class="gis-control-toolbar gis-mainmenu">
       <Menu.Root>
@@ -67,8 +71,8 @@ const MenuComponent = () => {
                         Print
             </Menu.Item>
             <MenuSeparator/>
-            <Menu.Item id='about' disabled>
-                        About
+            <Menu.Item id='about' onpointerup={onAbout}>
+              <About isOpen={isAboutOpen} setOpen={setAboutOpen}/>About
             </Menu.Item>
             <MenuSeparator/>
             <Menu.Item id='exit' disabled>
