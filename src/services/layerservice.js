@@ -205,6 +205,12 @@ export function LayerService() {
     /**
      * @returns {VectorSource}
      */
+    get userObjectsLayer(){
+      return localUserObjectsLayer.get('source');
+    },
+    /**
+     * @returns {VectorSource}
+     */
     get userGeolocationLayer(){
       return ul[1].get('source');
     },

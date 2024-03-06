@@ -1,6 +1,7 @@
 @import url('../ark-styles/checkbox.css');
 @import url('../ark-styles/radiogroup.css');
 @import url('../ark-styles/backdrop.css');
+@import url('../components/manageobjects.css');
 @import url('../controls/layerswitcher/layercontrol.css');
 @import url('../controls/suncalc/suncalc.css');
 @import url('../controls/reticle/reticle.css');

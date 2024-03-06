@@ -19,6 +19,7 @@
         "@solid-primitives/clipboard": "^1.5.7",
         "@solid-primitives/keyboard": "^1.2.5",
         "@solid-primitives/upload": "^0.0.114",
+        "@tanstack/solid-table": "^8.13.2",
         "ol": "latest",
         "ol-mapbox-style": "^12.2.0",
         "proj4": "^2.9.0",

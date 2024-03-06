@@ -9,11 +9,13 @@ import { PLT } from '../../format/PLT.js';
 import { MapContext } from '../../services/mapcontext.js';
 import { get as getProjection} from 'ol/proj.js';
 import { About } from '../../components/about.jsx';
+import { ManageObjects } from '../../components/manageobjects.jsx';
 
 const MenuComponent = () => {
   // eslint-disable-next-line no-unused-vars
   const { files, selectFiles } = createFileUploader({ multiple: true, accept: '*' });
   const [isAboutOpen, setAboutOpen ] = createSignal(false);
+  const [isManageOpen, setManageOpen ] = createSignal(false);
   const getLayerService = useService(LayerService);
   const getMapContext = useService(MapContext);
 
@@ -48,6 +50,9 @@ const MenuComponent = () => {
   function onAbout() {
     setAboutOpen(true);
   }
+  function onManage() {
+    setManageOpen(true);
+  }
   return (
     <div class="gis-control-toolbar gis-mainmenu">
       <Menu.Root>
@@ -65,6 +70,10 @@ const MenuComponent = () => {
             </Menu.Item>
             <Menu.Item id='import-grids' disabled>
                         Import Grid
+            </Menu.Item>
+            <MenuSeparator/>
+            <Menu.Item id='manage' onpointerup={onManage}>
+              <ManageObjects isOpen={isManageOpen} setOpen={setManageOpen}/>Manage Objects
             </Menu.Item>
             <MenuSeparator/>
             <Menu.Item id='print' onpointerup={()=> window.print()}>

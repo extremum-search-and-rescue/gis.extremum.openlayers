@@ -54,3 +54,8 @@
     position: relative;
     top: -1px;
   }
+
+  [data-scope='checkbox'][data-part='root'][data-disabled]{
+    pointer-events: none;
+    filter:saturate(0) brightness(0.5);
+  }

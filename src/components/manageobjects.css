@@ -1,0 +1,20 @@
+table.manageobjects {
+    border: 1px solid var(--gis-outline);
+}
+tr[data-scope='header'][data-part='row']{
+    padding: 0.25rem;
+    min-height: 1.5rem;
+}
+tr[data-scope='rows'][data-part='row']{
+    padding: 0.25rem;
+    min-height: 1.5rem;
+}
+tr[data-scope='rows'][data-part='row']:hover{
+  background-color: var(--blue-400);
+}
+.manageobjects td{
+    padding: 0.25rem;
+}
+.manageobjects .toolbar{
+    padding: 0.5rem 0;
+}
