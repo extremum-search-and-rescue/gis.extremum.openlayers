@@ -12,9 +12,13 @@
 {
     outline: 1px solid green;
 }
-#suncalc{
-    transition: transform 0.2s;
+
+@media not (prefers-reduced-motion){
+    #suncalc {
+        transition: transform 0.2s;
+    }
 }
+
 .css-debug #suncalc{
     outline: 1px solid blue;
     pointer-events: all;
@@ -23,8 +27,13 @@
 .suncalc-sun{
     filter: blur(0.5px);
     opacity: 0.9;
-    transition: fill ease-out 1s;
 }
+@media not (prefers-reduced-motion){
+    .suncalc-sun{
+        transition: fill ease-out 1s;
+    }
+}
+
 .map-dark-sat .suncalc-sun,
 .map-dark-topo .suncalc-sun {
     fill: var(--yellow-200);
@@ -52,8 +61,10 @@
 .map-vivid-topo .suncalc-moon {
     fill: var(--gray-950);
 }
-.suncalc-sun-label {
-    transition: fill ease-out 0.2s, text-shadow ease-out 0.5s;
+@media not (prefers-reduced-motion){
+    .suncalc-sun-label {
+        transition: fill ease-out 0.2s, text-shadow ease-out 0.5s;
+    }
 }
 
 .map-default .suncalc-sun-label,
@@ -102,7 +113,11 @@
     stroke-width: 2;
     stroke-opacity: 0.7;
     stroke-dasharray: 7px 3px;
-    transition: stroke ease-out 1s;
+}
+@media not (prefers-reduced-motion){
+    .suncalc-sun-path {
+        transition: stroke ease-out 1s;
+    }
 }
 
 .map-dark-topo .suncalc-sun-path,
@@ -133,10 +148,14 @@
 }
 
 .suncalc-azimuth-circle {
-    transition: fill ease-out 0.2s, stroke ease-out 0.2s;
     stroke-width: 2;
     stroke-opacity: 0.8;
     fill: none;
+}
+@media not (prefers-reduced-motion){
+    .suncalc-azimuth-circle {
+        transition: fill ease-out 0.2s, stroke ease-out 0.2s;
+    }  
 }
 
 .map-dark-topo .suncalc-azimuth-circle,
