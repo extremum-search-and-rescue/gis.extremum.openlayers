@@ -1,15 +1,12 @@
-import { For, Show, createMemo, createSignal } from 'solid-js';
+import { For, Show, createEffect, createMemo, createSignal } from 'solid-js';
 import { createSolidTable, flexRender, getCoreRowModel } from '@tanstack/solid-table';
-import { Config } from '../config';
 import { Checkbox, Dialog } from '@ark-ui/solid';
 import { Portal } from 'solid-js/web';
 import { useService } from 'solid-services';
 import { LayerService } from '../services/layerservice';
-import { createStore } from 'solid-js/store';
 
 const ObjectTable = (props) => {
   const features = [...props.layerService.userObjectsLayer.getFeatures(), ...props.layerService.userDrawingLayer.getFeatures()];
-  const [rowSelection, setRowSelection] = createSignal({});
   
   function getGeometryName(feature){
     return 'Point ??';
@@ -17,38 +14,38 @@ const ObjectTable = (props) => {
   function getCenter(feature){
     return [0,0];
   }
+  const [isAllRowsSelected, setAllRowsSelected] = createSignal(false);
+  const [rowCount, setRowCount] = createSignal(0);
+  const multiselectDisabled = () => rowCount() == 0;
   const colDefs = createMemo(()=> [
     {
       id: 'select',
-      header: (context) => (
+      header: ''/*(context) => (
         <Checkbox.Root
-          checked={() => context.table.getIsAllRowsSelected() 
-            ? true 
-            : table.getIsSomeRowsSelected() 
-              ? 'indeterminate'
-              : false
-          }
-          onCheckedChange={()=> context.table.getToggleAllRowsSelectedHandler()}>
+          disabled={multiselectDisabled()}
+          checked={isAllRowsSelected()}
+          onCheckedChange={(e)=> context.table.toggleAllRowsSelected(e.checked)}>
           <Checkbox.Control/>
         </Checkbox.Root>
-      ),
+      )*/,
+      class: 'checkbox',
       cell: (context) => (
-        <Show when={()=> !context.row.getCanSelect()}>
-          <Checkbox.Root
-            onCheckedChange={() => context.row.getToggleSelectedHandler()}>
-            <Checkbox.Control/>
-          </Checkbox.Root>
-        </Show>
+        <Checkbox.Root
+          onCheckedChange={(e) => context.row.toggleSelected(e.checked)}>
+          <Checkbox.Control/>
+        </Checkbox.Root>
       ),
     },
     {
       accessorFn: (feature, i) => getGeometryName(feature),
       header: 'type',
+      class: 'text',
       cell: info => info.getValue()
     },
     {
       accessorFn: (feature, i) => getCenter(feature),
       header: 'coordinates',
+      class: 'text',
       cell: info => info.getValue()
     },
   ]);
@@ -56,16 +53,21 @@ const ObjectTable = (props) => {
   const table = createSolidTable({
     data: features,
     enableRowSelection: true,
-    state: {
-      rowSelection
-    },
     columns: colDefs(),
     getCoreRowModel: getCoreRowModel(),
-    debugAll: Config.IS_DEVELOPMENT,
-    onRowSelectionChange: (e) => setRowSelection(e)
   },[]);
-  
-  const stateOfRowSelection = ()=> table.getState().rowSelection;
+
+  createEffect(()=> {
+    console.log(JSON.stringify(table.getState().rowSelection));
+    const allRowsSelectedState = table.getIsAllRowsSelected() 
+      ? true 
+      : table.getIsSomeRowsSelected() 
+        ? 'indeterminate'
+        : false;
+    console.log(allRowsSelectedState);
+    setAllRowsSelected(allRowsSelectedState);
+    setRowCount(table.getRowCount());
+  });
 
   return (
     <table class='manageobjects'>
@@ -75,7 +77,7 @@ const ObjectTable = (props) => {
             <tr data-scope='header' data-part='row'>
               <For each={headerGroup.headers}>
                 {header => (
-                  <th data-scope='header' data-part='cell'>
+                  <th data-scope='header' data-part='cell' class={header.column.columnDef.class ?? ''}>
                     {flexRender(
                       header.column.columnDef.header,
                       header.getContext()
@@ -93,7 +95,7 @@ const ObjectTable = (props) => {
             <tr data-scope='rows' data-part='row'>
               <For each={row.getVisibleCells()}>{cell => {
                 return(
-                  <td data-scope='rows' data-part='cell'>
+                  <td data-scope='rows' data-part='cell' class={cell.column.columnDef.class ?? ''}>
                     {flexRender(cell.column.columnDef.cell,cell.getContext()
                     )}
                   </td>
@@ -106,8 +108,8 @@ const ObjectTable = (props) => {
       </tbody>
       <tfoot>
         <tr>
-          <td>{()=> 
-            JSON.stringify(stateOfRowSelection(), null, 2)}
+          <td colSpan='3'>{()=> 
+            JSON.stringify(table.getState().rowSelection, null, 2)}
           </td>
         </tr>
       </tfoot>
@@ -117,7 +119,10 @@ const ObjectTable = (props) => {
 export const ManageObjects = (props) => {
   const layerService = useService(LayerService);
   return (
-    <Dialog.Root modal={true} open={props.isOpen()} onExitComplete={()=>props.setOpen(false)}>
+    <Dialog.Root 
+      modal={true} 
+      open={props.isOpen()} 
+      onExitComplete={()=>props.setOpen(false)}>
       <Portal mount={document.getElementById('modal-overlay')}>
         <Dialog.Backdrop />
         <Dialog.Positioner>

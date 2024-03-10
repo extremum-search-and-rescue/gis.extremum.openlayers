@@ -1,5 +1,8 @@
 table.manageobjects {
     border: 1px solid var(--gis-outline);
+    -webkit-user-select: none;
+    user-select: none;
+    cursor:default;
 }
 tr[data-scope='header'][data-part='row']{
     padding: 0.25rem;
@@ -12,9 +15,16 @@ tr[data-scope='rows'][data-part='row']{
 tr[data-scope='rows'][data-part='row']:hover{
   background-color: var(--blue-400);
 }
-.manageobjects td{
+.manageobjects th.text,
+.manageobjects td.text{
     padding: 0.25rem;
 }
 .manageobjects .toolbar{
     padding: 0.5rem 0;
+}
+.manageobjects .checkbox{
+    width: 2rem;
+    display: flex;
+    vertical-align: baseline;
+    justify-content: center;
 }

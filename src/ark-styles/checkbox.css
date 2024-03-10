@@ -28,6 +28,13 @@
 [data-scope='checkbox'][data-part='control'][data-focus] {
     outline: 1px solid var(--gis-focus-outline);
 }
+[data-scope='checkbox'][data-part='control'][data-state='indeterminate']{
+    background-color: var(--gis-input-background-checked);
+    position: relative;
+    width: 9px;
+    height: 9px;
+    padding: 2px;
+}
 
 [data-scope='checkbox'][data-part='control'][data-state='checked'] {
     background-color: var(--gis-input-background-checked);
@@ -57,5 +64,5 @@
 
   [data-scope='checkbox'][data-part='root'][data-disabled]{
     pointer-events: none;
-    filter:saturate(0) brightness(0.5);
+    filter:saturate(0) brightness(0.7);
   }
