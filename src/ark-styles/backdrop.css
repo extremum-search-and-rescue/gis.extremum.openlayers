@@ -1,9 +1,7 @@
 [data-scope='dialog'][data-part='backdrop'][data-state='open'] {
-    backdrop-filter: blur(8px);
     background-color: black;
     opacity: 0.7;
-    transition: background-color 0.05s;
-    pointer-events: none;
+    pointer-events: all;
     width: 100%;
     height: 100%;
     position: absolute;
