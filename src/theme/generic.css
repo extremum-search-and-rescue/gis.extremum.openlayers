@@ -195,6 +195,11 @@ button[data-scope='dialog']:active{
     border-color: var(--gis-input-background-active);
     color: var(--gis-text-light); 
 }
+button[data-scope='dialog']:disabled{
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 button[data-scope='dialog']:focus-visible{
     outline: 1px solid var(--gis-primary);
 }

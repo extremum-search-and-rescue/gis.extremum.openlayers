@@ -6,7 +6,7 @@ import { useService } from 'solid-services';
 import { LayerService } from '../services/layerservice';
 
 const ObjectTable = (props) => {
-  const features = [...props.layerService.userObjectsLayer.getFeatures(), ...props.layerService.userDrawingLayer.getFeatures()];
+  const features = () => [...props.layerService.userObjectsLayer.getFeatures(), ...props.layerService.userDrawingLayer.getFeatures()];
   
   function getGeometryName(feature){
     return 'Point ??';
@@ -15,19 +15,20 @@ const ObjectTable = (props) => {
     return [0,0];
   }
   const [isAllRowsSelected, setAllRowsSelected] = createSignal(false);
+  const [isSomeRowsSelected, setSomeRowsSelected] = createSignal(false);
   const [rowCount, setRowCount] = createSignal(0);
   const multiselectDisabled = () => rowCount() == 0;
   const colDefs = createMemo(()=> [
     {
       id: 'select',
-      header: ''/*(context) => (
+      header: (context) => (
         <Checkbox.Root
           disabled={multiselectDisabled()}
           checked={isAllRowsSelected()}
           onCheckedChange={(e)=> context.table.toggleAllRowsSelected(e.checked)}>
           <Checkbox.Control/>
         </Checkbox.Root>
-      )*/,
+      ),
       class: 'checkbox',
       cell: (context) => (
         <Checkbox.Root
@@ -51,7 +52,7 @@ const ObjectTable = (props) => {
   ]);
 
   const table = createSolidTable({
-    data: features,
+    data: features(),
     enableRowSelection: true,
     columns: colDefs(),
     getCoreRowModel: getCoreRowModel(),
@@ -64,56 +65,61 @@ const ObjectTable = (props) => {
       : table.getIsSomeRowsSelected() 
         ? 'indeterminate'
         : false;
+    setSomeRowsSelected(table.getIsAllRowsSelected() || table.getIsSomeRowsSelected());
     console.log(allRowsSelectedState);
     setAllRowsSelected(allRowsSelectedState);
     setRowCount(table.getRowCount());
   });
 
   return (
-    <table class='manageobjects'>
-      <thead>
+    <>
+      <div style={{'display':'flex','gap':'0.5rem'}}>
+        <button data-dd-action-name="manageobjects: del" data-scope='dialog' disabled={!isSomeRowsSelected()}>
+          Del
+        </button>
+        <button data-dd-action-name="manageobjects: copy" data-scope='dialog' disabled={!isSomeRowsSelected()}>
+          Copy
+        </button>
+      </div>
+      <div class='manageobjects'>
         <For each={table.getHeaderGroups()}>
-          {headerGroup => (
-            <tr data-scope='header' data-part='row'>
+          {(headerGroup) => (
+            <div data-scope='header' data-part='row' style={{'grid-row': 1}}>
               <For each={headerGroup.headers}>
-                {header => (
-                  <th data-scope='header' data-part='cell' class={header.column.columnDef.class ?? ''}>
+                {(header,c) => (
+                  <div style={{'grid-column': c()+1}}  data-scope='header' data-part='cell' class={header.column.columnDef.class ?? ''}>
                     {flexRender(
                       header.column.columnDef.header,
                       header.getContext()
                     )}
-                  </th>
+                  </div>
                 )}
               </For>
-            </tr>
+            </div>
           )}
         </For>
-      </thead>
-      <tbody>
-        <For each={table.getRowModel().rows}>{row => {
+        <For each={table.getRowModel().rows}>{(row, r) => {
           return (
-            <tr data-scope='rows' data-part='row'>
-              <For each={row.getVisibleCells()}>{cell => {
+            <div data-scope='rows' data-part='row' style={{'grid-row': r()+2}} >
+              <For each={row.getVisibleCells()}>{(cell, c) => {
                 return(
-                  <td data-scope='rows' data-part='cell' class={cell.column.columnDef.class ?? ''}>
+                  <div style={{'grid-column': c()+1}} data-scope='rows' data-part='cell' class={cell.column.columnDef.class ?? ''}>
                     {flexRender(cell.column.columnDef.cell,cell.getContext()
                     )}
-                  </td>
+                  </div>
                 );
               }}</For>
-            </tr>
+            </div>
           );
         }}
         </For>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colSpan='3'>{()=> 
-            JSON.stringify(table.getState().rowSelection, null, 2)}
-          </td>
-        </tr>
-      </tfoot>
-    </table>);
+      </div>
+      <div>
+        <div>{()=> 
+          JSON.stringify(table.getState().rowSelection, null, 2)}
+        </div>
+      </div>
+    </>);
 };
 
 export const ManageObjects = (props) => {
@@ -126,7 +132,7 @@ export const ManageObjects = (props) => {
       <Portal mount={document.getElementById('modal-overlay')}>
         <Dialog.Backdrop />
         <Dialog.Positioner>
-          <Dialog.Content class='manageobjects'>  
+          <Dialog.Content class='manageobjects-dialog'>  
             <Show when={props.isOpen()}>
               <>
                 <div class='toolbar'>

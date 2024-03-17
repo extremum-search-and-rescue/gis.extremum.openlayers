@@ -14,6 +14,7 @@
     justify-content: center;
     width: 13px;
     height: 13px;
+    padding: 0 !important;
   }
   
 [data-scope='checkbox'][data-part='control'] {
@@ -31,9 +32,6 @@
 [data-scope='checkbox'][data-part='control'][data-state='indeterminate']{
     background-color: var(--gis-input-background-checked);
     position: relative;
-    width: 9px;
-    height: 9px;
-    padding: 2px;
 }
 
 [data-scope='checkbox'][data-part='control'][data-state='checked'] {
@@ -60,6 +58,18 @@
     transform: rotate(45deg);
     position: relative;
     top: -1px;
+  }
+
+  [data-scope='checkbox'][data-part='control'][data-state='indeterminate']::after {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 5px;
+    transform: unset;
+    padding: 0;
+    background-color: white;
+    position: relative;
+    top: unset;
   }
 
   [data-scope='checkbox'][data-part='root'][data-disabled]{
