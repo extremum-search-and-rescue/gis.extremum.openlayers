@@ -103,32 +103,3 @@ export const YandexHybridLayer =
         projection: proj3395    
       }),
     });
-
-export const YandexTracks = {
-  id: 'yN',
-  visible: false,
-  title: 'Треки Народной карты',
-  layers: [
-    new TileLayer({
-      minZoom: 17,
-      preload: 4,
-      source: new XYZ({
-        minZoom: 17,
-        transition: 0,
-        url: 'https://core-gpstiles.maps.yandex.net/tiles?style=red_combined&x={x}&y={y}&z={z}',
-        projection: proj3395    
-      }),
-    }),
-    new TileLayer({
-      minZoom: 10,
-      preload: 4,
-      source: new XYZ({
-        minZoom: 10,
-        maxZoom: 15,
-        transition: 0,
-        url: 'https://core-gpstiles.maps.yandex.net/tiles?style=point&x={x}&y={y}&z={z}',
-        projection: proj3395    
-      }),
-    })
-  ]
-};

@@ -7,7 +7,6 @@ export {
   YandexSatellite, 
   YandexMaps,
   YandexMapsDark,
-  YandexTracks,
   YandexRainClouds
 } from './yandex';
 export {Topomapper} from './topomapper';

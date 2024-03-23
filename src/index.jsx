@@ -57,7 +57,6 @@ render(() =>
         Layers.LifeByCoverage,
         Layers.Tele2Coverage,
         Layers.BeelineCoverage,
-        Layers.YandexTracks,
         Layers.Strava,
         Layers.OpenSnowMap,
         Layers.Hybrid,
