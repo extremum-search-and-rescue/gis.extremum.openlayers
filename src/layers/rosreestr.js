@@ -1,5 +1,6 @@
 import TileLayer from 'ol/layer/Tile';
 import XYZ from 'ol/source/XYZ';
+import { Config } from '../config';
 
 export const PkkRosreestr = {
   id: 'ppk',
@@ -11,7 +12,8 @@ export const PkkRosreestr = {
     new TileLayer({
       preload: 4,
       source: new XYZ({
-        url: 'https://ngw.fppd.cgkipd.ru/tile/56/{z}/{x}/{y}.png'
+        maxZoom: 14,
+        url: `${Config.backend.scheme}://${Config.backend.host}/proxy/pkk/{z}/{x}/{y}.png`
       }),
     })
   ]
