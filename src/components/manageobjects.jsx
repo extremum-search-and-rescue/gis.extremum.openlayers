@@ -4,6 +4,7 @@ import { Checkbox, Dialog } from '@ark-ui/solid';
 import { Portal } from 'solid-js/web';
 import { useService } from 'solid-services';
 import { LayerService } from '../services/layerservice';
+import { createStore } from 'solid-js/store';
 
 const ObjectTable = (props) => {
   const features = () => [...props.layerService.userObjectsLayer.getFeatures(), ...props.layerService.userDrawingLayer.getFeatures()];
@@ -16,6 +17,7 @@ const ObjectTable = (props) => {
   }
   const [isAllRowsSelected, setAllRowsSelected] = createSignal(false);
   const [isSomeRowsSelected, setSomeRowsSelected] = createSignal(false);
+  const [rowSelection, setRowSelection] = createStore({});
   const [rowCount, setRowCount] = createSignal(0);
   const multiselectDisabled = () => rowCount() == 0;
   const colDefs = createMemo(()=> [
@@ -25,14 +27,15 @@ const ObjectTable = (props) => {
         <Checkbox.Root
           disabled={multiselectDisabled()}
           checked={isAllRowsSelected()}
-          onCheckedChange={(e)=> context.table.toggleAllRowsSelected(e.checked)}>
+          onClick={context.table.getToggleAllRowsSelectedHandler()}>
           <Checkbox.Control/>
         </Checkbox.Root>
       ),
       class: 'checkbox',
-      cell: (context) => (
+      cell: (context, i) => (
         <Checkbox.Root
-          onCheckedChange={(e) => context.row.toggleSelected(e.checked)}>
+          //checked={context.row.getIsSelected()}
+          onClick={context.row.getToggleSelectedHandler()}>
           <Checkbox.Control/>
         </Checkbox.Root>
       ),
@@ -54,12 +57,14 @@ const ObjectTable = (props) => {
   const table = createSolidTable({
     data: features(),
     enableRowSelection: true,
+    state: { rowSelection: rowSelection },
+    onRowSelectionChange: setRowSelection,
     columns: colDefs(),
     getCoreRowModel: getCoreRowModel(),
   },[]);
 
   createEffect(()=> {
-    console.log(JSON.stringify(table.getState().rowSelection));
+    console.log(JSON.stringify(rowSelection));
     const allRowsSelectedState = table.getIsAllRowsSelected() 
       ? true 
       : table.getIsSomeRowsSelected() 
@@ -69,6 +74,7 @@ const ObjectTable = (props) => {
     console.log(allRowsSelectedState);
     setAllRowsSelected(allRowsSelectedState);
     setRowCount(table.getRowCount());
+    //setTableState(table.getState());
   });
 
   return (
