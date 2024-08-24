@@ -11,6 +11,9 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       output: {
+        entryFileNames: '[name].js',
+        assetFileNames: '[name].[ext]',
+        chunkFileNames: '[name].js',
         manualChunks: (id) => {
           if (id.includes('ol-mapbox-style')) {
             return 'vt';
