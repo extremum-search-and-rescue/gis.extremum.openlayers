@@ -67,7 +67,8 @@ const ContextMenuComponent = () => {
     copyToClipboard(CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.DEGREES_AND_MINUTES_AND_SECONDS));
   }
   onMount( () => {
-    const viewport = document.getElementsByClassName('ol-layers')[0];
+    const getMap = useService(MapContext);
+    const viewport = getMap().map().get('target');
     viewport.addEventListener('contextmenu', onContextMenu, {}, true);
     
     //workaround on touch, at least on iOS
