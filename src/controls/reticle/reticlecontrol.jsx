@@ -38,7 +38,7 @@ const ReticleComponent = () => {
   const getMapContext = useService(MapContext);
   const map = getMapContext().map();
   
-  let bounds = createElementBounds(document.querySelector(`#${map.get('target')}`), { 
+  let bounds = createElementBounds(map.get('target'), { 
     trackMutation: false, 
     trackScroll: false, 
     trackResize: true
