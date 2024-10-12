@@ -43,7 +43,7 @@ export const GeoCase = () => {
           Layers.YandexSatellite,
           Layers.YandexMaps,
           Layers.YandexMapsDark,
-          Layers.MapTilerLayer,
+          //Layers.MapTilerLayer,
         ]} 
         overlays={[
           Layers.HillshadingCPU,
