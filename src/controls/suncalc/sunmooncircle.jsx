@@ -156,7 +156,7 @@ const SunmoonCircleComponent = () => {
   let sunset = () => sunTimes()['sunset'];
   let dusk = ()=> sunTimes()['dusk'];
 
-  let bounds = createElementBounds(document.querySelector(`#${getMapContext().map().get('target')}`), { 
+  let bounds = createElementBounds(getMapContext().map().get('target'), { 
     trackMutation: false, 
     trackScroll: false, 
     trackResize: true
