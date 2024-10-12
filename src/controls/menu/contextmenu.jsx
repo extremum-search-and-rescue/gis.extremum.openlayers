@@ -69,13 +69,15 @@ const ContextMenuComponent = () => {
   onMount( () => {
     const getMap = useService(MapContext);
     const viewport = getMap().map().get('target');
-    viewport.addEventListener('contextmenu', onContextMenu, {}, true);
+    if(viewport){
+      viewport.addEventListener('contextmenu', onContextMenu, {}, true);
     
-    //workaround on touch, at least on iOS
-    viewport.addEventListener('pointerdown', onContextMenu);
-    viewport.addEventListener('pointermove', onContextMenu);
-    viewport.addEventListener('pointerup', onContextMenu);
-    //end of workaround
+      //workaround on touch, at least on iOS
+      viewport.addEventListener('pointerdown', onContextMenu);
+      viewport.addEventListener('pointermove', onContextMenu);
+      viewport.addEventListener('pointerup', onContextMenu);
+      //end of workaround
+    }
   });
   return (
     <div>
