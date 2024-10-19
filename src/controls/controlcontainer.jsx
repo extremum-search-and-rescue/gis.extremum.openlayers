@@ -1,6 +1,7 @@
-import { onMount } from 'solid-js';
+import { onMount, For, createSignal} from 'solid-js';
 
 export const ControlContainer = props => {
+  let [containerDiv, setContainerDiv] = createSignal(null);
 
   onMount(()=> {
     const self = document.getElementById(props.id);
@@ -12,7 +13,13 @@ export const ControlContainer = props => {
       document.getElementById(props.target).appendChild(self);
   });
     
-  return (<div id={props.id} class={props.classes}>
-    {props.children}
+  return (<div id={props.id} class={props.classes} ref={(el) => setContainerDiv(el)}>
+    <For each={props.children}>
+      {
+        (item) => {
+          return item({parent: containerDiv});
+        }
+      }
+    </For>
   </div>);
 };
