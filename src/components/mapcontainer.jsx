@@ -2,7 +2,7 @@ import Map from 'ol/Map.js';
 import {Collection} from 'ol';
 import '../index.css';
 import '../../node_modules/ol/ol.css';
-import { onMount } from 'solid-js';
+import { createSignal, onMount } from 'solid-js';
 import { useService } from 'solid-services';
 import {GPX} from 'ol/format.js';
 import { MapContext } from '../services/mapcontext';
@@ -19,7 +19,7 @@ export const MapContainer = props => {
   // eslint-disable-next-line solid/reactivity
   if(!props.view) throw new Error('no View in props');
 
-  let mapDiv;
+  let [mapDiv, setMapDiv] = createSignal(null);
   onMount(() => {
     const layerService = useService(LayerService);
 
@@ -32,7 +32,7 @@ export const MapContainer = props => {
       controls: props.controls || new Collection(),
       interactions: interactions,
       layers: layerService().flat,
-      target: mapDiv,
+      target: mapDiv(),
       view: props.view,
       maxTilesLoading: 64,
       moveTolerance: 1 //default value
@@ -63,7 +63,7 @@ export const MapContainer = props => {
     getMap().map = indexMap;
   });
 
-  return (<div id={props.id} ref={(el) => mapDiv = el } class='map-default'>
+  return (<div id={props.id} ref={(el) => setMapDiv(el) } class='map-default'>
     {props.children}
   </div>);
 };
