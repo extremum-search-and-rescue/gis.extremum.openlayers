@@ -7,6 +7,7 @@ export default defineConfig({
   plugins: [solidPlugin(), basicSsl()],
   root: 'src',
   build: {
+    minify: false,
     lib: {
       entry: './../lib/lib-index.js',
       formats: ['es'],
