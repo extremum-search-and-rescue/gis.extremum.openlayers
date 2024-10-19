@@ -2,6 +2,7 @@
 @import url(theme/palette.css);
 @import url(theme/overrides.css);
 @import url(theme/generic.css);
+@import 'ol/ol.css';
 body {
     margin: 0;
     padding: 0;
