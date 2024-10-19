@@ -146,10 +146,9 @@ export class ContextMenu extends Control {
   static element;
   constructor(options) {
     options = options || {};     
-    const element = createComponent(ContextMenuComponent);
     
     super({
-      element: element(),
+      element: createComponent(ContextMenuComponent)(),
       target: options.target || undefined,
     });
   }
