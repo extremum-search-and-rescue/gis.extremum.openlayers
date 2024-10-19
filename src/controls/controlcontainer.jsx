@@ -1,4 +1,5 @@
 import {  For, createEffect, createSignal} from 'solid-js';
+import { Dynamic } from 'solid-js/web';
 
 export const ControlContainer = props => {
   let [containerDiv, setContainerDiv] = createSignal(null);
@@ -6,7 +7,7 @@ export const ControlContainer = props => {
   createEffect(() => {
     const self = containerDiv();
     const parent = self.parentElement;
-    parent.removeChild(self);
+    parent?.removeChild(self);
     if(!props.target)
       document.getElementsByClassName('ol-overlaycontainer-stopevent')[0].appendChild(self);
     else
@@ -17,7 +18,7 @@ export const ControlContainer = props => {
     <For each={props.children}>
       {
         (item) => {
-          return item({parent: containerDiv});
+          return <Dynamic parent={containerDiv()} component={item} />;
         }
       }
     </For>
