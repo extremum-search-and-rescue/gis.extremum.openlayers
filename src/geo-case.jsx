@@ -21,8 +21,7 @@ export const GeoCase = () => {
           GeolocationPublic
         ]}
         config={Config}
-        view={view}>
-      </MapContainer>
+        view={view} />
     </ServiceRegistry>
   );
 };
