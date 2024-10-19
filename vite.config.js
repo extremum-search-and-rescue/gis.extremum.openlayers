@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import solidPlugin from 'vite-plugin-solid';
 import basicSsl from '@vitejs/plugin-basic-ssl';
-
+import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [solidPlugin(), basicSsl()],
@@ -10,6 +10,10 @@ export default defineConfig({
     outDir: '../dist',
     sourcemap: true,
     rollupOptions: {
+      input: {
+        index: resolve(__dirname, 'src/index.html'),
+        geocase: resolve(__dirname, 'src/geo-case.html'),
+      },
       output: {
         entryFileNames: '[name].js',
         assetFileNames: '[name].[ext]',
