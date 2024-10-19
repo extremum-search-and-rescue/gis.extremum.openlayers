@@ -2,8 +2,7 @@
 import Map from 'ol/Map.js';
 import {Collection} from 'ol';
 import '../index.css';
-import '../../node_modules/ol/ol.css';
-import { createSignal } from 'solid-js';
+import { createSignal, For } from 'solid-js';
 import { Dynamic } from 'solid-js/web';
 import { useService } from 'solid-services';
 import {GPX} from 'ol/format.js';
