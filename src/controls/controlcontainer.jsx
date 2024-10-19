@@ -1,10 +1,10 @@
-import { onMount, For, createSignal} from 'solid-js';
+import {  For, createEffect, createSignal} from 'solid-js';
 
 export const ControlContainer = props => {
   let [containerDiv, setContainerDiv] = createSignal(null);
 
-  onMount(()=> {
-    const self = document.getElementById(props.id);
+  createEffect(() => {
+    const self = containerDiv();
     const parent = self.parentElement;
     parent.removeChild(self);
     if(!props.target)
