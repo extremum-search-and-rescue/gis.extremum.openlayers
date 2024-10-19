@@ -59,9 +59,7 @@ function MapInternal(props) {
 
 
 export const MapContainer = props => {
-  // eslint-disable-next-line solid/reactivity
   if(!props.id) throw new Error('no map div id in props');
-  // eslint-disable-next-line solid/reactivity
   if(!props.view) throw new Error('no View in props');
 
   let [mapDiv, setMapDiv] = createSignal(null);
