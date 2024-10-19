@@ -4,6 +4,7 @@ import {Collection} from 'ol';
 import '../index.css';
 import '../../node_modules/ol/ol.css';
 import { createSignal } from 'solid-js';
+import { Dynamic } from 'solid-js/web';
 import { useService } from 'solid-services';
 import {GPX} from 'ol/format.js';
 import { MapContext } from '../services/mapcontext';
@@ -63,10 +64,15 @@ export const MapContainer = props => {
   if(!props.view) throw new Error('no View in props');
 
   let [mapDiv, setMapDiv] = createSignal(null);
- 
 
   return (<div id={props.id} ref={(el) => setMapDiv(el) } class='map-default'>
     <MapInternal target={mapDiv} {...props}/>
-    {props.children}
+    <For each={props.children}>
+      {
+        (item) => {
+          return <Dynamic parent={mapDiv} component={item} />;
+        }
+      }
+    </For>
   </div>);
 };
