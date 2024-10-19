@@ -19,6 +19,7 @@ export const MapContainer = props => {
   // eslint-disable-next-line solid/reactivity
   if(!props.view) throw new Error('no View in props');
 
+  let mapDiv;
   onMount(() => {
     const layerService = useService(LayerService);
 
@@ -31,7 +32,7 @@ export const MapContainer = props => {
       controls: props.controls || new Collection(),
       interactions: interactions,
       layers: layerService().flat,
-      target: props.id,
+      target: mapDiv,
       view: props.view,
       maxTilesLoading: 64,
       moveTolerance: 1 //default value
@@ -61,7 +62,7 @@ export const MapContainer = props => {
     getMap().map = indexMap;
   });
 
-  return (<div id={props.id} class='map-default'>
+  return (<div id={props.id} ref={(el) => mapDiv = el } class='map-default'>
     {props.children}
   </div>);
 };

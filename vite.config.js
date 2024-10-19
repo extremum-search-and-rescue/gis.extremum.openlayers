@@ -7,6 +7,10 @@ export default defineConfig({
   plugins: [solidPlugin(), basicSsl()],
   root: 'src',
   build: {
+    lib: {
+      entry: './../lib/lib-index.js',
+      formats: ['es'],
+    },
     outDir: '../dist',
     sourcemap: true,
     rollupOptions: {

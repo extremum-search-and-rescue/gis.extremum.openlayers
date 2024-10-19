@@ -16,10 +16,12 @@ function updateMapTint(map, bm){
   if(!map) throw new Error('no map context');
   if(!bm) throw new Error('no vibisble basemap in tint function');
   const targetElement = map.getTargetElement();
-  //const visibleBasemapLayerTint = bm.layers.filter(l => l.visible).tint;
-  const visibleBasemapTint = bm.tint;
-  targetElement.classList = '';
-  targetElement.classList.toggle(`map-${visibleBasemapTint || 'default'}`);
+  if(targetElement){
+    //const visibleBasemapLayerTint = bm.layers.filter(l => l.visible).tint;
+    const visibleBasemapTint = bm.tint;
+    targetElement.classList = '';
+    targetElement.classList.toggle(`map-${visibleBasemapTint || 'default'}`);
+  }
 }
 
 export function LayerService() {

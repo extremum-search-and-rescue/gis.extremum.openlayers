@@ -21,7 +21,7 @@ const layer2 =new VectorTileLayer({
   source: new VectorTileSource({}),
 });
 
-export const MapTilerLayer = {
+const MapTilerLayer = {
   id: 'mtv',
   title: 'Map Tiler Outdoor',
   type: 'base',

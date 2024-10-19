@@ -67,14 +67,17 @@ const ContextMenuComponent = () => {
     copyToClipboard(CoordinateConverter.formatLonLat(cursorCoord(), CoordinateConverter.DEGREES_AND_MINUTES_AND_SECONDS));
   }
   onMount( () => {
-    const viewport = document.getElementsByClassName('ol-layers')[0];
-    viewport.addEventListener('contextmenu', onContextMenu, {}, true);
+    const getMap = useService(MapContext);
+    const viewport = getMap().map().get('target');
+    if(viewport){
+      viewport.addEventListener('contextmenu', onContextMenu, {}, true);
     
-    //workaround on touch, at least on iOS
-    viewport.addEventListener('pointerdown', onContextMenu);
-    viewport.addEventListener('pointermove', onContextMenu);
-    viewport.addEventListener('pointerup', onContextMenu);
-    //end of workaround
+      //workaround on touch, at least on iOS
+      viewport.addEventListener('pointerdown', onContextMenu);
+      viewport.addEventListener('pointermove', onContextMenu);
+      viewport.addEventListener('pointerup', onContextMenu);
+      //end of workaround
+    }
   });
   return (
     <div>
