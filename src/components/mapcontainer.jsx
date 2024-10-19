@@ -28,7 +28,7 @@ export const MapContainer = props => {
         
     const interactions = props.interactions || defaults();
 
-    const indexMap = new Map({
+    const options = {...{
       controls: props.controls || new Collection(),
       interactions: interactions,
       layers: layerService().flat,
@@ -36,8 +36,9 @@ export const MapContainer = props => {
       view: props.view,
       maxTilesLoading: 64,
       moveTolerance: 1 //default value
-    });
-
+    }, ...props.options};
+    
+    const indexMap = new Map(options);
 
     let dragAndDropInteraction;
 
